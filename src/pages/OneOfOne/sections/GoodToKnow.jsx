@@ -1,5 +1,6 @@
 import { Reveal } from '@/components/ui/Reveal'
 import { useI18n } from '@/i18n/context'
+import { twoDigits } from '@/utils/format'
 
 export function GoodToKnow() {
   const { t } = useI18n()
@@ -18,7 +19,7 @@ export function GoodToKnow() {
         {copy.answers.map((answer, index) => (
           <Reveal key={index} className="good-to-know-row">
             <dt>
-              0{index + 1} · {answer.label}
+              {twoDigits(index + 1)} · {answer.label}
             </dt>
             <dd className="good-to-know-title">{answer.title}</dd>
             <dd className="good-to-know-text">{answer.description}</dd>

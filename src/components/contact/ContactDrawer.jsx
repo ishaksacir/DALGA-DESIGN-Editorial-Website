@@ -1,10 +1,14 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useRef } from 'react'
 
 import { products } from '@/data/products'
+import { useEscapeKey } from '@/hooks/useEscapeKey'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { useI18n } from '@/i18n/context'
 import { sendCommissionRequest } from '@/services/commissionRequest'
 
-const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled])'
+import { ContactField } from './ContactField'
+import { ContactPieces } from './ContactPieces'
+import { ContactSent } from './ContactSent'
 
 /** Which fields fail. The message is only required when no piece is tagged. */
 const validate = (form, tagCount) => ({
@@ -14,71 +18,37 @@ const validate = (form, tagCount) => ({
   message: !form.message.trim() && tagCount === 0,
 })
 
+/** A specific message when only the phone or only the message fails; a generic one otherwise. */
+const errorMessage = (errors, status, tried, invalid) => {
+  if (status === 'failed') return errors.failed
+  if (!tried || !Object.values(invalid).some(Boolean)) return ''
+  const only = (field) => Object.entries(invalid).every(([key, bad]) => bad === (key === field))
+  if (only('phone')) return errors.phone
+  if (only('message')) return errors.message
+  return errors.generic
+}
+
 /** Right-side "Get your piece" drawer: tag catalogue pieces, leave contact details, send. */
 export function ContactDrawer({ state, dispatch, returnFocusRef }) {
-  const { t, tr } = useI18n()
+  const { t } = useI18n()
   const copy = t.contact
   const panelRef = useRef(null)
   const { open, status, tried, form, tags } = state
 
-  const close = () => dispatch({ type: 'close' })
-
-  // Lock page scroll, move focus in and trap it while open; give focus back on close.
-  useEffect(() => {
-    if (!open) return
-    const panel = panelRef.current
-    const returnTo = returnFocusRef.current
-    panel.focus()
-    document.body.style.overflow = 'hidden'
-
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        dispatch({ type: 'close' })
-        return
-      }
-      if (event.key !== 'Tab') return
-      const items = [...panel.querySelectorAll(FOCUSABLE)]
-      if (!items.length) return
-      const first = items[0]
-      const last = items[items.length - 1]
-      if (
-        event.shiftKey &&
-        (document.activeElement === first || document.activeElement === panel)
-      ) {
-        event.preventDefault()
-        last.focus()
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault()
-        first.focus()
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
-      returnTo?.focus?.()
-    }
-  }, [open, dispatch, returnFocusRef])
+  const close = useCallback(() => dispatch({ type: 'close' }), [dispatch])
+  useEscapeKey(close, open)
+  useFocusTrap(panelRef, open, returnFocusRef)
 
   const tagged = products.filter((product) => product.id in tags)
   const invalid = validate(form, tagged.length)
   const anyInvalid = Object.values(invalid).some(Boolean)
-  const lineClass = (field) => (tried && invalid[field] ? ' invalid' : '')
+  const error = errorMessage(copy.errors, status, tried, invalid)
 
-  let error = ''
-  if (status === 'failed') error = copy.errors.failed
-  else if (tried && anyInvalid) {
-    const only = (field) => Object.entries(invalid).every(([key, bad]) => bad === (key === field))
-    error = only('phone')
-      ? copy.errors.phone
-      : only('message')
-        ? copy.errors.message
-        : copy.errors.generic
-  }
-
-  const setField = (field) => (event) =>
-    dispatch({ type: 'field', field, value: event.target.value })
+  const fieldProps = (field) => ({
+    value: form[field],
+    onChange: (event) => dispatch({ type: 'field', field, value: event.target.value }),
+    invalid: tried && invalid[field],
+  })
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -126,22 +96,12 @@ export function ContactDrawer({ state, dispatch, returnFocusRef }) {
         </div>
 
         {status === 'sent' ? (
-          <div className="contact-sent" aria-live="polite">
-            <span className="contact-label">{copy.sentLabel}</span>
-            <p>{copy.sentText(form.name.trim(), form.phone.trim())}</p>
-            <div className="contact-sent-actions">
-              <button type="button" className="contact-primary" onClick={close}>
-                {copy.done}
-              </button>
-              <button
-                type="button"
-                className="contact-text-btn"
-                onClick={() => dispatch({ type: 'reset' })}
-              >
-                {copy.another}
-              </button>
-            </div>
-          </div>
+          <ContactSent
+            name={form.name.trim()}
+            phone={form.phone.trim()}
+            onDone={close}
+            onAnother={() => dispatch({ type: 'reset' })}
+          />
         ) : (
           <form className="contact-form" onSubmit={handleSubmit} noValidate>
             <div className="contact-form-body">
@@ -150,112 +110,35 @@ export function ContactDrawer({ state, dispatch, returnFocusRef }) {
                 <p>{copy.intro}</p>
               </div>
 
-              <div className="contact-pieces">
-                <div className="contact-pieces-head">
-                  <span className="contact-label">{copy.tagLabel}</span>
-                  <span className="contact-optional">{copy.optional}</span>
-                </div>
-                <div className="contact-strip">
-                  {products.map((product) => {
-                    const on = product.id in tags
-                    return (
-                      <button
-                        key={product.id}
-                        type="button"
-                        className={`contact-thumb${on ? ' on' : ''}`}
-                        aria-pressed={on}
-                        title={tr(product.name)}
-                        aria-label={`${product.number} ${tr(product.name)}`}
-                        onClick={() => dispatch({ type: 'toggleTag', productId: product.id })}
-                      >
-                        <img src={product.img} alt="" loading="lazy" />
-                        <span>{product.number}</span>
-                      </button>
-                    )
-                  })}
-                </div>
-                {tagged.map((product) => (
-                  <div key={product.id} className="contact-tagged">
-                    <img src={product.img} alt="" />
-                    <div>
-                      <div className="contact-tagged-head">
-                        <span>
-                          <b>{product.number}</b>
-                          {tr(product.name)}
-                        </span>
-                        <button
-                          type="button"
-                          className="contact-text-btn"
-                          onClick={() => dispatch({ type: 'toggleTag', productId: product.id })}
-                        >
-                          {copy.remove}
-                        </button>
-                      </div>
-                      <input
-                        type="text"
-                        className="contact-note"
-                        value={tags[product.id]}
-                        placeholder={copy.notePlaceholder}
-                        aria-label={copy.noteLabel(tr(product.name))}
-                        onChange={(event) =>
-                          dispatch({
-                            type: 'note',
-                            productId: product.id,
-                            value: event.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <ContactPieces tags={tags} tagged={tagged} dispatch={dispatch} />
 
               <div className="contact-name-row">
-                <label className="contact-field">
-                  <span className="contact-label">{copy.name}</span>
-                  <input
-                    type="text"
-                    className={`contact-input${lineClass('name')}`}
-                    value={form.name}
-                    onChange={setField('name')}
-                    autoComplete="given-name"
-                    aria-invalid={tried && invalid.name}
-                  />
-                </label>
-                <label className="contact-field">
-                  <span className="contact-label">{copy.surname}</span>
-                  <input
-                    type="text"
-                    className={`contact-input${lineClass('surname')}`}
-                    value={form.surname}
-                    onChange={setField('surname')}
-                    autoComplete="family-name"
-                    aria-invalid={tried && invalid.surname}
-                  />
-                </label>
+                <ContactField
+                  label={copy.name}
+                  type="text"
+                  autoComplete="given-name"
+                  {...fieldProps('name')}
+                />
+                <ContactField
+                  label={copy.surname}
+                  type="text"
+                  autoComplete="family-name"
+                  {...fieldProps('surname')}
+                />
               </div>
-              <label className="contact-field">
-                <span className="contact-label">{copy.phone}</span>
-                <input
-                  type="tel"
-                  className={`contact-input${lineClass('phone')}`}
-                  value={form.phone}
-                  onChange={setField('phone')}
-                  autoComplete="tel"
-                  aria-invalid={tried && invalid.phone}
-                />
-              </label>
-              <label className="contact-field">
-                <span className="contact-label">{copy.message}</span>
-                <textarea
-                  rows={4}
-                  className={`contact-input${lineClass('message')}`}
-                  value={form.message}
-                  onChange={setField('message')}
-                  placeholder={copy.messagePlaceholder}
-                  aria-invalid={tried && invalid.message}
-                />
-              </label>
+              <ContactField
+                label={copy.phone}
+                type="tel"
+                autoComplete="tel"
+                {...fieldProps('phone')}
+              />
+              <ContactField
+                label={copy.message}
+                as="textarea"
+                rows={4}
+                placeholder={copy.messagePlaceholder}
+                {...fieldProps('message')}
+              />
             </div>
 
             <div className="contact-form-footer">

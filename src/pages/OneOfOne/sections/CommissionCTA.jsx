@@ -1,4 +1,5 @@
 import { useContactDrawer } from '@/components/contact/context'
+import { LineBreaks } from '@/components/ui/LineBreaks'
 import { NeedleLink } from '@/components/ui/NeedleLink'
 import { Reveal } from '@/components/ui/Reveal'
 import { asset } from '@/constants/site'
@@ -17,9 +18,7 @@ export function CommissionCTA() {
       <Reveal className="begin-commission-copy">
         <p className="begin-commission-eyebrow">{copy.eyebrow}</p>
         <h2>
-          {copy.title[0]}
-          <br />
-          {copy.title[1]}
+          <LineBreaks lines={copy.title} />
           <br />
           <span>{copy.titleAccent}</span>
         </h2>

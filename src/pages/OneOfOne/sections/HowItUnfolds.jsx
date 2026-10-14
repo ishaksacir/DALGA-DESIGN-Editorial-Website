@@ -1,6 +1,7 @@
 import { Reveal } from '@/components/ui/Reveal'
 import { asset } from '@/constants/site'
 import { useI18n } from '@/i18n/context'
+import { twoDigits } from '@/utils/format'
 
 /** Illustrations for the four stages; the copy for each lives in `oneOfOne.unfolds.stages`. */
 const STAGE_IMAGES = [
@@ -28,7 +29,7 @@ export function HowItUnfolds() {
             </div>
             <div className="unfolds-meta">
               <h3>
-                {copy.stage} 0{index + 1} · {title}
+                {copy.stage} {twoDigits(index + 1)} · {title}
               </h3>
               <span>{timing}</span>
             </div>

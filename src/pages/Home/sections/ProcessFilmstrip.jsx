@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { LineBreaks } from '@/components/ui/LineBreaks'
 import { asset } from '@/constants/site'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useI18n } from '@/i18n/context'
+import { twoDigits } from '@/utils/format'
+import { rafThrottle } from '@/utils/rafThrottle'
 
 /** Illustrations for the four stages; the copy for each lives in `home.process.stages`. */
 const STAGE_IMAGES = [
@@ -49,7 +52,6 @@ export function ProcessFilmstrip() {
       for (const panel of track.children) panel.style.opacity = ''
       return
     }
-    let frame = null
     let offsets = []
 
     // Resting x-offset for each step: flush left, centred, centred, flush right.
@@ -63,7 +65,6 @@ export function ProcessFilmstrip() {
     }
 
     const update = () => {
-      frame = null
       const rect = sectionRef.current.getBoundingClientRect()
       const stepPx = (window.innerHeight * STEP_VH) / 100
       const raw = Math.min(LAST_STEP, Math.max(0, -rect.top) / stepPx)
@@ -84,9 +85,7 @@ export function ProcessFilmstrip() {
         setRevealed((prev) => Math.max(prev, next))
       }
     }
-    const schedule = () => {
-      if (frame === null) frame = requestAnimationFrame(update)
-    }
+    const schedule = rafThrottle(update)
     const onResize = () => {
       measure()
       schedule()
@@ -99,7 +98,7 @@ export function ProcessFilmstrip() {
     return () => {
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', onResize)
-      if (frame !== null) cancelAnimationFrame(frame)
+      schedule.cancel()
     }
   }, [pinned])
 
@@ -123,9 +122,7 @@ export function ProcessFilmstrip() {
           <div>
             <p className="process-eyebrow">{copy.eyebrow}</p>
             <h2>
-              {copy.title[0]}
-              <br />
-              {copy.title[1]}
+              <LineBreaks lines={copy.title} />
             </h2>
           </div>
           <p className="process-lead">{copy.lead}</p>
@@ -168,7 +165,7 @@ export function ProcessFilmstrip() {
         {pinned && (
           <div className="process-progress" aria-hidden="true">
             <span className="process-counter">
-              0{step + 1} <span>/ 0{LAST_STEP + 1}</span>
+              {twoDigits(step + 1)} <span>/ {twoDigits(LAST_STEP + 1)}</span>
             </span>
             <div className="process-bars">
               {STAGE_IMAGES.map((image, index) => (

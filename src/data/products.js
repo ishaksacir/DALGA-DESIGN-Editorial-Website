@@ -1,3 +1,5 @@
+import { asset } from '@/constants/site'
+
 /**
  * Every visible text field is `{ bs, en }`; components resolve it with `tr()` from `useI18n`.
  * The `category.en` value doubles as the stable key for catalogue filtering.
@@ -152,7 +154,7 @@ export const products = [
     category: CATEGORY.blouseSkirt,
     collection: commission('01'),
     year: '2026',
-    img: '/uploads/collection-1.jpg',
+    img: asset('collection-1.jpg'),
     alt: {
       bs: 'Bluza od sirovog pamuka sa suknjom vezanom mašnom od tafta',
       en: 'Raw cotton blouse with a taffeta bow-tied skirt',
@@ -184,7 +186,7 @@ export const products = [
     category: CATEGORY.eveningGown,
     collection: commission('02'),
     year: '2025',
-    img: '/uploads/collection-2.jpg',
+    img: asset('collection-2.jpg'),
     alt: {
       bs: 'Haljina od tafta boje umbre s ručno tkanim bočnim panelom',
       en: 'Umber taffeta gown with a hand-woven side panel',
@@ -216,7 +218,7 @@ export const products = [
     category: CATEGORY.jacketSkirt,
     collection: commission('03'),
     year: '2025',
-    img: '/uploads/collection-3.jpg',
+    img: asset('collection-3.jpg'),
     alt: {
       bs: 'Jakna od žakard vune s paisley uzorkom preko crne kružne suknje',
       en: 'Paisley jacquard wool jacket over a black circle skirt',
@@ -248,7 +250,7 @@ export const products = [
     category: CATEGORY.dayDress,
     collection: commission('04'),
     year: '2026',
-    img: '/uploads/craftsmanship.jpg',
+    img: asset('craftsmanship.jpg'),
     alt: {
       bs: 'Lanena haljina boje žalfije s četvrtastim izrezom i puf rukavima',
       en: 'Sage linen dress with a square neckline and puff sleeves',
@@ -280,11 +282,11 @@ export const products = [
     category: CATEGORY.dress,
     collection: commission('05'),
     year: '2026',
-    img: '/uploads/darigo-dress-front.png',
+    img: asset('darigo-dress-front.png'),
     images: [
-      '/uploads/darigo-dress-front.png',
-      '/uploads/darigo-dress-back.png',
-      '/uploads/darigo-dress-detail.png',
+      asset('darigo-dress-front.png'),
+      asset('darigo-dress-back.png'),
+      asset('darigo-dress-detail.png'),
     ],
     alt: {
       bs: 'Pamučna haljina boje senfa s asimetričnim rubom u obliku maramice i ručno oslikanim panelom na ramenu',
@@ -320,12 +322,12 @@ export const products = [
     category: CATEGORY.topSkirt,
     collection: commission('06'),
     year: '2026',
-    img: '/uploads/navy-wrap-front.png',
+    img: asset('navy-wrap-front.png'),
     images: [
-      '/uploads/navy-wrap-front.png',
-      '/uploads/navy-wrap-back.png',
-      '/uploads/navy-wrap-front-close.png',
-      '/uploads/navy-wrap-back-close.png',
+      asset('navy-wrap-front.png'),
+      asset('navy-wrap-back.png'),
+      asset('navy-wrap-front-close.png'),
+      asset('navy-wrap-back-close.png'),
     ],
     alt: {
       bs: 'Teget pamučna preklopna bluza s dolman rukavima preko crne plisirane suknje',
@@ -370,11 +372,11 @@ export const products = [
     category: CATEGORY.jacketSkirt,
     collection: commission('07'),
     year: '2025',
-    img: '/uploads/beige-jacket-front.png',
+    img: asset('beige-jacket-front.png'),
     images: [
-      '/uploads/beige-jacket-front.png',
-      '/uploads/beige-jacket-back.png',
-      '/uploads/beige-jacket-front-close.png',
+      asset('beige-jacket-front.png'),
+      asset('beige-jacket-back.png'),
+      asset('beige-jacket-front-close.png'),
     ],
     alt: {
       bs: 'Kratka vunena jakna boje zobi s našivenim džepovima preko crne plisirane suknje',
@@ -410,11 +412,11 @@ export const products = [
     category: CATEGORY.jacketSkirt,
     collection: commission('08'),
     year: '2025',
-    img: '/uploads/teal-tweed-jacket-front.png',
+    img: asset('teal-tweed-jacket-front.png'),
     images: [
-      '/uploads/teal-tweed-jacket-front.png',
-      '/uploads/teal-tweed-jacket-back.png',
-      '/uploads/teal-tweed-jacket-front-close.png',
+      asset('teal-tweed-jacket-front.png'),
+      asset('teal-tweed-jacket-back.png'),
+      asset('teal-tweed-jacket-front-close.png'),
     ],
     alt: {
       bs: 'Jakna od tirkizno-crnog bouclé tvida s crnim ovratnikom i manžetama od janjećeg krzna, preko crne suknje',
@@ -450,8 +452,8 @@ export const products = [
     category: CATEGORY.coat,
     collection: commission('09'),
     year: '2025',
-    img: '/uploads/grey-cocoon-coat-front.png',
-    images: ['/uploads/grey-cocoon-coat-front.png', '/uploads/grey-cocoon-coat-back.png'],
+    img: asset('grey-cocoon-coat-front.png'),
+    images: [asset('grey-cocoon-coat-front.png'), asset('grey-cocoon-coat-back.png')],
     alt: {
       bs: 'Široki vuneni kaput kokon boje pepela s čipkanom trakom na rubu, nošen preko crne haljine',
       en: 'Oversized ash grey wool cocoon coat with a lace hem band, worn over a black dress',
@@ -483,11 +485,11 @@ export const products = [
     category: CATEGORY.coat,
     collection: commission('10'),
     year: '2024',
-    img: '/uploads/patchwork-coat-front.png',
+    img: asset('patchwork-coat-front.png'),
     images: [
-      '/uploads/patchwork-coat-front.png',
-      '/uploads/patchwork-coat-back.png',
-      '/uploads/patchwork-coat-front-close.png',
+      asset('patchwork-coat-front.png'),
+      asset('patchwork-coat-back.png'),
+      asset('patchwork-coat-front-close.png'),
     ],
     alt: {
       bs: 'Sivo-zlatni kaput s patchwork printom i stojećim ovratnikom, nošen preko crne haljine',
@@ -520,12 +522,12 @@ export const products = [
     category: CATEGORY.coat,
     collection: commission('11'),
     year: '2024',
-    img: '/uploads/dot-coat-front.png',
+    img: asset('dot-coat-front.png'),
     images: [
-      '/uploads/dot-coat-front.png',
-      '/uploads/dot-coat-back.png',
-      '/uploads/dot-coat-front-close.png',
-      '/uploads/dot-coat-back-close.png',
+      asset('dot-coat-front.png'),
+      asset('dot-coat-back.png'),
+      asset('dot-coat-front-close.png'),
+      asset('dot-coat-back-close.png'),
     ],
     alt: {
       bs: 'Vuneni kaput boje senfa sa šarenim aplikacijama tačkica od filca i odgovarajućim dugmadima, preko crne haljine',

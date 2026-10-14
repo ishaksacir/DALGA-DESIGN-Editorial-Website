@@ -1,3 +1,5 @@
+import { asset } from '@/constants/site'
+
 /**
  * Atelier news shown on the home page. The first entry is the featured story;
  * the rest fill the row of cards beneath it. An entry without `img` renders as
@@ -16,7 +18,7 @@ export const news = [
       bs: 'Mekani dvostruki pamuk za košulje i široke hlače. Zatražite da je vidite na sljedećoj probi.',
       en: 'A soft double cotton for shirts and loose trousers. Ask to see it at your next fitting.',
     },
-    img: '/uploads/news-chocolate-pinstripe.jpg',
+    img: asset('news-chocolate-pinstripe.jpg'),
     alt: {
       bs: 'Čokoladna pamučna gaza s finim krem prugama, labavo presavijena',
       en: 'Chocolate cotton gauze with a fine cream pinstripe, loosely folded',
@@ -27,7 +29,7 @@ export const news = [
     category: { bs: 'Nova kolekcija', en: 'New collection' },
     date: { bs: '22. sep. 2026.', en: '22 Sep 2026' },
     title: { bs: 'Vunene tkanine za odijela, jesen–zima', en: 'Autumn–winter suiting wools' },
-    img: '/uploads/news-suiting-wools.jpg',
+    img: asset('news-suiting-wools.jpg'),
     alt: {
       bs: 'Lepeza uzoraka vune za odijela — karo, pepito i tanke pruge',
       en: 'Fanned swatches of check, houndstooth and pinstripe suiting wool',
@@ -38,7 +40,7 @@ export const news = [
     category: { bs: 'Nova boja', en: 'New colour' },
     date: { bs: '09. sep. 2026.', en: '09 Sep 2026' },
     title: { bs: 'Prani lan, sada u antracit boji', en: 'Washed linen, now in charcoal' },
-    img: '/uploads/news-charcoal-linen.jpg',
+    img: asset('news-charcoal-linen.jpg'),
     alt: { bs: 'Draperirani prani lan u antracit boji', en: 'Draped charcoal washed linen' },
   },
   {

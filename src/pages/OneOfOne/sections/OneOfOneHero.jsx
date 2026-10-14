@@ -1,3 +1,4 @@
+import { LineBreaks } from '@/components/ui/LineBreaks'
 import { Reveal } from '@/components/ui/Reveal'
 import { asset } from '@/constants/site'
 import { useI18n } from '@/i18n/context'
@@ -20,9 +21,7 @@ export function OneOfOneHero() {
         </div>
         <div className="oneofone-cover-body">
           <h1>
-            {copy.title[0]}
-            <br />
-            {copy.title[1]}
+            <LineBreaks lines={copy.title} />
           </h1>
           <Reveal as="p">{copy.lead}</Reveal>
         </div>

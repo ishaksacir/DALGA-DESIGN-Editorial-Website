@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 
+import { useEscapeKey } from '@/hooks/useEscapeKey'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 
 import { NavLinks } from './NavLinks'
@@ -7,15 +8,7 @@ import { NavLinks } from './NavLinks'
 export function MobileMenu({ open, onClose }) {
   const panelRef = useRef(null)
   useOutsideClick(panelRef, onClose, open)
-
-  useEffect(() => {
-    if (!open) return
-    const onKeyDown = (event) => {
-      if (event.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [open, onClose])
+  useEscapeKey(onClose, open)
 
   return (
     <div

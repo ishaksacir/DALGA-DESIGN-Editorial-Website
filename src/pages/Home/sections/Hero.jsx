@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 
+import { LineBreaks } from '@/components/ui/LineBreaks'
 import { useI18n } from '@/i18n/context'
+import { rafThrottle } from '@/utils/rafThrottle'
 
 /**
  * Full-bleed hero with the DALGA / DESIGN wordmark zooming in as the page scrolls.
@@ -13,8 +15,7 @@ export function Hero() {
   const designRef = useRef(null)
 
   useEffect(() => {
-    let raf = null
-    const applyZoom = () => {
+    const onScroll = rafThrottle(() => {
       const viewportHeight = window.innerHeight || 1
       const progress = Math.min(1, window.scrollY / (viewportHeight * 0.9))
       const scale = 1 + progress * 1.35
@@ -24,15 +25,11 @@ export function Hero() {
         el.style.transform = `scale(${scale})`
         el.style.opacity = opacity
       })
-      raf = null
-    }
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(applyZoom)
-    }
+    })
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
-      if (raf) cancelAnimationFrame(raf)
+      onScroll.cancel()
     }
   }, [])
 
@@ -47,14 +44,10 @@ export function Hero() {
         DESIGN
       </h1>
       <div className="hero-note left">
-        {t.home.hero.noteLeft[0]}
-        <br />
-        {t.home.hero.noteLeft[1]}
+        <LineBreaks lines={t.home.hero.noteLeft} />
       </div>
       <div className="hero-note right">
-        {t.home.hero.noteRight[0]}
-        <br />
-        {t.home.hero.noteRight[1]}
+        <LineBreaks lines={t.home.hero.noteRight} />
       </div>
     </header>
   )

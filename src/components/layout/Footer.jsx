@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { LineBreaks } from '@/components/ui/LineBreaks'
 import { NAV_ITEMS } from '@/constants/navigation'
 import { SITE } from '@/constants/site'
 import { useI18n } from '@/i18n/context'
@@ -12,9 +13,7 @@ export function Footer() {
       <div className="footer-grid">
         <div className="footer-intro">
           <p className="footer-tagline">
-            {t.footer.tagline[0]}
-            <br />
-            {t.footer.tagline[1]}
+            <LineBreaks lines={t.footer.tagline} />
           </p>
           <p>{t.footer.intro}</p>
         </div>
@@ -42,7 +41,7 @@ export function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 Dalga Design</span>
+        <span>© 2026 {SITE.name}</span>
         <span>{t.footer.everyPiece}</span>
       </div>
       <p className="footer-wordmark" aria-hidden="true">
