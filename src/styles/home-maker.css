@@ -1,0 +1,67 @@
+/* Home — founder / maker feature under the process filmstrip. */
+.maker-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(48px, 6vw, 88px);
+  align-items: center;
+  padding: clamp(80px, 10vw, 140px) var(--pad-x);
+  background: var(--paper);
+}
+.maker-feature-image img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 45%;
+  display: block;
+}
+.maker-feature-eyebrow,
+.maker-feature-credit {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+.maker-feature-eyebrow {
+  margin: 0 0 36px;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+}
+.maker-feature blockquote {
+  margin: 0 0 40px;
+  font-family: 'Gloock', serif;
+  font-size: clamp(34px, 3.4vw, 50px);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+.maker-feature-credit {
+  margin: 0 0 56px;
+  letter-spacing: 0.24em;
+  color: var(--muted);
+}
+.maker-feature-notes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  padding-top: 28px;
+  border-top: 1px solid #17140f33;
+}
+.maker-feature-notes p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.85;
+  font-weight: 300;
+  color: #453d31;
+  text-wrap: pretty;
+}
+@media (max-width: 900px) {
+  .maker-feature {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .maker-feature-notes {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

@@ -1,0 +1,77 @@
+/* Home — full-bleed hero with the zooming DALGA / DESIGN wordmark. */
+.hero {
+  height: 100svh;
+  min-height: 640px;
+  position: relative;
+  overflow: hidden;
+  background: var(--placeholder-bg);
+  scroll-snap-align: start;
+}
+.hero-bg,
+.hero-cutout {
+  position: absolute;
+  inset: 0;
+  background: url('/uploads/hero-bg-wide.png') center 56% / auto 175% no-repeat;
+  z-index: 1;
+}
+.hero-cutout {
+  background-image: url('/uploads/hero-cutout-wide.png');
+  z-index: 3;
+}
+.hero-word {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Gloock', serif;
+  font-size: clamp(88px, 16.5vw, 310px);
+  font-weight: 500;
+  line-height: 0.82;
+  letter-spacing: 0.06em;
+  color: #fdfcfa;
+  white-space: nowrap;
+  text-shadow: 0 2px 46px #140f0838;
+  animation: hero-in 1.8s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+  will-change: transform;
+  z-index: 2;
+}
+.dalga {
+  top: 16%;
+}
+.design {
+  top: 43%;
+  z-index: 4;
+  margin: 0;
+  font-size: clamp(74px, 13.5vw, 252px);
+  font-weight: 500;
+  line-height: 0.82;
+  letter-spacing: 0.14em;
+  animation-delay: 0.35s;
+}
+.hero-note {
+  position: absolute;
+  bottom: clamp(28px, 5vh, 56px);
+  z-index: 5;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.hero-note.left {
+  left: var(--pad-x);
+}
+.hero-note.right {
+  right: var(--pad-x);
+  text-align: right;
+}
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    letter-spacing: 0.3em;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

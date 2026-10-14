@@ -46,17 +46,19 @@ src/
   layouts/           AppLayout: navbar + <Outlet/> + footer, shared across all pages
   pages/              one folder per route; page-only sections live in a local sections/ subfolder
   components/
-    ui/               small reusable primitives (Button-like NeedleLink, Reveal, PageHero, EyebrowRow)
+    ui/               small reusable primitives (Button-like NeedleLink, Reveal, PageHero, EyebrowRow, LineBreaks)
     navigation/       Navbar, NavLinks, mobile menu
     layout/           Footer
-    contact/          "Get your piece" contact drawer (provider, drawer, useContactDrawer)
+    contact/          "Get your piece" contact drawer (provider, drawer + its field/pieces/sent parts, useContactDrawer)
     sections/         sections shared across more than one page (e.g. Statement)
   data/               product catalogue + news content
   services/           commissionRequest: sends the contact form
   constants/          routes, nav items, site info (email/social), asset path helper
   i18n/               Bosnian / English copy and the language provider
-  hooks/              useReveal, useMediaQuery, useOutsideClick, useScrollToTop
-  styles.css          single global stylesheet (design tokens at :root, organized by section)
+  hooks/              useReveal, useMediaQuery, useOutsideClick, useScrollToTop, useEscapeKey, useFocusTrap
+  utils/              small pure helpers (twoDigits, rafThrottle)
+  styles/             global CSS split by section; index.css imports them in cascade order
+                      (design tokens at :root in base.css)
 ```
 
 Static image assets are served from `public/uploads`. To add a page: create a folder under

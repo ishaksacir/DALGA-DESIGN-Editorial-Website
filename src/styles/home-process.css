@@ -1,0 +1,281 @@
+/* Home — "How a piece is made": pinned section, vertical scroll steps a row of four panels. */
+.process {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+}
+.process-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px 48px;
+  padding: clamp(24px, 6vh, 72px) var(--pad-x) clamp(12px, 3vh, 32px);
+}
+.process-eyebrow {
+  margin: 0 0 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+.process-head h2 {
+  margin: 0;
+  font-size: clamp(32px, min(4.4vw, 7vh), 72px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+.process-lead {
+  max-width: 340px;
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.85;
+  font-weight: 300;
+  color: #cfc7b9;
+  text-wrap: pretty;
+}
+.process-art {
+  position: relative;
+  overflow: hidden;
+}
+.process-ghost {
+  position: absolute;
+  left: 50%;
+  bottom: -0.12em;
+  transform: translateX(-50%);
+  font-family: 'Gloock', serif;
+  line-height: 1;
+  color: rgba(247, 245, 241, 0.045);
+  pointer-events: none;
+  user-select: none;
+}
+.process-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+  display: block;
+}
+.process-text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vh, 20px);
+  min-width: 0;
+}
+.process-week {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+.process-number {
+  display: block;
+  font-family: 'Gloock', serif;
+  font-size: clamp(48px, min(12vw, 14vh), 180px);
+  line-height: 0.8;
+}
+.process-text h3 {
+  margin: 12px 0 0;
+  font-family: 'Gloock', serif;
+  font-weight: 400;
+  font-size: clamp(26px, min(3.6vw, 6vh), 56px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+.process-text p {
+  margin: 0;
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.7;
+  font-weight: 300;
+  color: #e6dfd3;
+  text-wrap: pretty;
+}
+/* Label column fits the longest label in either language; rows share it via subgrid. */
+.process-details {
+  display: grid;
+  grid-template-columns: minmax(96px, max-content) minmax(0, 1fr);
+  column-gap: 16px;
+  margin: 8px 0 0;
+  border-top: 1px solid rgba(247, 245, 241, 0.12);
+}
+.process-details > div {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  padding: clamp(6px, 1.2vh, 12px) 0;
+  border-bottom: 1px solid rgba(247, 245, 241, 0.12);
+}
+.process-details dt {
+  padding-top: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+.process-details dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+/* Pinned: the frame sticks (section height set inline from the step constants) while the
+   track follows the scroll. One soft snap point per step gives the gentle magnetic pull. */
+.process-snaps > span {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  scroll-snap-align: start;
+  pointer-events: none;
+}
+.is-pinned .process-frame {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.is-pinned .process-viewport {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px 0;
+}
+.is-pinned .process-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+}
+.is-pinned .process-panel {
+  flex: 0 0 78vw;
+  width: 78vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 4.4vw, 64px);
+  padding: 0 clamp(20px, 4.4vw, 64px);
+  border-right: 1px solid rgba(247, 245, 241, 0.1);
+}
+.is-pinned .process-art {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+}
+.is-pinned .process-ghost {
+  font-size: min(70vh, 40vw);
+}
+.is-pinned .process-text {
+  flex: 0 1 min(460px, 46%);
+  max-height: 100%;
+  overflow: hidden;
+}
+/* Reveal: the drawing wipes up from the bottom, the copy slides in from the right. */
+.is-pinned .process-art img {
+  opacity: 0;
+  transform: translateY(40px);
+  clip-path: inset(100% 0 0 0);
+  transition:
+    clip-path 1400ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1400ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 900ms ease;
+}
+.is-pinned .process-text {
+  opacity: 0;
+  transform: translateX(32px);
+  transition:
+    opacity 700ms ease 200ms,
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+.is-pinned .process-panel.on .process-art img {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+.is-pinned .process-panel.on .process-text {
+  opacity: 1;
+  transform: none;
+}
+.process-progress {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px var(--pad-x) 36px;
+}
+.process-counter {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.process-counter span {
+  color: #8a8178;
+}
+.process-bars {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.process-bars > span {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(247, 245, 241, 0.18);
+}
+.process-bars > span::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-on-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.process-bars > span.filled::after {
+  transform: scaleX(1);
+}
+/* Short laptop screens: drop the detail lists so each panel's copy fits. */
+@media (max-height: 759px) {
+  .is-pinned .process-details {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-pinned .process-art img,
+  .is-pinned .process-text {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
+
+/* Under 720px: a plain vertical stack, no pinning. */
+.process:not(.is-pinned) {
+  padding-bottom: clamp(56px, 12vw, 80px);
+}
+.process:not(.is-pinned) .process-head {
+  padding-top: clamp(72px, 16vw, 96px);
+  padding-bottom: 40px;
+}
+.process:not(.is-pinned) .process-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px var(--pad-x) 48px;
+  border-top: 1px solid rgba(247, 245, 241, 0.1);
+}
+.process:not(.is-pinned) .process-art {
+  height: min(100vw, 480px);
+}
+.process:not(.is-pinned) .process-ghost {
+  font-size: min(100vw, 480px);
+}

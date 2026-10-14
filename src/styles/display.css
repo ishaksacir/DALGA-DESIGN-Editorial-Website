@@ -1,0 +1,49 @@
+/* Display typography: Gloock carries the brand; tracking stays restrained. */
+h1,
+h2 {
+  letter-spacing: -0.012em;
+}
+.hero-word {
+  font-weight: 400;
+  letter-spacing: 0.025em;
+}
+.design {
+  font-size: clamp(82px, 15vw, 280px);
+  font-weight: 400;
+  letter-spacing: 0.025em;
+}
+
+.creations-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #ece4d9;
+  border-bottom: 0;
+}
+.creations-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('/uploads/pattern-diamond-terracotta.jpg') center 44%/440px auto repeat;
+  opacity: 0.24;
+  mask-image: radial-gradient(62% 85% at 80% 32%, #000 38%, transparent 88%);
+  -webkit-mask-image: radial-gradient(62% 85% at 80% 32%, #000 38%, transparent 88%);
+}
+.creations-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, transparent 76%, var(--paper-alt) 100%),
+    linear-gradient(
+      100deg,
+      rgba(247, 245, 241, 0.82) 0%,
+      rgba(247, 245, 241, 0.28) 42%,
+      rgba(247, 245, 241, 0.48) 100%
+    );
+}
+.creations-hero > p {
+  color: var(--accent);
+}

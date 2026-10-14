@@ -1,0 +1,20 @@
+/* Light nav ink for pages that open on a dark photograph (One of one). */
+.nav-light {
+  color: var(--paper);
+}
+.nav-light .brand img {
+  filter: invert(1);
+}
+.nav-light .nav-links a.active,
+.nav-light .nav-links a:hover {
+  border-color: var(--paper);
+}
+.nav-light .nav-toggle {
+  border-color: var(--paper);
+}
+.nav-light .nav-toggle span {
+  background: var(--paper);
+}
+.nav-light .nav-mobile-panel {
+  color: var(--ink);
+}

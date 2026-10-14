@@ -1,0 +1,119 @@
+/* Catalogue — magazine-cover header. Background matches the studio backdrop of the product photography. */
+.catalogue-cover {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* Sits under the overlaid nav (108px) and never taller than the screen. */
+  height: max(560px, min(100svh, calc(54vw + 108px)));
+  padding: calc(108px + clamp(16px, 3vh, 48px)) var(--pad-x) 0;
+  background: #cdc2b9;
+  color: var(--ink);
+}
+/* Scaled past the section so the coat fills it; the stand and empty backdrop fall outside the crop. */
+.catalogue-cover-image {
+  position: absolute;
+  z-index: -1;
+  top: -4%;
+  right: 4%;
+  height: 155%;
+  width: auto;
+  max-width: none;
+  object-fit: cover;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 22%, #000 82%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 10%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 22%, #000 82%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 10%);
+  -webkit-mask-composite: source-in;
+}
+.catalogue-cover::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(100deg, #f7f5f159 0%, #f7f5f126 45%, #f7f5f100 70%);
+  pointer-events: none;
+}
+.catalogue-cover-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+.catalogue-cover-meta p {
+  margin: 0;
+}
+.catalogue-cover-meta p,
+.catalogue-cover-credit {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+.catalogue-cover-credit {
+  align-items: flex-end;
+  text-align: right;
+}
+.catalogue-cover-meta b {
+  font-weight: 600;
+}
+.catalogue-cover-meta span {
+  font-weight: 400;
+  color: #3a342a;
+}
+.catalogue-cover-lead {
+  max-width: 460px;
+  margin: clamp(40px, 10vh, 200px) 0 0;
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.85;
+  font-weight: 300;
+  color: #2b251d;
+  text-wrap: pretty;
+}
+.catalogue-cover-title {
+  position: absolute;
+  left: var(--pad-x);
+  bottom: 0;
+  margin: 0 0 -0.2em;
+  font-size: clamp(120px, min(17vw, 34svh), 330px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+@media (max-width: 800px) {
+  .catalogue-cover {
+    height: auto;
+    min-height: 0;
+    padding-top: calc(86px + 24px);
+    padding-bottom: calc(118vw + 40px);
+  }
+  .catalogue-cover-image {
+    top: auto;
+    bottom: -50vw;
+    right: 50%;
+    height: 170vw;
+    transform: translateX(50%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 18%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%);
+  }
+  .catalogue-cover::before {
+    background: linear-gradient(180deg, #f7f5f166 0%, #f7f5f100 45%);
+  }
+  .catalogue-cover-meta {
+    flex-direction: column;
+  }
+  .catalogue-cover-credit {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .catalogue-cover-lead {
+    margin-top: 36px;
+  }
+  .catalogue-cover-title {
+    font-size: 20vw;
+  }
+}
