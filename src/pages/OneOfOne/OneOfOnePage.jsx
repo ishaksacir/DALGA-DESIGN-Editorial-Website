@@ -1,9 +1,10 @@
 import { Statement } from '@/components/sections/Statement'
 import { useI18n } from '@/i18n/context'
-import { OneOfOneHero } from './sections/OneOfOneHero'
-import { HowItUnfolds } from './sections/HowItUnfolds'
-import { GoodToKnow } from './sections/GoodToKnow'
+
 import { CommissionCTA } from './sections/CommissionCTA'
+import { GoodToKnow } from './sections/GoodToKnow'
+import { HowItUnfolds } from './sections/HowItUnfolds'
+import { OneOfOneHero } from './sections/OneOfOneHero'
 
 export function OneOfOnePage() {
   const { t } = useI18n()

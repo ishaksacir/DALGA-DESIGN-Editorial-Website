@@ -1,10 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
-import { NeedleLink } from '@/components/ui/NeedleLink'
-import { ProductGallery } from './ProductGallery'
-import { getProductById } from '@/data/products'
-import { ROUTES } from '@/constants/routes'
+
 import { useContactDrawer } from '@/components/contact/context'
+import { NeedleLink } from '@/components/ui/NeedleLink'
+import { ROUTES } from '@/constants/routes'
+import { getProductById } from '@/data/products'
 import { useI18n } from '@/i18n/context'
+
+import { ProductGallery } from './ProductGallery'
 
 export function ProductPage() {
   const { productId } = useParams()

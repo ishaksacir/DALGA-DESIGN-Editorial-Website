@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+
 import { NAV_ITEMS } from '@/constants/navigation'
 import { SITE } from '@/constants/site'
 import { useI18n } from '@/i18n/context'

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { useI18n } from '@/i18n/context'
 
 /** Renders the gallery for one product. Mount a fresh instance per product (e.g. `key={product.id}`) so the active image resets on navigation. */

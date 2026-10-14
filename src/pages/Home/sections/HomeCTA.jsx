@@ -1,5 +1,5 @@
-import { Reveal } from '@/components/ui/Reveal'
 import { useContactDrawer } from '@/components/contact/context'
+import { Reveal } from '@/components/ui/Reveal'
 import { useI18n } from '@/i18n/context'
 
 export function HomeCTA() {

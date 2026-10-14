@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Reveal } from '@/components/ui/Reveal'
+
 import { EyebrowRow } from '@/components/ui/EyebrowRow'
-import { products } from '@/data/products'
+import { Reveal } from '@/components/ui/Reveal'
 import { productPath } from '@/constants/routes'
+import { products } from '@/data/products'
 import { useI18n } from '@/i18n/context'
 
 const VISIBLE_COUNT = Math.min(4, products.length)

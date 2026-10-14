@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
+
 import { useOutsideClick } from '@/hooks/useOutsideClick'
+
 import { NavLinks } from './NavLinks'
 
 export function MobileMenu({ open, onClose }) {

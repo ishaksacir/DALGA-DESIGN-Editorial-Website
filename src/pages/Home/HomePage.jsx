@@ -1,10 +1,10 @@
-import { Hero } from './sections/Hero'
 import { AtelierNews } from './sections/AtelierNews'
-import { ShowcaseGallery } from './sections/ShowcaseGallery'
 import { AtelierStatement } from './sections/AtelierStatement'
-import { ProcessFilmstrip } from './sections/ProcessFilmstrip'
-import { MakerFeature } from './sections/MakerFeature'
+import { Hero } from './sections/Hero'
 import { HomeCTA } from './sections/HomeCTA'
+import { MakerFeature } from './sections/MakerFeature'
+import { ProcessFilmstrip } from './sections/ProcessFilmstrip'
+import { ShowcaseGallery } from './sections/ShowcaseGallery'
 
 export function HomePage() {
   return (

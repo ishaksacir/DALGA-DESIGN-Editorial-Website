@@ -1,12 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { AppLayout } from '@/layouts/AppLayout'
+
 import { ROUTES } from '@/constants/routes'
-import { HomePage } from '@/pages/Home/HomePage'
+import { AppLayout } from '@/layouts/AppLayout'
 import { AboutPage } from '@/pages/About/AboutPage'
 import { CataloguePage } from '@/pages/Catalogue/CataloguePage'
 import { ProductPage } from '@/pages/Catalogue/ProductPage'
-import { OneOfOnePage } from '@/pages/OneOfOne/OneOfOnePage'
+import { HomePage } from '@/pages/Home/HomePage'
 import { NotFoundPage } from '@/pages/NotFound/NotFoundPage'
+import { OneOfOnePage } from '@/pages/OneOfOne/OneOfOnePage'
 
 export const router = createBrowserRouter([
   {

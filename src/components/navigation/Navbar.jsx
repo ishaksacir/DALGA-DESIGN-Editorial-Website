@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+
 import { ROUTES } from '@/constants/routes'
 import { asset } from '@/constants/site'
 import { useI18n } from '@/i18n/context'
-import { NavLinks } from './NavLinks'
-import { MobileMenu } from './MobileMenu'
+
 import { LanguageSwitch } from './LanguageSwitch'
+import { MobileMenu } from './MobileMenu'
+import { NavLinks } from './NavLinks'
 
 export function Navbar() {
   const { pathname } = useLocation()

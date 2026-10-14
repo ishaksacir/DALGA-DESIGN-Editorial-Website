@@ -1,10 +1,12 @@
 import { useMemo, useRef, useState } from 'react'
-import { CatalogueCover } from './CatalogueCover'
-import { ProductCard } from './ProductCard'
+
 import { NeedleLink } from '@/components/ui/NeedleLink'
 import { products } from '@/data/products'
 import { useReveal } from '@/hooks/useReveal'
 import { useI18n } from '@/i18n/context'
+
+import { CatalogueCover } from './CatalogueCover'
+import { ProductCard } from './ProductCard'
 
 const PAGE_SIZE = 8
 const SHOW_MORE_STEP = 4

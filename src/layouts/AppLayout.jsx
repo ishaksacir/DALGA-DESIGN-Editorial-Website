@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { Navbar } from '@/components/navigation/Navbar'
-import { Footer } from '@/components/layout/Footer'
+
 import { ContactDrawerProvider } from '@/components/contact/ContactDrawerProvider'
+import { Footer } from '@/components/layout/Footer'
+import { Navbar } from '@/components/navigation/Navbar'
+import { ROUTES } from '@/constants/routes'
 import { useReveal } from '@/hooks/useReveal'
 import { useScrollToTop } from '@/hooks/useScrollToTop'
-import { ROUTES } from '@/constants/routes'
 
 const bodyPageForPath = (pathname) => {
   if (pathname === ROUTES.HOME) return 'home'

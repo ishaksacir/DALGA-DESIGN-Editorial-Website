@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+
 import { products } from '@/data/products'
 import { useI18n } from '@/i18n/context'
 import { sendCommissionRequest } from '@/services/commissionRequest'

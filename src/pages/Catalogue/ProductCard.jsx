@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+
 import { Reveal } from '@/components/ui/Reveal'
 import { productPath } from '@/constants/routes'
 import { useI18n } from '@/i18n/context'
