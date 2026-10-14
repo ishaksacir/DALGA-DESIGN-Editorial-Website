@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Navbar } from '@/components/navigation/Navbar'
 import { Footer } from '@/components/layout/Footer'
+import { ContactDrawerProvider } from '@/components/contact/ContactDrawerProvider'
 import { useReveal } from '@/hooks/useReveal'
 import { useScrollToTop } from '@/hooks/useScrollToTop'
 import { ROUTES } from '@/constants/routes'
@@ -24,10 +25,12 @@ export function AppLayout() {
   }, [pathname])
 
   return (
-    <div className="app">
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </div>
+    <ContactDrawerProvider>
+      <div className="app">
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </div>
+    </ContactDrawerProvider>
   )
 }

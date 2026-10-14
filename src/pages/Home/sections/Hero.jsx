@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useI18n } from '@/i18n/context'
 
 /**
  * Full-bleed hero with the DALGA / DESIGN wordmark zooming in as the page scrolls.
@@ -6,6 +7,7 @@ import { useEffect, useRef } from 'react'
  * touches elements this component renders.
  */
 export function Hero() {
+  const { t } = useI18n()
   const dalgaRef = useRef(null)
   const designRef = useRef(null)
 
@@ -44,14 +46,14 @@ export function Hero() {
         DESIGN
       </h1>
       <div className="hero-note left">
-        Made for one.
+        {t.home.hero.noteLeft[0]}
         <br />
-        Repeated for no one.
+        {t.home.hero.noteLeft[1]}
       </div>
       <div className="hero-note right">
-        Custom garments designed
+        {t.home.hero.noteRight[0]}
         <br />
-        around your story.
+        {t.home.hero.noteRight[1]}
       </div>
     </header>
   )

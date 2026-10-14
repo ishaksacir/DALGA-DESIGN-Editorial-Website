@@ -1,7 +1,8 @@
 import { ROUTES } from './routes'
 
+/** `labelKey` points into the `nav` section of the active dictionary. */
 export const NAV_ITEMS = [
-  { label: 'Catalogue', to: ROUTES.CATALOGUE },
-  { label: 'One of one', to: ROUTES.ONE_OF_ONE },
-  { label: 'About', to: ROUTES.ABOUT },
+  { labelKey: 'catalogue', to: ROUTES.CATALOGUE },
+  { labelKey: 'oneOfOne', to: ROUTES.ONE_OF_ONE },
+  { labelKey: 'about', to: ROUTES.ABOUT },
 ]

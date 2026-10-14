@@ -1,40 +1,33 @@
-import { Reveal } from '@/components/ui/Reveal'
+import { useContactDrawer } from '@/components/contact/context'
 import { NeedleLink } from '@/components/ui/NeedleLink'
-import { asset, SITE } from '@/constants/site'
+import { Reveal } from '@/components/ui/Reveal'
+import { asset } from '@/constants/site'
+import { useI18n } from '@/i18n/context'
 
 export function CommissionCTA() {
+  const { t } = useI18n()
+  const copy = t.oneOfOne.cta
+  const { openDrawer } = useContactDrawer()
+
   return (
-    <section className="commission-cta snap-section">
-      <div className="commission-media">
-        <img
-          src={asset('commission-pattern.jpg')}
-          alt="Hand-painted wave motif, the DALGA signature pattern"
-        />
-      </div>
-      <div className="commission-panel">
-        <Reveal as="p" className="kicker">
-          Begin your commission
-        </Reveal>
-        <Reveal as="h2">Tell us the story your garment should carry</Reveal>
-        <Reveal as="p" className="commission-copy">
-          Write a few lines about you, the occasion and what you imagine. Photos, sketches and
-          half-formed ideas are all welcome — we answer every letter personally, within a week.
-        </Reveal>
-        <Reveal className="commission-actions">
-          <NeedleLink dark href={`mailto:${SITE.email}`}>
-            Begin a conversation
-          </NeedleLink>
-          <a className="commission-email" href={`mailto:${SITE.email}`}>
-            {SITE.email}
-          </a>
-        </Reveal>
-        <Reveal className="commission-meta">
-          <span>{SITE.commissionsOpen}</span>
-          <a href={SITE.instagram} target="_blank" rel="noreferrer">
-            Follow the atelier →
-          </a>
-        </Reveal>
-      </div>
+    <section className="begin-commission">
+      <Reveal as="figure" className="begin-commission-image">
+        <img src={asset('atelier-linen.jpg')} alt={copy.imageAlt} />
+      </Reveal>
+      <Reveal className="begin-commission-copy">
+        <p className="begin-commission-eyebrow">{copy.eyebrow}</p>
+        <h2>
+          {copy.title[0]}
+          <br />
+          {copy.title[1]}
+          <br />
+          <span>{copy.titleAccent}</span>
+        </h2>
+        <p className="begin-commission-text">{copy.text}</p>
+        <NeedleLink className="needle-btn begin-commission-btn" onClick={() => openDrawer()}>
+          {copy.link}
+        </NeedleLink>
+      </Reveal>
     </section>
   )
 }

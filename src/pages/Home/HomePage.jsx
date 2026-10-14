@@ -1,16 +1,20 @@
 import { Hero } from './sections/Hero'
+import { AtelierNews } from './sections/AtelierNews'
 import { ShowcaseGallery } from './sections/ShowcaseGallery'
-import { AtelierFeature } from './sections/AtelierFeature'
+import { AtelierStatement } from './sections/AtelierStatement'
+import { ProcessFilmstrip } from './sections/ProcessFilmstrip'
+import { MakerFeature } from './sections/MakerFeature'
 import { HomeCTA } from './sections/HomeCTA'
-import { CommissionJourney } from '@/components/sections/CommissionJourney'
 
 export function HomePage() {
   return (
     <main>
       <Hero />
+      <AtelierNews />
       <ShowcaseGallery />
-      <CommissionJourney />
-      <AtelierFeature />
+      <AtelierStatement />
+      <ProcessFilmstrip />
+      <MakerFeature />
       <HomeCTA />
     </main>
   )

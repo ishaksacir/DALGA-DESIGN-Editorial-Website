@@ -16,6 +16,19 @@ npm run build
 npm run preview
 ```
 
+## Contact form
+
+The "Get your piece" drawer (home CTA bar, "Ask about this piece" on product pages) posts
+`{ name, surname, phone, message, pieces: [{ no, name, note }] }` as JSON to the endpoint in
+`VITE_CONTACT_ENDPOINT` (a form service or API route that notifies the atelier):
+
+```bash
+# .env
+VITE_CONTACT_ENDPOINT=https://example.com/commission
+```
+
+Without it, sending falls back to opening a pre-filled email to the atelier address.
+
 ## Quality checks
 
 ```bash
@@ -36,10 +49,13 @@ src/
     ui/               small reusable primitives (Button-like NeedleLink, Reveal, PageHero, EyebrowRow)
     navigation/       Navbar, NavLinks, mobile menu
     layout/           Footer
-    sections/         sections shared across more than one page (e.g. CommissionJourney)
-  data/               product catalogue + commission process content
+    contact/          "Get your piece" contact drawer (provider, drawer, useContactDrawer)
+    sections/         sections shared across more than one page (e.g. Statement)
+  data/               product catalogue + news content
+  services/           commissionRequest: sends the contact form
   constants/          routes, nav items, site info (email/social), asset path helper
-  hooks/              useReveal, useMediaQuery, usePrefersReducedMotion, useOutsideClick, useScrollToTop
+  i18n/               Bosnian / English copy and the language provider
+  hooks/              useReveal, useMediaQuery, useOutsideClick, useScrollToTop
   styles.css          single global stylesheet (design tokens at :root, organized by section)
 ```
 
