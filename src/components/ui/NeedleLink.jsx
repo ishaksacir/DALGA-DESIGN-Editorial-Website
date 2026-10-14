@@ -8,9 +8,16 @@ import { asset } from '@/constants/site'
  * `className` replaces the default outlined look; `needle` picks the icon ('white' | 'black')
  * to contrast with the hover background.
  */
-export function NeedleLink({ children, to, href, dark = false, className, needle, ...props }) {
-  const classes = `needle-hover ${className ?? `needle-btn ${dark ? 'on-dark' : ''}`}`
-  const icon = <img src={asset(`needle-${needle ?? (dark ? 'black' : 'white')}.png`)} alt="" />
+export function NeedleLink({
+  children,
+  to,
+  href,
+  className = 'needle-btn',
+  needle = 'white',
+  ...props
+}) {
+  const classes = `needle-hover ${className}`
+  const icon = <img src={asset(`needle-${needle}.png`)} alt="" />
   const content = (
     <>
       <span>{children}</span>

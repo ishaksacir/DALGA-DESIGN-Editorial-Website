@@ -5,6 +5,5 @@ export const SITE = {
   facebook: 'https://www.facebook.com/dalgadesign',
 }
 
-export const ASSET_BASE = '/uploads/'
-
-export const asset = (fileName) => `${ASSET_BASE}${fileName}`
+/** Public URL of a file in `public/uploads`. */
+export const asset = (fileName) => `/uploads/${fileName}`

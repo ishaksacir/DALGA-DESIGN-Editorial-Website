@@ -559,10 +559,3 @@ export const products = [
 ]
 
 export const getProductById = (id) => products.find((product) => product.id === id)
-
-export const getAdjacentProducts = (product) => {
-  const index = products.indexOf(product)
-  const prev = products[(index - 1 + products.length) % products.length]
-  const next = products[(index + 1) % products.length]
-  return { prev, next }
-}
