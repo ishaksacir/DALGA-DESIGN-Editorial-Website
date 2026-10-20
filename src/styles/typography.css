@@ -1,0 +1,96 @@
+/*
+  Shared text roles. Each role's type (size, weight, leading, tracking, case) is set once here;
+  section stylesheets add only spacing and colour, so the same role can't drift between sections.
+  To use a role on a new element, add its selector to the list.
+*/
+
+/* Eyebrow: small uppercase label above a section's heading or content. */
+.eyebrow-row,
+.statement-label,
+.atelier-news-head p,
+.atelier-news-head a,
+.process-eyebrow,
+.maker-feature-eyebrow,
+.unfolds-head p,
+.good-to-know-eyebrow,
+.page-hero > p {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Serif quote: the large serif sentence beside a portrait. */
+.maker-feature blockquote {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(34px, 3.4vw, 50px);
+  line-height: 1.14;
+}
+
+/* CTA heading: the light display serif, as on phones, with the accent word in umber. Size is set per section. */
+.home-cta h2 {
+  font-family: var(--display);
+  font-weight: 300;
+  line-height: 0.9;
+}
+
+/* Status bar: the ruled two-item row at the top of a hero or CTA. */
+.home-cta-status,
+.oneofone-cover-status,
+.about-hero-meta {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+/* Body paragraph: section leads and running copy. */
+.process-lead,
+.good-to-know-lead,
+.oneofone-cover-body > p,
+.maker-feature-notes p,
+.creations-page .product-description {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+}
+
+/* Card description: the paragraph under a card or row title. */
+.news-featured-excerpt,
+.unfolds-stage > p,
+.good-to-know-text {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* Button: outlined and solid call-to-action buttons. */
+.needle-btn,
+.news-read-more,
+.contact-primary {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+/* Image caption. */
+.gallery-track .gallery-item-caption,
+.atelier-story-image figcaption {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Detail-list term: the small label column in spec and detail lists. */
+.process-details dt,
+.atelier-story-facts dt,
+.creations-page .product-specs dt {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}

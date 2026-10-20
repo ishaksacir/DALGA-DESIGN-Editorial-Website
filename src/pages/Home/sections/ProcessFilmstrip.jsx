@@ -1,19 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { LineBreaks } from '@/components/ui/LineBreaks'
-import { asset } from '@/constants/site'
+import { Mark } from '@/components/ui/Mark'
+import { PROCESS_IMAGES as STAGE_IMAGES } from '@/data/process'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useI18n } from '@/i18n/context'
 import { twoDigits } from '@/utils/format'
 import { rafThrottle } from '@/utils/rafThrottle'
 
-/** Illustrations for the four stages; the copy for each lives in `home.process.stages`. */
-const STAGE_IMAGES = [
-  'process-line-conversation.png',
-  'process-line-concept.png',
-  'process-line-fittings.png',
-  'process-line-yours.png',
-]
+/** Atelier mark beside each stage's week label, in stage order. */
+const STAGE_MARKS = ['birds', 'flower', 'figure', 'crescent']
 const LAST_STEP = STAGE_IMAGES.length - 1
 /** Vertical scroll (in viewport heights) between two steps. The section is one screen plus
  *  that distance per step, so the last step lands exactly as the section releases. */
@@ -34,7 +30,7 @@ const settle = (t) => {
  * "How a piece is made". From 720px up the section pins and the row of four step panels follows
  * the vertical scroll, easing to rest on each step; light scroll-snap points add a soft pull when
  * the reader stops near one. First and last panels sit flush with the screen edge, the middle ones
- * centre. Narrower screens get a plain stack.
+ * centre. Narrower screens swipe the same row sideways, one panel at a time.
  */
 export function ProcessFilmstrip() {
   const { t } = useI18n()
@@ -104,6 +100,14 @@ export function ProcessFilmstrip() {
 
   const isOn = (index) => !pinned || index <= revealed
 
+  // Narrow screens swipe the track sideways; the counter follows the panel at the left edge.
+  const onSwipe = () => {
+    const track = trackRef.current
+    const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2
+    const panelWidth = track.firstElementChild.getBoundingClientRect().width
+    setStep(atEnd ? LAST_STEP : Math.round(track.scrollLeft / panelWidth))
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -120,7 +124,10 @@ export function ProcessFilmstrip() {
       <div className="process-frame">
         <div className="process-head">
           <div>
-            <p className="process-eyebrow">{copy.eyebrow}</p>
+            <p className="process-eyebrow mark-row">
+              <Mark name="spiral" size={22} color="var(--accent-on-dark)" />
+              {copy.eyebrow}
+            </p>
             <h2>
               <LineBreaks lines={copy.title} />
             </h2>
@@ -129,7 +136,7 @@ export function ProcessFilmstrip() {
         </div>
 
         <div className="process-viewport">
-          <div ref={trackRef} className="process-track">
+          <div ref={trackRef} className="process-track" onScroll={pinned ? undefined : onSwipe}>
             {copy.stages.map((stage, index) => (
               <article
                 key={STAGE_IMAGES[index]}
@@ -139,10 +146,13 @@ export function ProcessFilmstrip() {
                   <span className="process-ghost" aria-hidden="true">
                     {index + 1}
                   </span>
-                  <img src={asset(STAGE_IMAGES[index])} alt={stage.alt} loading="lazy" />
+                  <img src={STAGE_IMAGES[index]} alt={stage.alt} loading="lazy" />
                 </div>
                 <div className="process-text">
-                  <span className="process-week">{stage.timing}</span>
+                  <span className="process-week mark-row">
+                    <Mark name={STAGE_MARKS[index]} size={34} color="var(--accent-on-dark)" />
+                    {stage.timing}
+                  </span>
                   <span className="process-number" aria-hidden="true">
                     {index + 1}
                   </span>
@@ -162,18 +172,16 @@ export function ProcessFilmstrip() {
           </div>
         </div>
 
-        {pinned && (
-          <div className="process-progress" aria-hidden="true">
-            <span className="process-counter">
-              {twoDigits(step + 1)} <span>/ {twoDigits(LAST_STEP + 1)}</span>
-            </span>
-            <div className="process-bars">
-              {STAGE_IMAGES.map((image, index) => (
-                <span key={image} className={index <= step ? 'filled' : ''} />
-              ))}
-            </div>
+        <div className="process-progress" aria-hidden="true">
+          <span className="process-counter">
+            {twoDigits(step + 1)} <span>/ {twoDigits(LAST_STEP + 1)}</span>
+          </span>
+          <div className="process-bars">
+            {STAGE_IMAGES.map((image, index) => (
+              <span key={image} className={index <= step ? 'filled' : ''} />
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </section>
   )

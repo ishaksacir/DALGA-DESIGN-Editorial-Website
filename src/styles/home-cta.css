@@ -12,10 +12,6 @@
   margin: 0 var(--pad-x);
   padding-bottom: 22px;
   border-bottom: 1px solid #17140f38;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
 }
 .home-cta-status > span:last-child {
   color: var(--muted);
@@ -38,20 +34,13 @@
   gap: 80px;
   align-items: end;
   margin: 0 var(--pad-x);
-  padding: clamp(56px, 7vw, 80px) 0 clamp(64px, 8vw, 96px);
+  padding: clamp(56px, 7vw, 80px) 0 clamp(80px, 9vw, 120px);
 }
 .home-cta h2 {
   margin: 0;
-  font-family: 'Manrope', sans-serif;
-  font-weight: 200;
   font-size: clamp(72px, 9vw, 140px);
-  line-height: 0.9;
-  letter-spacing: -0.05em;
 }
 .home-cta h2 span {
-  font-family: 'Gloock', serif;
-  font-weight: 400;
-  letter-spacing: -0.03em;
   color: var(--accent);
 }
 .home-cta-steps {
@@ -90,9 +79,9 @@
   align-items: center;
   gap: 24px;
   width: 100%;
-  padding: 38px var(--pad-x);
+  margin-top: 40px;
+  padding: 28px;
   border: 0;
-  border-bottom: 1px solid #f7f5f11f;
   background: var(--ink);
   color: var(--paper);
   font: inherit;

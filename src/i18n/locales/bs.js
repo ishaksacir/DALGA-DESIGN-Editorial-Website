@@ -14,6 +14,7 @@ export const bs = {
     homeAlt: 'Dalga Design — početna',
     openMenu: 'Otvori meni',
     closeMenu: 'Zatvori meni',
+    menu: 'Meni',
   },
   site: {
     commissionsOpen: 'Narudžbe otvorene · Jesen 2026',
@@ -25,6 +26,7 @@ export const bs = {
     follow: 'Pratite',
     atelier: 'Atelje',
     everyPiece: 'Svaki komad je unikat',
+    backToTop: 'Nazad na vrh',
   },
   home: {
     hero: {
@@ -36,6 +38,8 @@ export const bs = {
       allNews: 'Sve novosti',
       justIn: 'Upravo stiglo',
       readMore: 'Pročitajte više',
+      onInstagram: 'Na Instagramu',
+      showPost: 'Prikaži objavu',
     },
     showcase: {
       title: 'Odabrani radovi',
@@ -203,27 +207,27 @@ export const bs = {
           timing: 'Sedmica 1',
           description:
             'Pišete o prilici i priči koju komad treba nositi. Odgovaramo lično. Još bez obaveze.',
-          alt: 'Pismo s olovkom u otvorenoj koverti',
+          alt: 'Crtež dvije žene koje razgovaraju nad skicom za stolom',
         },
         {
           title: 'Koncept i ponuda',
           timing: 'Sedmice 2—3',
           description:
             'Nacrtamo ga, s vama odaberemo tkaninu i jasno odredimo cijenu. Ništa nije dogovoreno dok ga ne vidite nacrtanog.',
-          alt: 'Crtež plisirane haljine pored uzorka tkanine',
+          alt: 'Crtež ruke koja drži uzorak tkanine pored haljine na krojačkoj lutki',
         },
         {
           title: 'Probe',
           timing: 'Sedmice 4—9',
           description:
             'Dvije do tri probe oblikuju komad direktno na vama. Po potrebi i probe na daljinu.',
-          alt: 'Krojačka lutka s pribadačama i krojačkim metrom',
+          alt: 'Crtež ruku koje pribadačama pričvršćuju tkaninu na krojačku lutku, uz makaze i krojački metar',
         },
         {
           title: 'Predaja',
           timing: 'Sedmica 10',
           description: 'Komad odlazi kući s vama. Kroj se zatvara istog dana.',
-          alt: 'Gotov kaput na vješalici s etiketom',
+          alt: 'Crtež žene u lepršavoj haljini koja gleda preko ramena',
         },
       ],
     },
@@ -256,36 +260,104 @@ export const bs = {
         },
       ],
     },
-    cta: {
-      imageAlt: 'Sirovi lan s utisnutim znakom DALGA DESIGN',
-      eyebrow: 'Započnite svoju narudžbu',
-      title: ['Ispričajte nam', 'priču koju'],
-      titleAccent: 'treba nositi.',
-      text: 'Nekoliko redova o vama, prilici i onome što zamišljate. Fotografije, skice i nedovršene ideje su dobrodošle — na svako pismo odgovaramo lično, u roku od sedmice.',
-      link: 'Pišite ateljeu',
-    },
   },
   about: {
-    hero: {
-      label: 'Atelje',
-      number: 'Dalga Design',
-      title: 'O nama',
-    },
-    story: {
-      imageAlt: 'Osnivačica DALGA DESIGN-a za svojim krojačkim stolom',
-      caption: 'Osnivačica · Za krojačkim stolom',
-      captionEnd: 'Atelje',
-      title: 'Pokret koji čuva svoj oblik, a nikad ne miruje.',
-      titleAside: 'Tako razmišljamo o odjeći.',
-      notes: [
-        'DALGA je mali nezavisni atelje koji pravi odjeću za jednu po jednu osobu. Počinjemo od priče, a ne od trenda, i polako gradimo oko tijela koje će je nositi.',
-        'Sve se kroji i šije za jednim stolom, rukama istih dviju osoba, od prve linije do posljednjeg šava.',
-      ],
-    },
+    eyebrow: 'O ateljeu',
+    title: 'Dalga znači',
+    titleAccent: 'val.',
+    imageAlt: 'Osnivačica DALGA DESIGN-a za svojim krojačkim stolom',
+    caption: 'Osnivačica, za krojačkim stolom',
+    facts: [
+      ['Gdje', 'Jedan mali atelje, jedan krojački sto.'],
+      ['Ko', 'Iste dvije osobe, od prve skice do posljednjeg šava.'],
+      ['Tkanina', 'Vuna, lan i sirovi pamuk — tkanine koje stare zajedno s osobom koja ih nosi.'],
+    ],
   },
   notFound: {
     title: 'Stranica nije pronađena',
     text: 'Ta stranica ne postoji.',
     link: 'Nazad na početnu →',
+  },
+  phone: {
+    nav: {
+      home: 'Početna',
+      catalogue: 'Katalog',
+      process: 'Proces',
+      about: 'O nama',
+      inquire: 'Upit',
+    },
+    hero: { name: 'Dalga Design', line: 'Stvoreno za jednog' },
+    work: { title: 'Odabrani radovi', all: 'Svi komadi →' },
+    rule: {
+      before: 'Ne pravimo kolekcije. Pravimo',
+      accent: 'jedan komad odjeće, za jednu osobu —',
+      after: 'a onda taj kroj zauvijek zatvaramo.',
+      label: 'Pravilo ateljea',
+    },
+    process: {
+      link: 'Kako to ide →',
+      lead: 'Otprilike deset sedmica od prvog pisma do posljednjeg šava.',
+      start: 'Započnite prvi korak',
+    },
+    about: {
+      title: 'Dalga znači val.',
+      credit: 'Osnivačica, Dalga Design',
+      link: 'O nama →',
+    },
+    steps: {
+      eyebrow: 'Proces · Deset sedmica',
+      intro:
+        'Od prvog pisma do dana kada ode kući, svaki komad nastaje u našem ateljeu, ručno, za jednu osobu.',
+      cta: 'Pogledajte cijeli proces',
+    },
+    cta: {
+      status: 'Narudžbe otvorene za jesen',
+      title: 'Vaš komad.',
+      text: 'Recite nam za šta je i za kada. Ništa nije dogovoreno dok ga ne vidite nacrtanog.',
+    },
+    catalogue: {
+      title: 'Svaki napravljen jednom.',
+      lead: 'Dodirnite komad da krenete od njega — vaš ćemo napraviti drugačijim.',
+      filter: 'Filtriraj po vrsti',
+      types: {
+        all: 'Sve',
+        dresses: 'Haljine',
+        skirts: 'Suknje',
+        tops: 'Topovi',
+        jackets: 'Jakne',
+        coats: 'Kaputi',
+      },
+    },
+    piece: {
+      madeOnce: (no) => `Br. ${no} · Napravljen jednom`,
+      intro:
+        'Upravo ovaj komad se više neće praviti. Krenite od njega, a vaš ćemo napraviti drugačijim — vaša tkanina, vaš kroj, vaše izmjene.',
+      details: {
+        type: 'Vrsta',
+        year: 'Godina',
+        cloth: 'Tkanina',
+        made: 'Izrada',
+        pattern: 'Kroj',
+        timeline: 'Rok',
+      },
+      made: 'Jednom, ručno, u ateljeu',
+      pattern: 'Zatvoren — nikad ponovo krojen',
+      timeline: 'Otprilike deset sedmica za vaš',
+      hint: 'Prevucite za više · povucite nadolje da zatvorite',
+      next: (no) => `Sljedeći · Br. ${no}`,
+      previous: 'Prethodni komad',
+      nextPiece: 'Sljedeći komad',
+      close: 'Zatvori',
+      start: 'Krenite od ovog komada',
+      view: (index, name) => `${name}, prikaz ${index}`,
+    },
+    failed: {
+      label: 'Nema veze',
+      title: 'Konac se olabavio.',
+      text: 'Nismo uspjeli doći do ateljea. Provjerite vezu i pokušajte ponovo — sve što ste napisali je sačuvano.',
+      retry: 'Pokušajte ponovo',
+      retrying: 'Pokušavamo ponovo…',
+      email: 'Pošaljite nam e-mail',
+    },
   },
 }

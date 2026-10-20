@@ -15,6 +15,3 @@
 .nav-light .nav-toggle span {
   background: var(--paper);
 }
-.nav-light .nav-mobile-panel {
-  color: var(--ink);
-}

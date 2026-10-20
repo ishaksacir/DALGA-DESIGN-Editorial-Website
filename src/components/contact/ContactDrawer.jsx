@@ -1,11 +1,14 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
+import { productPath } from '@/constants/routes'
 import { products } from '@/data/products'
 import { useEscapeKey } from '@/hooks/useEscapeKey'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
+import { usePhone } from '@/hooks/usePhone'
 import { useI18n } from '@/i18n/context'
 import { sendCommissionRequest } from '@/services/commissionRequest'
 
+import { ContactFailed } from './ContactFailed'
 import { ContactField } from './ContactField'
 import { ContactPieces } from './ContactPieces'
 import { ContactSent } from './ContactSent'
@@ -30,10 +33,14 @@ const errorMessage = (errors, status, tried, invalid) => {
 
 /** Right-side "Get your piece" drawer: tag catalogue pieces, leave contact details, send. */
 export function ContactDrawer({ state, dispatch, returnFocusRef }) {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const copy = t.contact
   const panelRef = useRef(null)
   const { open, status, tried, form, tags } = state
+  const isPhone = usePhone()
+  // Phones swap the form for a full "didn't send" screen, which stays up while retrying.
+  const [retrying, setRetrying] = useState(false)
+  const showFailed = isPhone && (status === 'failed' || (retrying && status === 'sending'))
 
   const close = useCallback(() => dispatch({ type: 'close' }), [dispatch])
   useEscapeKey(close, open)
@@ -50,13 +57,23 @@ export function ContactDrawer({ state, dispatch, returnFocusRef }) {
     invalid: tried && invalid[field],
   })
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
     if (status === 'sending') return
     if (anyInvalid) {
       dispatch({ type: 'invalid' })
       return
     }
+    setRetrying(false)
+    send()
+  }
+
+  const retry = () => {
+    setRetrying(true)
+    send()
+  }
+
+  const send = async () => {
     dispatch({ type: 'status', status: 'sending' })
     try {
       await sendCommissionRequest({
@@ -64,10 +81,14 @@ export function ContactDrawer({ state, dispatch, returnFocusRef }) {
         surname: form.surname.trim(),
         phone: form.phone.trim(),
         message: form.message.trim(),
+        lang,
         pieces: tagged.map((product) => ({
           no: product.number,
           name: product.name.en,
+          category: product.category.en,
           note: tags[product.id].trim(),
+          img: product.img,
+          path: productPath(product.id),
         })),
       })
       dispatch({ type: 'status', status: 'sent' })
@@ -95,7 +116,9 @@ export function ContactDrawer({ state, dispatch, returnFocusRef }) {
           </button>
         </div>
 
-        {status === 'sent' ? (
+        {showFailed ? (
+          <ContactFailed retrying={status === 'sending'} onRetry={retry} />
+        ) : status === 'sent' ? (
           <ContactSent
             name={form.name.trim()}
             phone={form.phone.trim()}

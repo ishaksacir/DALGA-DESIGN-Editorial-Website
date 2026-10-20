@@ -19,19 +19,21 @@ export function HomeCTA() {
           <br />
           <span>{copy.titleAccent}</span>
         </Reveal>
-        <Reveal as="ol" className="home-cta-steps">
-          {copy.steps.map((step) => (
-            <li key={step.label}>
-              <b>{step.label}</b>
-              <span>{step.text}</span>
-            </li>
-          ))}
+        <Reveal>
+          <ol className="home-cta-steps">
+            {copy.steps.map((step) => (
+              <li key={step.label}>
+                <b>{step.label}</b>
+                <span>{step.text}</span>
+              </li>
+            ))}
+          </ol>
+          <button type="button" className="home-cta-bar" onClick={() => openDrawer()}>
+            <span>{t.contact.trigger}</span>
+            <span>{t.contact.triggerAction}&nbsp;&nbsp;→</span>
+          </button>
         </Reveal>
       </div>
-      <button type="button" className="home-cta-bar" onClick={() => openDrawer()}>
-        <span>{t.contact.trigger}</span>
-        <span>{t.contact.triggerAction}&nbsp;&nbsp;→</span>
-      </button>
     </section>
   )
 }

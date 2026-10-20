@@ -1,54 +1,61 @@
-import { useEffect, useRef } from 'react'
-
 import { LineBreaks } from '@/components/ui/LineBreaks'
+import { asset } from '@/constants/site'
 import { useI18n } from '@/i18n/context'
-import { rafThrottle } from '@/utils/rafThrottle'
 
 /**
- * Full-bleed hero with the DALGA / DESIGN wordmark zooming in as the page scrolls.
- * The parallax listener lives here (rather than globally) since it only ever
- * touches elements this component renders.
+ * Full-bleed hero: photo, DALGA, the model cut-out, then DESIGN, layered in one SVG so text and
+ * images share a coordinate system. On load the words fall in from 8× and settle with a small
+ * bounce, then stay put (see hero.css); the images never move.
  */
 export function Hero() {
   const { t } = useI18n()
-  const dalgaRef = useRef(null)
-  const designRef = useRef(null)
-
-  useEffect(() => {
-    const onScroll = rafThrottle(() => {
-      const viewportHeight = window.innerHeight || 1
-      const progress = Math.min(1, window.scrollY / (viewportHeight * 0.9))
-      const scale = 1 + progress * 1.35
-      const opacity = Math.max(0, 1 - progress * 1.1)
-      ;[dalgaRef.current, designRef.current].forEach((el) => {
-        if (!el) return
-        el.style.transform = `scale(${scale})`
-        el.style.opacity = opacity
-      })
-    })
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      onScroll.cancel()
-    }
-  }, [])
 
   return (
     <header className="hero">
-      <div className="hero-bg" />
-      <div className="hero-word dalga" ref={dalgaRef}>
-        DALGA
-      </div>
-      <div className="hero-cutout" />
-      <h1 className="hero-word design" ref={designRef}>
-        DESIGN
-      </h1>
-      <div className="hero-note left">
+      <h1 className="sr-only">Dalga Design</h1>
+      <svg className="hero-svg" aria-hidden="true">
+        {/* An SVG filter rather than CSS drop-shadow(): Safari ignores CSS filters on SVG text. */}
+        <defs>
+          <filter id="hero-word-shadow" x="-10%" y="-30%" width="120%" height="160%">
+            <feDropShadow
+              dx="0"
+              dy="4"
+              stdDeviation="14"
+              floodColor="#140f08"
+              floodOpacity="0.28"
+            />
+          </filter>
+        </defs>
+        {/* Photo and cut-out share one transform so the model stays pixel-aligned. */}
+        <g className="hero-zoom">
+          <image
+            href={asset('home/hero-background.webp')}
+            width="100%"
+            height="100%"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </g>
+        <text className="hero-word" filter="url(#hero-word-shadow)" x="50%" y="50%" dy="-0.43em">
+          DALGA
+        </text>
+        <g className="hero-zoom">
+          <image
+            href={asset('home/hero-cutout.webp')}
+            width="100%"
+            height="100%"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </g>
+        <text className="hero-word" filter="url(#hero-word-shadow)" x="50%" y="50%" dy="0.43em">
+          DESIGN
+        </text>
+      </svg>
+      <p className="hero-note left">
         <LineBreaks lines={t.home.hero.noteLeft} />
-      </div>
-      <div className="hero-note right">
+      </p>
+      <p className="hero-note right">
         <LineBreaks lines={t.home.hero.noteRight} />
-      </div>
+      </p>
     </header>
   )
 }

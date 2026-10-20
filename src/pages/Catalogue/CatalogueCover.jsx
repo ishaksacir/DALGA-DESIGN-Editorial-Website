@@ -4,7 +4,7 @@ import { useI18n } from '@/i18n/context'
 
 /** The photograph on the catalogue cover. Not tied to a catalogue entry, so the credit is plain text. */
 const COVER = {
-  img: asset('catalogue-cover-green-coat.png'),
+  img: asset('catalogue/cover-green-coat.webp'),
   name: { bs: 'Maslinasti vuneni kaput', en: 'Olive wool coat' },
   alt: {
     bs: 'Maslinasti vuneni kaput sa stojećim ovratnikom i dubokim džepovima na krojačkoj lutki',
@@ -19,7 +19,12 @@ export function CatalogueCover() {
 
   return (
     <section className="catalogue-cover">
-      <img className="catalogue-cover-image" src={COVER.img} alt={tr(COVER.alt)} />
+      <img
+        className="catalogue-cover-image"
+        src={COVER.img}
+        alt={tr(COVER.alt)}
+        fetchPriority="high"
+      />
       <div className="catalogue-cover-meta">
         <p>
           <b>{copy.archive}</b>

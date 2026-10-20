@@ -45,7 +45,6 @@
 }
 .showcase-pattern-panel .eyebrow-row {
   color: #302820;
-  font-weight: 700;
 }
 .showcase-pattern-panel .gallery-track.gallery-static .gallery-item-caption {
   color: #2b231d;
@@ -63,17 +62,21 @@
 }
 .gallery-shell {
   position: relative;
-  width: min(100%, 1380px);
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: clamp(16px, 1.8vw, 32px);
+  width: min(100%, 1480px);
   margin: 0 auto;
 }
 .gallery-arrow {
-  position: absolute;
-  top: calc(50% - 28px);
-  z-index: 3;
+  /* Centred on the photos rather than photo + caption. */
+  margin-bottom: 60px;
   width: 44px;
   height: 44px;
   border: 1px solid var(--ink);
-  background: rgba(247, 245, 241, 0.92);
+  background: transparent;
+  color: var(--ink);
   display: grid;
   place-items: center;
   padding: 0;
@@ -88,61 +91,83 @@
 .gallery-arrow:hover {
   background: var(--ink);
   color: var(--paper);
-  transform: translateY(-2px);
-}
-.gallery-arrow-prev {
-  left: 12px;
-}
-.gallery-arrow-next {
-  right: 12px;
-}
-/* Arrows move out beside the images only once the gutter can hold them. */
-@media (min-width: 1600px) {
-  .gallery-arrow-prev {
-    left: -64px;
-  }
-  .gallery-arrow-next {
-    right: -64px;
-  }
 }
 
+/* Narrow screens: every piece in one swipeable row that bleeds to the screen edge,
+   snapping card by card, with the next card peeking in (pattern from the mobile app). */
 @media (max-width: 800px) {
-  .gallery-track.gallery-static {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 14px;
+  .gallery {
+    min-height: 0;
   }
-  .gallery-track .gallery-item-caption {
-    font-size: 8px;
-    letter-spacing: 0.1em;
+  .gallery > .showcase-pattern-panel {
+    padding-right: 0;
+    padding-left: 0;
   }
-  .gallery-track .gallery-item-caption span {
-    display: none;
+  .showcase-pattern-panel .eyebrow-row {
+    padding: 0 var(--pad-x);
+  }
+  .gallery-shell {
+    display: block;
   }
   .gallery-arrow {
-    top: calc(50% - 22px);
-    width: 38px;
-    height: 38px;
+    display: none;
   }
-  .gallery-arrow-prev {
-    left: 8px;
+  .gallery-window {
+    width: 100%;
   }
-  .gallery-arrow-next {
-    right: 8px;
+  .gallery-track.gallery-static {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--pad-x);
+    padding: 0 var(--pad-x) 4px;
+    scrollbar-width: none;
+  }
+  .gallery-track.gallery-static::-webkit-scrollbar {
+    display: none;
+  }
+  .gallery-track.gallery-static .gallery-item {
+    flex: 0 0 clamp(220px, 44vw, 300px);
+    width: auto;
+    scroll-snap-align: start;
+  }
+  .showcase-pattern-panel .gallery-track.gallery-static .gallery-item-caption {
+    margin-top: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .showcase-pattern-panel .gallery-track.gallery-static .gallery-item-caption > span {
+    display: none;
+  }
+  /* Closing card: a link through to the full catalogue, sized like an image. */
+  .gallery-track.gallery-static .gallery-item-all {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 2/3;
+    padding: 22px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1;
+  }
+  .gallery-item-all-count {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    color: var(--accent-on-dark);
   }
 }
 @media (max-width: 480px) {
-  .gallery-window {
-    width: 100%;
-    margin-left: 0;
-  }
-  .gallery-track.gallery-static {
-    gap: 24px 10px;
-  }
-  .gallery-track .gallery-item {
-    padding: 0;
-  }
-  .gallery-track .gallery-item-caption {
-    display: none;
+  .gallery-track.gallery-static .gallery-item {
+    flex-basis: 64vw;
   }
 }
 

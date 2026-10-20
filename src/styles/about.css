@@ -1,103 +1,133 @@
-/* About — "Dalga means wave." masthead over a watercolour sea; the nav floats on top. */
+/* About — "Dalga means wave." masthead with the atelier's one-line introduction; the nav floats on top. */
 .about-hero {
-  padding: calc(108px + clamp(48px, 6vw, 96px)) var(--pad-x) clamp(56px, 6vw, 88px);
+  padding: calc(108px + clamp(48px, 6vw, 96px)) var(--pad-x) clamp(64px, 7vw, 104px);
   background: var(--paper);
 }
 .about-hero-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
+  margin: 0;
   padding-bottom: 22px;
   border-bottom: 1px solid #17140f59;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #4c4f52;
+  color: var(--accent);
+}
+.about-hero-body {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(40px, 6vw, 120px);
+  align-items: end;
+  margin-top: clamp(40px, 5vw, 72px);
 }
 .about-hero h1 {
-  margin: clamp(40px, 5vw, 72px) 0 0;
-  font-size: clamp(64px, 11vw, 196px);
+  margin: 0;
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: clamp(64px, 9.5vw, 172px);
   line-height: 0.92;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
 }
-
-/* About — founder photograph and the atelier's story. */
-.atelier-story {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: clamp(48px, 6vw, 120px);
-  align-items: start;
-  padding: clamp(40px, 5vw, 72px) var(--pad-x) clamp(96px, 11vw, 160px);
+.about-hero h1 em {
+  color: var(--accent);
 }
-.atelier-story-image img {
-  width: 100%;
-  aspect-ratio: 1 / 1.1;
-  object-fit: cover;
-  object-position: 50% 40%;
-  display: block;
-  filter: grayscale(1);
-}
-.atelier-story-image figcaption {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 18px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-.atelier-story-image figcaption > span:last-child {
-  color: var(--muted);
-}
-.atelier-story-copy {
-  padding-top: clamp(0px, 8vw, 120px);
-}
-.atelier-story h2 {
+.about-hero-intro {
   margin: 0;
-  font-size: clamp(34px, 3.6vw, 58px);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
-  text-wrap: pretty;
-}
-.atelier-story h2 span {
-  color: #8a7f6c;
-}
-.atelier-story-notes {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 40px;
-  margin-top: clamp(40px, 4vw, 64px);
-  padding-top: 36px;
-  border-top: 1px solid #17140f33;
-}
-.atelier-story-notes p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.85;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
   color: #453d31;
   text-wrap: pretty;
 }
 
+/* About — the founder's line on an ink band. */
+.about-quote {
+  padding: clamp(80px, 10vw, 150px) var(--pad-x);
+  background: var(--ink);
+  color: var(--paper);
+}
+.about-quote blockquote {
+  max-width: 1100px;
+  margin: 0;
+}
+.about-quote blockquote > span {
+  display: block;
+  height: 0.5em;
+  font-family: var(--display);
+  font-size: clamp(96px, 10vw, 150px);
+  line-height: 1;
+  color: var(--accent-on-dark);
+}
+.about-quote p {
+  margin: 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(40px, 4.6vw, 72px);
+  line-height: 1.12;
+  text-wrap: pretty;
+}
+.about-quote footer {
+  margin-top: clamp(32px, 3.5vw, 48px);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+
+/* About — founder photograph beside three facts about the atelier. */
+.atelier-story {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(48px, 6vw, 120px);
+  align-items: center;
+  padding: clamp(80px, 10vw, 140px) var(--pad-x) clamp(96px, 11vw, 160px);
+}
+.atelier-story-image img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 45%;
+  display: block;
+}
+.atelier-story-image figcaption {
+  margin-top: 18px;
+  color: var(--muted);
+}
+.atelier-story-facts {
+  margin: 0 0 clamp(28px, 3vw, 40px);
+}
+.atelier-story-facts > div {
+  display: grid;
+  grid-template-columns: minmax(96px, 1fr) minmax(0, 3fr);
+  gap: 24px;
+  padding: clamp(24px, 2.6vw, 36px) 0;
+  border-top: 1px solid #17140f29;
+}
+.atelier-story-facts > div:last-child {
+  border-bottom: 1px solid #17140f29;
+}
+.atelier-story-facts dt {
+  padding-top: 0.6em;
+  color: var(--accent);
+}
+.atelier-story-facts dd {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 1.25;
+  text-wrap: pretty;
+}
+
 @media (max-width: 900px) {
+  .about-hero-body,
   .atelier-story {
     grid-template-columns: 1fr;
   }
-  .atelier-story-copy {
-    padding-top: 0;
+  .about-hero-body {
+    align-items: start;
   }
 }
 @media (max-width: 560px) {
-  .about-hero-meta {
-    flex-direction: column;
-    gap: 10px;
-  }
   .about-hero h1 {
     font-size: 17vw;
-  }
-  .atelier-story-notes {
-    grid-template-columns: 1fr;
-    gap: 16px;
   }
 }

@@ -1,7 +1,14 @@
 /* Home — "How a piece is made": pinned section, vertical scroll steps a row of four panels. */
 .process {
   position: relative;
+  /* Above the fabric strips, so their dark edges tuck under this section (as with the news). */
+  z-index: 2;
   background: var(--ink);
+  box-shadow:
+    0 -2px 4px rgba(23, 20, 15, 0.35),
+    0 -8px 18px rgba(23, 20, 15, 0.3),
+    0 2px 4px rgba(23, 20, 15, 0.35),
+    0 8px 18px rgba(23, 20, 15, 0.3);
   color: var(--paper);
 }
 .process-head {
@@ -14,10 +21,6 @@
 }
 .process-eyebrow {
   margin: 0 0 16px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
   color: var(--accent-on-dark);
 }
 .process-head h2 {
@@ -29,9 +32,6 @@
 .process-lead {
   max-width: 340px;
   margin: 0 0 6px;
-  font-size: 15px;
-  line-height: 1.85;
-  font-weight: 300;
   color: #cfc7b9;
   text-wrap: pretty;
 }
@@ -44,7 +44,8 @@
   left: 50%;
   bottom: -0.12em;
   transform: translateX(-50%);
-  font-family: 'Gloock', serif;
+  font-family: var(--display);
+  font-weight: 300;
   line-height: 1;
   color: rgba(247, 245, 241, 0.045);
   pointer-events: none;
@@ -74,17 +75,17 @@
 }
 .process-number {
   display: block;
-  font-family: 'Gloock', serif;
+  font-family: var(--display);
+  font-weight: 300;
   font-size: clamp(48px, min(12vw, 14vh), 180px);
   line-height: 0.8;
 }
 .process-text h3 {
   margin: 12px 0 0;
-  font-family: 'Gloock', serif;
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 300;
   font-size: clamp(26px, min(3.6vw, 6vh), 56px);
   line-height: 1.05;
-  letter-spacing: -0.015em;
 }
 .process-text p {
   margin: 0;
@@ -111,10 +112,6 @@
 }
 .process-details dt {
   padding-top: 3px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
   color: var(--accent-on-dark);
 }
 .process-details dd {
@@ -223,13 +220,20 @@
   flex: 1;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  /* Wider than a stitch gap, so the four steps still read as four seams. */
+  gap: 28px;
 }
+/* Each bar is a running stitch: the dash pattern masks both the dim track and the fill, so the
+   stitches light up one after another as the fill sweeps across. `round` fits whole stitches
+   to each bar, so none ends cut in half. */
 .process-bars > span {
+  --stitch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='2'><rect width='12' height='2' rx='1'/></svg>");
   position: relative;
-  height: 1px;
+  height: 2px;
   overflow: hidden;
-  background: rgba(247, 245, 241, 0.18);
+  background: rgba(247, 245, 241, 0.22);
+  mask: var(--stitch) left center / 20px 2px round no-repeat;
+  -webkit-mask: var(--stitch) left center / 20px 2px round no-repeat;
 }
 .process-bars > span::after {
   content: '';
@@ -258,24 +262,52 @@
   }
 }
 
-/* Under 720px: a plain vertical stack, no pinning. */
+/* Under 720px: no pinning. The same row of panels swipes sideways, snapping one panel at a
+   time with the next one peeking in; the counter and bars below follow the swipe. */
 .process:not(.is-pinned) {
-  padding-bottom: clamp(56px, 12vw, 80px);
+  padding-bottom: 16px;
 }
 .process:not(.is-pinned) .process-head {
-  padding-top: clamp(72px, 16vw, 96px);
-  padding-bottom: 40px;
+  padding-top: clamp(64px, 16vw, 96px);
+  padding-bottom: 32px;
 }
-.process:not(.is-pinned) .process-panel {
+.process:not(.is-pinned) .process-track {
   display: flex;
-  flex-direction: column;
-  gap: 28px;
-  padding: 40px var(--pad-x) 48px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
   border-top: 1px solid rgba(247, 245, 241, 0.1);
 }
-.process:not(.is-pinned) .process-art {
-  height: min(100vw, 480px);
+.process:not(.is-pinned) .process-track::-webkit-scrollbar {
+  display: none;
 }
+.process:not(.is-pinned) .process-panel {
+  flex: 0 0 86%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px 20px 8px var(--pad-x);
+  border-right: 1px solid rgba(247, 245, 241, 0.1);
+  scroll-snap-align: start;
+}
+.process:not(.is-pinned) .process-panel:last-child {
+  padding-right: var(--pad-x);
+  border-right: 0;
+}
+.process:not(.is-pinned) .process-art {
+  height: clamp(200px, 56vw, 300px);
+}
+/* The faint ghost numeral needs the big pinned panels; here the drawing carries the art. */
 .process:not(.is-pinned) .process-ghost {
-  font-size: min(100vw, 480px);
+  display: none;
+}
+.process:not(.is-pinned) .process-number {
+  font-size: 44px;
+}
+.process:not(.is-pinned) .process-text h3 {
+  margin-top: 4px;
+}
+.process:not(.is-pinned) .process-progress {
+  padding: 24px var(--pad-x) 40px;
 }

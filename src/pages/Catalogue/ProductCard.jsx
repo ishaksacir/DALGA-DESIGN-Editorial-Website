@@ -8,10 +8,10 @@ export function ProductCard({ product }) {
   const { tr } = useI18n()
 
   return (
-    <Reveal as="article" className="card">
-      <Link to={productPath(product.id)}>
+    <Reveal as="article" className="card" data-product={product.id}>
+      <Link to={productPath(product.id)} state={{ fromCatalogue: true }}>
         <div className="card-media">
-          <img src={product.img} alt={tr(product.alt)} />
+          <img src={product.img} alt={tr(product.alt)} loading="lazy" />
         </div>
         <div className="card-caption">
           <span className="card-number">{product.number}</span>

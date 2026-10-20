@@ -17,7 +17,7 @@ export function NeedleLink({
   ...props
 }) {
   const classes = `needle-hover ${className}`
-  const icon = <img src={asset(`needle-${needle}.png`)} alt="" />
+  const icon = <img src={asset(`ui/needle-${needle}.png`)} alt="" />
   const content = (
     <>
       <span>{children}</span>

@@ -1,15 +1,26 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { useContactDrawer } from '@/components/contact/context'
 import { NeedleLink } from '@/components/ui/NeedleLink'
 import { ROUTES } from '@/constants/routes'
 import { getProductById } from '@/data/products'
+import { usePhone } from '@/hooks/usePhone'
 import { useI18n } from '@/i18n/context'
 
 import { ProductGallery } from './ProductGallery'
 
 export function ProductPage() {
   const { productId } = useParams()
+  // Phones show pieces in a sheet over the catalogue, so a direct link opens it there.
+  if (usePhone() && getProductById(productId)) {
+    return <Navigate to={`${ROUTES.CATALOGUE}?piece=${productId}`} replace />
+  }
+  return <ProductDetail productId={productId} />
+}
+
+function ProductDetail({ productId }) {
+  const location = useLocation()
+  const navigate = useNavigate()
   const { t, tr } = useI18n()
   const copy = t.product
   const { openDrawer } = useContactDrawer()
@@ -34,7 +45,18 @@ export function ProductPage() {
   return (
     <main className="creations-page">
       <section className="product section">
-        <Link className="text-link" to={ROUTES.CATALOGUE}>
+        {/* From the catalogue this is a plain Back, so the filter, count and scroll come back as
+            they were; arriving any other way, the catalogue opens scrolled to this piece. */}
+        <Link
+          className="text-link"
+          to={ROUTES.CATALOGUE}
+          state={{ focus: product.id }}
+          onClick={(event) => {
+            if (!location.state?.fromCatalogue) return
+            event.preventDefault()
+            navigate(-1)
+          }}
+        >
           {copy.back}
         </Link>
         <div className="product-grid">

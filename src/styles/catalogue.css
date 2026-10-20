@@ -196,22 +196,34 @@
   }
   .creations-page .catalogue-sidebar {
     position: static;
+    min-width: 0;
   }
   .creations-page .catalogue-sidebar-label {
     display: none;
   }
+  /* Filters: one row of chips that swipes sideways and bleeds to the screen edge. */
   .creations-page .catalogue-filters {
     display: flex;
-    flex-wrap: wrap;
     gap: 8px;
+    margin: 0 calc(-1 * var(--pad-x));
+    padding: 0 var(--pad-x) 2px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .creations-page .catalogue-filters::-webkit-scrollbar {
+    display: none;
   }
   .creations-page .catalogue-filters li {
+    flex: 0 0 auto;
     border-bottom: 0;
   }
   .creations-page .catalogue-filters button {
     width: auto;
+    min-height: 44px;
     border: 1px solid rgba(23, 20, 15, 0.25);
     padding: 9px 14px;
+    white-space: nowrap;
   }
   .creations-page .catalogue-filters button.active {
     background: var(--ink);
@@ -222,10 +234,40 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+/* Phones: keep two columns (pattern from the mobile app) with a compact caption —
+   number above the name, year dropped. */
 @media (max-width: 560px) {
+  .creations-page .catalogue {
+    padding-top: 32px;
+  }
   .creations-page .catalogue-grid {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-    margin: 0 auto;
+    gap: 32px 12px;
+  }
+  .creations-page .card-caption {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  .creations-page .card-number {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+  }
+  .creations-page .catalogue-grid .card h3 {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .creations-page .card-category {
+    margin-top: 6px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+  .creations-page .card-year {
+    display: none;
+  }
+  .creations-page .catalogue-more {
+    gap: 12px;
   }
 }

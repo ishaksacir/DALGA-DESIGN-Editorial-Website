@@ -38,10 +38,6 @@
   gap: 24px;
   padding-bottom: 22px;
   border-bottom: 1px solid #f7f5f170;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
 }
 .oneofone-cover-open {
   display: flex;
@@ -64,6 +60,8 @@
 }
 .oneofone-cover h1 {
   margin: clamp(16px, 2vw, 28px) 0 0;
+  font-family: var(--wordmark);
+  font-weight: 400;
   font-size: clamp(96px, min(12.5vw, 26svh), 240px);
   line-height: 0.86;
   letter-spacing: -0.035em;
@@ -73,9 +71,6 @@
 .oneofone-cover-body > p {
   max-width: 320px;
   margin: 0 0 clamp(8px, 1.5vw, 24px);
-  font-size: 15px;
-  line-height: 1.8;
-  font-weight: 300;
   color: #f7f5f1e6;
   text-wrap: pretty;
 }
@@ -93,11 +88,6 @@
 }
 .unfolds-head p {
   margin: 0;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
 }
 .unfolds-grid {
   display: grid;
@@ -117,6 +107,9 @@
   height: 100%;
   object-fit: contain;
   display: block;
+  /* The drawings are light lines on transparent (made for the dark home section); darken them. */
+  filter: brightness(0);
+  opacity: 0.85;
 }
 .unfolds-meta {
   display: flex;
@@ -144,9 +137,6 @@
 }
 .unfolds-stage > p {
   margin: 22px 0 0;
-  font-size: 15px;
-  line-height: 1.75;
-  font-weight: 300;
   color: #453d31;
   text-wrap: pretty;
 }
@@ -167,11 +157,6 @@
 }
 .good-to-know-eyebrow {
   margin: 0 0 20px;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
   color: var(--accent-on-dark);
 }
 .good-to-know h2 {
@@ -184,9 +169,6 @@
 .good-to-know-lead {
   max-width: 330px;
   margin: 0 0 10px;
-  font-size: 15px;
-  line-height: 1.85;
-  font-weight: 300;
   color: #cfc7b9;
 }
 .good-to-know-list {
@@ -214,70 +196,27 @@
   margin: 0;
 }
 .good-to-know-title {
-  font-family: 'Gloock', serif;
+  font-family: var(--display);
+  font-weight: 300;
   font-size: clamp(32px, 3.4vw, 54px);
   line-height: 1.05;
-  letter-spacing: -0.02em;
 }
 .good-to-know-text {
-  font-size: 15px;
-  line-height: 1.75;
-  font-weight: 300;
   color: #b8ae9d;
   text-wrap: pretty;
 }
 
-/* One of one — closing "Begin your commission". */
-.begin-commission {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: clamp(48px, 6vw, 88px);
-  align-items: center;
-  padding: clamp(40px, 4vw, 64px) var(--pad-x);
-  background: var(--panel-warm);
-}
-.begin-commission-image img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: 62% 50%;
-  display: block;
-  filter: grayscale(1);
-}
-.begin-commission-eyebrow {
-  margin: 0 0 clamp(32px, 4vw, 52px);
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.begin-commission h2 {
-  margin: 0;
-  font-family: 'Manrope', sans-serif;
-  font-weight: 200;
-  font-size: clamp(54px, 6vw, 96px);
-  line-height: 0.98;
-  letter-spacing: -0.05em;
-}
-.begin-commission h2 span {
-  font-family: 'Gloock', serif;
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  color: var(--accent);
-}
-.begin-commission-text {
-  max-width: 420px;
-  margin: clamp(36px, 4vw, 56px) 0 0;
-  font-size: 15px;
-  line-height: 1.85;
-  font-weight: 300;
-  color: #453d31;
-  text-wrap: pretty;
-}
-.begin-commission-btn {
-  margin-top: 40px;
+/* The title's intro (letters gather in as it rises). Lived in the old hero.css; this is its only user. */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    letter-spacing: 0.3em;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -291,11 +230,6 @@
   }
   .good-to-know-text {
     grid-column: 2;
-  }
-}
-@media (max-width: 900px) {
-  .begin-commission {
-    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 800px) {

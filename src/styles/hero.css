@@ -1,77 +1,97 @@
-/* Home — full-bleed hero with the zooming DALGA / DESIGN wordmark. */
+/* Home — full-bleed hero: DALGA behind the model, DESIGN in front. The words zoom in on load.
+   Values follow the hero handoff (hero-reference.html). */
+
 .hero {
-  height: 100svh;
-  min-height: 640px;
+  --hero-ink: #ffffff;
   position: relative;
+  height: 100vh;
+  min-height: 600px;
   overflow: hidden;
-  background: var(--placeholder-bg);
+  isolation: isolate;
+  background: #d9d6d1;
   scroll-snap-align: start;
 }
-.hero-bg,
-.hero-cutout {
+.hero-svg {
   position: absolute;
   inset: 0;
-  background: url('/uploads/hero-bg-wide.png') center 56% / auto 175% no-repeat;
-  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
-.hero-cutout {
-  background-image: url('/uploads/hero-cutout-wide.png');
-  z-index: 3;
+/* Photo + cut-out: identical transforms, or the cut-out drifts off the photo. */
+.hero-zoom {
+  transform-box: view-box;
+  transform-origin: 50% 58%;
+  transform: scale(1.35);
 }
 .hero-word {
-  position: absolute;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-family: 'Gloock', serif;
-  font-size: clamp(88px, 16.5vw, 310px);
-  font-weight: 500;
-  line-height: 0.82;
-  letter-spacing: 0.06em;
-  color: #fdfcfa;
-  white-space: nowrap;
-  text-shadow: 0 2px 46px #140f0838;
-  animation: hero-in 1.8s cubic-bezier(0.2, 0.6, 0.2, 1) both;
-  will-change: transform;
-  z-index: 2;
-}
-.dalga {
-  top: 16%;
-}
-.design {
-  top: 43%;
-  z-index: 4;
-  margin: 0;
-  font-size: clamp(74px, 13.5vw, 252px);
-  font-weight: 500;
-  line-height: 0.82;
-  letter-spacing: 0.14em;
-  animation-delay: 0.35s;
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  /* On load: fall in from 8× (the old maximum zoom), dip just under full size, spring back and
+     stay. Opacity fades in quicker so the words read early.
+     reduced-motion.css turns animations off, so those visitors see the words still. */
+  animation:
+    hero-word-zoom 1.6s both,
+    hero-word-fade 0.7s ease-out both;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: 15vw;
+  letter-spacing: -0.045em;
+  font-kerning: normal;
+  fill: var(--hero-ink);
 }
 .hero-note {
   position: absolute;
-  bottom: clamp(28px, 5vh, 56px);
-  z-index: 5;
-  font-size: 11.5px;
+  bottom: 40px;
+  margin: 0;
+  font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.14em;
+  line-height: 1.7;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: #3a342a;
 }
 .hero-note.left {
-  left: var(--pad-x);
+  left: 48px;
 }
 .hero-note.right {
-  right: var(--pad-x);
+  right: 48px;
   text-align: right;
 }
-@keyframes hero-in {
+@media (max-width: 800px) {
+  .hero-note.left {
+    left: var(--pad-x);
+  }
+  .hero-note.right {
+    right: var(--pad-x);
+  }
+}
+/* The bounce is set as explicit sizes, not an overshooting curve: a curve overshoots by a share
+   of the whole 8× → 1× travel, which dips far too small. */
+@keyframes hero-word-zoom {
+  0% {
+    transform: scale(8);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  60% {
+    transform: scale(0.94);
+    animation-timing-function: ease-in-out;
+  }
+  80% {
+    transform: scale(1.02);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes hero-word-fade {
   from {
     opacity: 0;
-    letter-spacing: 0.3em;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: none;
   }
 }

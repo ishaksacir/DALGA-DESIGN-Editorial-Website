@@ -15,7 +15,8 @@
 .footer-tagline {
   max-width: 360px;
   margin: 0 0 18px;
-  font-family: 'Gloock', serif;
+  font-family: var(--display);
+  font-weight: 300;
   font-size: 34px;
   line-height: 1.1;
 }
@@ -61,12 +62,34 @@
   text-transform: uppercase;
   color: var(--muted-on-dark);
 }
+.footer-top {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.footer-top:hover {
+  color: var(--accent-on-dark);
+}
+.footer-top span {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+.footer-top:hover span {
+  transform: translateY(-2px);
+}
 .footer-wordmark {
   margin: 0 0 -0.16em;
-  font-family: 'Gloock', serif;
+  font-family: var(--wordmark);
+  font-weight: 400;
   font-size: 17.4vw;
   line-height: 0.8;
-  letter-spacing: -0.03em;
   white-space: nowrap;
   text-align: center;
 }
@@ -85,6 +108,23 @@
   }
   .footer-bottom {
     flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
+  }
+  /* Taller touch targets for the links without changing their visual rhythm. */
+  .footer-col {
+    gap: 0;
+  }
+  .footer-col b {
+    margin-bottom: 4px;
+  }
+  .footer-col a,
+  .footer-top {
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-col a {
+    min-height: 40px;
   }
 }

@@ -79,6 +79,8 @@
   left: var(--pad-x);
   bottom: 0;
   margin: 0 0 -0.2em;
+  font-family: var(--wordmark);
+  font-weight: 400;
   font-size: clamp(120px, min(17vw, 34svh), 330px);
   line-height: 1;
   letter-spacing: -0.03em;

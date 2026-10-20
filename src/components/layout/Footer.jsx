@@ -43,6 +43,9 @@ export function Footer() {
       <div className="footer-bottom">
         <span>© 2026 {SITE.name}</span>
         <span>{t.footer.everyPiece}</span>
+        <button type="button" className="footer-top" onClick={() => window.scrollTo({ top: 0 })}>
+          {t.footer.backToTop} <span aria-hidden="true">↑</span>
+        </button>
       </div>
       <p className="footer-wordmark" aria-hidden="true">
         DALGA

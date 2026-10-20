@@ -52,7 +52,7 @@ export function ContactDrawerProvider({ children }) {
     dispatch({ type: 'open', productId })
   }, [])
 
-  const value = useMemo(() => ({ openDrawer }), [openDrawer])
+  const value = useMemo(() => ({ openDrawer, isOpen: state.open }), [openDrawer, state.open])
 
   return (
     <ContactDrawerContext.Provider value={value}>

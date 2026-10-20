@@ -1,9 +1,36 @@
+/* Wordmark face: SangBleu Empire by Swiss Typefaces, for the home hero, the footer wordmark and
+   the big page titles. These are the foundry's TRIAL files, for evaluation only; swap in the
+   licensed web fonts before the site goes live (these WOFF2s were converted from the trial OTFs). Regular is preloaded in index.html;
+   Bodoni Moda only covers the moment before it loads. Only 400 exists, so use weight 400.
+   TRIAL ONLY: the trial files draw every accented letter (č ć š ž đ, é …) as its plain letter,
+   which misspells Bosnian ("znači" → "znaci"). unicode-range keeps the trial to unaccented
+   Latin, punctuation and symbols so accented letters fall back to Bodoni Moda. Delete both
+   unicode-range lines when the licensed files replace these. */
+@font-face {
+  font-family: 'DALGA SangBleu Empire';
+  src: url('/fonts/SangBleuEmpireTrial-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00BF, U+00D7, U+00F7, U+2000-206F, U+20AC, U+2122;
+}
+@font-face {
+  font-family: 'DALGA SangBleu Empire';
+  src: url('/fonts/SangBleuEmpireTrial-RegularItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00BF, U+00D7, U+00F7, U+2000-206F, U+20AC, U+2122;
+}
+
 /*
   Design tokens. Breakpoint scale used across these stylesheets (no preprocessor,
   so documented here rather than as CSS variables):
   480 / 520 / 560 / 620 / 760-800 / 900 / 1000px
 */
 :root {
+  --display: 'Cormorant Garamond', serif;
+  --wordmark: 'DALGA SangBleu Empire', 'Bodoni Moda', serif;
   --ink: #17140f;
   --paper: #f7f5f1;
   --paper-alt: #f5f3ef;
@@ -40,6 +67,16 @@ html {
 html:has(body[data-page='home']) {
   scroll-snap-type: y proximity;
 }
+/* Visually hidden, still read by screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: 0;
+  white-space: nowrap;
+}
 body {
   margin: 0;
   font-family: 'Manrope', sans-serif;
@@ -73,8 +110,8 @@ figure {
 }
 h1,
 h2 {
-  font-family: 'Gloock', serif;
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 300;
   letter-spacing: 0.02em;
   line-height: 1;
 }

@@ -58,10 +58,7 @@
 }
 .creations-page .product h1 {
   margin: 0 0 20px;
-  font:
-    400 clamp(36px, 4vw, 58px)/1.04 'Gloock',
-    serif;
-  letter-spacing: -0.015em;
+  font: 300 clamp(36px, 4vw, 58px)/1.04 var(--display);
   text-wrap: balance;
 }
 .creations-page .product .category {
@@ -70,24 +67,21 @@
   letter-spacing: 0.3em;
 }
 .creations-page .product .lead.italic {
-  font-family: 'Gloock', serif;
+  font-family: var(--display);
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   max-width: none;
   margin: clamp(40px, 4.5vw, 64px) 0 clamp(24px, 2.4vw, 32px);
   padding-top: clamp(40px, 4.5vw, 64px);
   border-top: 1px solid rgba(23, 20, 15, 0.12);
   font-size: clamp(19px, 1.6vw, 23px);
   line-height: 1.45;
-  letter-spacing: -0.005em;
   color: var(--ink);
   text-wrap: pretty;
 }
 .creations-page .product-description {
   max-width: 460px;
   margin: 0 0 clamp(56px, 6vw, 88px);
-  font-size: 15px;
-  line-height: 1.9;
   color: #4c4740;
   text-wrap: pretty;
 }
@@ -105,10 +99,6 @@
   border-bottom: 1px solid rgba(23, 20, 15, 0.08);
 }
 .creations-page .product-specs dt {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
   color: #8c8375;
 }
 .creations-page .product-specs dd {
@@ -233,6 +223,13 @@
     opacity 0.25s,
     border-color 0.25s;
 }
+/* More than four images: rows of four, each thumb the size it has in a four-image gallery. */
+.product-thumbs-rows {
+  flex-wrap: wrap;
+}
+.product-thumbs-rows button {
+  flex: 0 0 calc((100% - 48px) / 4);
+}
 .product-thumbs button.active,
 .product-thumbs button:hover {
   opacity: 1;
@@ -244,8 +241,115 @@
   object-fit: cover;
   display: block;
 }
+/* Phones: the gallery bleeds edge to edge as a swipeable row (pattern from the mobile app),
+   with a counter, progress bars and a strip of thumbnails; the enquiry button docks to the
+   bottom of the screen while the details are in view. */
 @media (max-width: 760px) {
-  .product-thumbs button {
-    max-width: 96px;
+  .creations-page .product > .text-link {
+    margin-bottom: 24px;
+  }
+  .creations-page .product-grid {
+    gap: 40px;
+  }
+  .creations-page .product-grid .product-gallery {
+    width: auto;
+    max-width: none;
+    margin: 0 calc(-1 * var(--pad-x));
+    gap: 12px;
+  }
+  .product-swipe {
+    position: relative;
+  }
+  .product-swipe-strip {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .product-swipe-strip::-webkit-scrollbar {
+    display: none;
+  }
+  /* The photographs are 2:3; matching that drops the letterbox the desktop frame allows. */
+  .creations-page .product-swipe-strip figure {
+    flex: 0 0 100%;
+    aspect-ratio: 2/3;
+    scroll-snap-align: start;
+  }
+  .product-swipe-counter {
+    position: absolute;
+    top: 14px;
+    right: var(--pad-x);
+    padding: 5px 8px;
+    background: rgba(247, 245, 241, 0.92);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    font-variant-numeric: tabular-nums;
+  }
+  .product-swipe-bars {
+    position: absolute;
+    left: var(--pad-x);
+    right: var(--pad-x);
+    bottom: 16px;
+    display: flex;
+    gap: 6px;
+    pointer-events: none;
+  }
+  .product-swipe-bars > span {
+    flex: 1;
+    height: 2px;
+    background: rgba(23, 20, 15, 0.22);
+    transition: background-color 0.3s ease;
+  }
+  .product-swipe-bars > span.active {
+    background: var(--ink);
+  }
+  .product-thumbs,
+  .product-thumbs-rows {
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 2px var(--pad-x);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .product-thumbs::-webkit-scrollbar {
+    display: none;
+  }
+  .product-thumbs button,
+  .product-thumbs-rows button {
+    flex: 0 0 56px;
+    max-width: none;
+    aspect-ratio: 4/5;
+  }
+  .creations-page .product .lead.italic {
+    margin-top: 32px;
+    padding-top: 32px;
+  }
+  .creations-page .product-specs > div {
+    padding: 14px 0;
+  }
+  .creations-page .product-cta {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin: 0 calc(-1 * var(--pad-x));
+    padding: 12px var(--pad-x) max(12px, env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(23, 20, 15, 0.12);
+    background: var(--paper-alt);
+  }
+  .creations-page .product .needle-btn {
+    flex: 1;
+    min-width: 0;
+    height: 54px;
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .creations-page .product .needle-btn img {
+    filter: none;
+  }
+  .creations-page .product-cta-note {
+    display: none;
   }
 }

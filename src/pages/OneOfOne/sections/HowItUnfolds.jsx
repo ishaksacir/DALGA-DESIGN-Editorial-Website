@@ -1,16 +1,9 @@
 import { Reveal } from '@/components/ui/Reveal'
-import { asset } from '@/constants/site'
+import { PROCESS_IMAGES } from '@/data/process'
 import { useI18n } from '@/i18n/context'
 import { twoDigits } from '@/utils/format'
 
-/** Illustrations for the four stages; the copy for each lives in `oneOfOne.unfolds.stages`. */
-const STAGE_IMAGES = [
-  'unfolds-letter.png',
-  'unfolds-dress.png',
-  'unfolds-form.png',
-  'unfolds-hanger.png',
-]
-
+/** The four stages, each with its process drawing; the copy lives in `oneOfOne.unfolds.stages`. */
 export function HowItUnfolds() {
   const { t } = useI18n()
   const copy = t.oneOfOne.unfolds
@@ -23,9 +16,9 @@ export function HowItUnfolds() {
       </div>
       <div className="unfolds-grid">
         {copy.stages.map(({ title, timing, description, alt }, index) => (
-          <Reveal as="article" key={STAGE_IMAGES[index]} className="unfolds-stage">
+          <Reveal as="article" key={PROCESS_IMAGES[index]} className="unfolds-stage">
             <div className="unfolds-art">
-              <img src={asset(STAGE_IMAGES[index])} alt={alt} loading="lazy" />
+              <img src={PROCESS_IMAGES[index]} alt={alt} loading="lazy" />
             </div>
             <div className="unfolds-meta">
               <h3>

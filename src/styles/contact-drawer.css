@@ -101,10 +101,6 @@
   border: 0;
   background: var(--ink);
   color: var(--paper);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
   cursor: pointer;
   transition: background 0.25s ease;
 }
@@ -139,11 +135,10 @@
 }
 .contact-intro h3 {
   margin: 0;
-  font-family: 'Gloock', serif;
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 300;
   font-size: clamp(32px, 3.2vw, 44px);
   line-height: 1.05;
-  letter-spacing: -0.02em;
 }
 .contact-intro p {
   margin: 0;
@@ -325,7 +320,8 @@ textarea.contact-input {
 }
 .contact-sent p {
   margin: 0;
-  font-family: 'Gloock', serif;
+  font-family: var(--display);
+  font-weight: 300;
   font-size: clamp(28px, 3vw, 40px);
   line-height: 1.15;
   text-wrap: pretty;
@@ -337,7 +333,6 @@ textarea.contact-input {
 }
 .contact-sent-actions .contact-primary {
   padding: 18px 28px;
-  letter-spacing: 0.24em;
 }
 .contact-sent-actions .contact-text-btn {
   font-size: 11px;

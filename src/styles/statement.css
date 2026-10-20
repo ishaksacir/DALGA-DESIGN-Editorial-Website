@@ -14,26 +14,47 @@
 }
 .statement-label {
   margin: 6px 0 0;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
   color: var(--accent);
+}
+.statement-stamp {
+  margin-top: 36px;
 }
 .statement-text {
   margin: 0;
-  font-family: 'Gloock', serif;
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 300;
   font-size: clamp(36px, 4.4vw, 66px);
   line-height: 1.08;
-  letter-spacing: -0.02em;
   text-wrap: pretty;
 }
 .statement-text span {
   color: var(--accent);
 }
+/* Home "The atelier": flat, hand-sewn stitches down the side gutters, kept inside the section. */
+.statement-stitched {
+  position: relative;
+  /* Room for the folk strip that overlaps the top of this section. */
+  padding-top: clamp(64px, 6vw, 96px);
+}
+.statement-stitches {
+  position: absolute;
+  inset: clamp(40px, 5vw, 72px) 0;
+  pointer-events: none;
+}
+/* Left: two staggered rows of running stitch. */
+.stitch-running {
+  left: calc(var(--pad-x) * 0.4);
+  --stitch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='40'><rect x='0' y='3' width='3' height='14' rx='1.5'/><rect x='11' y='23' width='3' height='14' rx='1.5'/></svg>");
+}
+/* Right: a column of cross stitch. */
+.stitch-cross {
+  right: calc(var(--pad-x) * 0.4);
+  --stitch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='22'><path d='M2 4 12 16M12 4 2 16' stroke='black' stroke-width='2' stroke-linecap='round'/></svg>");
+}
 @media (max-width: 800px) {
+  .statement-stitches {
+    display: none;
+  }
   .statement-inner {
     grid-template-columns: 1fr;
     gap: 24px;

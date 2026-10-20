@@ -1,11 +1,24 @@
 /* Home — founder / maker feature under the process filmstrip. */
 .maker-feature {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   gap: clamp(48px, 6vw, 88px);
   align-items: center;
   padding: clamp(80px, 10vw, 140px) var(--pad-x);
   background: var(--paper);
+}
+/* Zigzag stitches down both side gutters. */
+.stitch-zigzag {
+  top: clamp(80px, 10vw, 140px);
+  bottom: clamp(80px, 10vw, 140px);
+  --stitch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='16'><path d='M3 0 11 8 3 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+}
+.stitch-zigzag-left {
+  left: calc(var(--pad-x) * 0.4);
+}
+.stitch-zigzag-right {
+  right: calc(var(--pad-x) * 0.4);
 }
 .maker-feature-image img {
   width: 100%;
@@ -28,10 +41,6 @@
 }
 .maker-feature blockquote {
   margin: 0 0 40px;
-  font-family: 'Gloock', serif;
-  font-size: clamp(34px, 3.4vw, 50px);
-  line-height: 1.14;
-  letter-spacing: -0.015em;
   text-wrap: pretty;
 }
 .maker-feature-credit {
@@ -48,15 +57,15 @@
 }
 .maker-feature-notes p {
   margin: 0;
-  font-size: 15px;
-  line-height: 1.85;
-  font-weight: 300;
   color: #453d31;
   text-wrap: pretty;
 }
 @media (max-width: 900px) {
   .maker-feature {
     grid-template-columns: 1fr;
+  }
+  .stitch-zigzag {
+    display: none;
   }
 }
 @media (max-width: 600px) {

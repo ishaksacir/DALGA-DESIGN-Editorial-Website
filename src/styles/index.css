@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Manrope:wght@200;300;400;500;600;700&display=swap');
+/* Google Fonts are linked from index.html, so the browser finds them before this CSS loads. */
 
 /* Order matters: later files override earlier ones (shared rules are refined per section), so keep this sequence. */
 @import './base.css';
+@import './typography.css';
 @import './navigation.css';
 @import './hero.css';
 @import './shared.css';
@@ -21,3 +22,4 @@
 @import './oneofone.css';
 @import './about.css';
 @import './contact-drawer.css';
+@import './phone.css';

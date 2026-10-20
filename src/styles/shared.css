@@ -15,10 +15,6 @@
   justify-content: space-between;
   gap: 16px;
   margin-bottom: clamp(28px, 3.5vw, 48px);
-  font-size: 11px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  font-weight: 600;
   color: var(--muted);
 }
 .gallery-window {
@@ -43,10 +39,6 @@
   display: flex;
   justify-content: space-between;
   margin-top: 14px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
   color: var(--muted);
 }
 .text-link {
@@ -105,10 +97,6 @@
   background: none;
   padding: 16px 40px;
   margin-top: 20px;
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  font-weight: 600;
   cursor: pointer;
   transition: 0.4s;
 }
@@ -124,15 +112,10 @@
   padding-bottom: 60px;
 }
 .page-hero > p {
-  font-size: 11px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
   color: var(--muted);
 }
 .page-hero h1 {
-  font:
-    400 clamp(50px, 10vw, 180px)/0.95 'Gloock',
-    serif;
+  font: 300 clamp(50px, 10vw, 180px)/0.95 var(--display);
   margin: 22px 0 0;
 }
 .lead {
@@ -149,21 +132,7 @@
     padding: 18px var(--pad-x);
   }
   .brand img {
-    height: 42px;
-  }
-  .hero {
-    min-height: 600px;
-  }
-  .hero-bg,
-  .hero-cutout {
-    background-size: auto 125%;
-    background-position: center;
-  }
-  .hero-word {
-    top: 24%;
-  }
-  .design {
-    top: 46%;
+    height: 48px;
   }
   .hero-note.right {
     display: none;
@@ -174,12 +143,6 @@
   }
 }
 @media (max-width: 480px) {
-  .hero-word {
-    font-size: 24vw;
-  }
-  .design {
-    font-size: 20vw;
-  }
   .page-hero h1 {
     font-size: 16vw;
   }
@@ -255,4 +218,29 @@
 }
 .gallery-track.gallery-static .gallery-item-caption > span:first-child {
   min-width: 0;
+}
+/* Atelier marks: small decorative stamps (see Mark). A mark sits before its label in a .mark-row. */
+.mark {
+  display: block;
+  flex: 0 0 auto;
+}
+.mark-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Decorative stitch column: an SVG tile (set as --stitch) used as a mask and repeated down the
+   element, so the colour comes from the theme. Place it with left/right inside a positioned box. */
+.stitch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  background: var(--caramel);
+  opacity: 0.6;
+  mask-image: var(--stitch);
+  -webkit-mask-image: var(--stitch);
+  mask-repeat: repeat-y;
+  -webkit-mask-repeat: repeat-y;
 }

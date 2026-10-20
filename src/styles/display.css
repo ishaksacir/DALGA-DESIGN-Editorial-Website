@@ -1,18 +1,5 @@
-/* Display typography: Gloock carries the brand; tracking stays restrained. */
-h1,
-h2 {
-  letter-spacing: -0.012em;
-}
-.hero-word {
-  font-weight: 400;
-  letter-spacing: 0.025em;
-}
-.design {
-  font-size: clamp(82px, 15vw, 280px);
-  font-weight: 400;
-  letter-spacing: 0.025em;
-}
-
+/* Display typography: Cormorant Garamond (light) carries the brand, as on phones.
+   The home hero wordmark is the exception: it uses the handoff face (see hero.css). */
 .creations-hero {
   position: relative;
   isolation: isolate;
@@ -25,7 +12,7 @@ h2 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url('/uploads/pattern-diamond-terracotta.jpg') center 44%/440px auto repeat;
+  background: url('/images/textures/pattern-diamond-terracotta.webp') center 44%/440px auto repeat;
   opacity: 0.24;
   mask-image: radial-gradient(62% 85% at 80% 32%, #000 38%, transparent 88%);
   -webkit-mask-image: radial-gradient(62% 85% at 80% 32%, #000 38%, transparent 88%);

@@ -11,8 +11,9 @@ export function OneOfOneHero() {
     <header className="oneofone-cover">
       <img
         className="oneofone-cover-image"
-        src={asset('process-heritage-print.jpg')}
+        src={asset('one-of-one/hero-heritage-print.webp')}
         alt={copy.imageAlt}
+        fetchPriority="high"
       />
       <div className="oneofone-cover-content">
         <div className="oneofone-cover-status">
