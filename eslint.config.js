@@ -35,4 +35,8 @@ export default [
       ...prettier.rules,
     },
   },
+  {
+    files: ['server/**/*.js', 'scripts/**/*.js'],
+    languageOptions: { globals: globals.node },
+  },
 ]

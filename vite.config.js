@@ -11,5 +11,10 @@ export default defineConfig({
   },
   server: {
     allowedHosts: true,
+    // The catalogue API (`npm run server`) runs beside Vite in development.
+    proxy: {
+      '/api': 'http://localhost:3001',
+      '/uploads': 'http://localhost:3001',
+    },
   },
 })

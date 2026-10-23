@@ -36,4 +36,10 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  // The admin sits outside the site layout: no navigation, footer or reveal animations.
+  {
+    path: ROUTES.ADMIN,
+    HydrateFallback: () => null,
+    lazy: page(() => import('@/pages/Admin/AdminPage'), 'AdminPage'),
+  },
 ])
