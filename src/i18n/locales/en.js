@@ -274,6 +274,12 @@ export const en = {
       ['Cloth', 'Wool, linen and raw cotton — fabrics that age with the person wearing them.'],
     ],
   },
+  loadError: {
+    eyebrow: 'Catalogue',
+    title: 'The archive is resting',
+    text: 'We couldn’t load the pieces just now.',
+    retry: 'Try again →',
+  },
   notFound: {
     title: 'Page not found',
     text: 'That page doesn’t exist.',

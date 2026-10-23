@@ -1,6 +1,8 @@
 import { asset } from '@/constants/site'
 
 /**
+ * Seed data for the catalogue database (`npm run db:seed`). The site reads pieces from the API,
+ * not from this file, so edits here only reach the site once they are seeded.
  * Every visible text field is `{ bs, en }`; components resolve it with `tr()` from `useI18n`.
  * The `category.en` value doubles as the stable key for catalogue filtering.
  */

@@ -1,10 +1,10 @@
 import { useCallback, useRef, useState } from 'react'
 
 import { productPath } from '@/constants/routes'
-import { products } from '@/data/products'
 import { useEscapeKey } from '@/hooks/useEscapeKey'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { usePhone } from '@/hooks/usePhone'
+import { useProducts } from '@/hooks/useProducts'
 import { useI18n } from '@/i18n/context'
 import { sendCommissionRequest } from '@/services/commissionRequest'
 
@@ -38,6 +38,7 @@ export function ContactDrawer({ state, dispatch, returnFocusRef }) {
   const panelRef = useRef(null)
   const { open, status, tried, form, tags } = state
   const isPhone = usePhone()
+  const products = useProducts()
   // Phones swap the form for a full "didn't send" screen, which stays up while retrying.
   const [retrying, setRetrying] = useState(false)
   const showFailed = isPhone && (status === 'failed' || (retrying && status === 'sending'))

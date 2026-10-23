@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom'
 
-import { products } from '@/data/products'
+import { useProducts } from '@/hooks/useProducts'
 import { usePieceSheet } from '@/hooks/usePieceSheet'
 import { useI18n } from '@/i18n/context'
 import { buzz } from '@/utils/haptics'
@@ -25,6 +25,7 @@ const inType = (type) => (product) => type === 'all' || typesOf(product).include
 /** Catalogue on phones: title, a sticky row of type chips, and a two-column grid of every piece. */
 export function CataloguePhone() {
   const { t, tr } = useI18n()
+  const products = useProducts()
   const copy = t.phone.catalogue
   const { openPiece, pieceHref } = usePieceSheet()
   const [params, setParams] = useSearchParams()

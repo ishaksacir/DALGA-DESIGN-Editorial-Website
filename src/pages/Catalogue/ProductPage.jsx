@@ -3,28 +3,29 @@ import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-route
 import { useContactDrawer } from '@/components/contact/context'
 import { NeedleLink } from '@/components/ui/NeedleLink'
 import { ROUTES } from '@/constants/routes'
-import { getProductById } from '@/data/products'
 import { usePhone } from '@/hooks/usePhone'
+import { useProduct } from '@/hooks/useProducts'
 import { useI18n } from '@/i18n/context'
 
 import { ProductGallery } from './ProductGallery'
 
 export function ProductPage() {
   const { productId } = useParams()
+  const isPhone = usePhone()
+  const product = useProduct(productId)
   // Phones show pieces in a sheet over the catalogue, so a direct link opens it there.
-  if (usePhone() && getProductById(productId)) {
+  if (isPhone && product) {
     return <Navigate to={`${ROUTES.CATALOGUE}?piece=${productId}`} replace />
   }
-  return <ProductDetail productId={productId} />
+  return <ProductDetail product={product} />
 }
 
-function ProductDetail({ productId }) {
+function ProductDetail({ product }) {
   const location = useLocation()
   const navigate = useNavigate()
   const { t, tr } = useI18n()
   const copy = t.product
   const { openDrawer } = useContactDrawer()
-  const product = getProductById(productId)
 
   if (!product) {
     return (

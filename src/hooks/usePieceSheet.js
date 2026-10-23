@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { getProductById } from '@/data/products'
+import { useProduct } from '@/hooks/useProducts'
 
 const PARAM = 'piece'
 
@@ -14,7 +14,7 @@ export function usePieceSheet() {
   const location = useLocation()
   const navigate = useNavigate()
   const params = new URLSearchParams(location.search)
-  const product = getProductById(params.get(PARAM)) || null
+  const product = useProduct(params.get(PARAM)) || null
 
   const withPiece = useCallback(
     (id) => {

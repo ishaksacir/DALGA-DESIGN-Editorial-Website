@@ -5,11 +5,10 @@ import { EyebrowRow } from '@/components/ui/EyebrowRow'
 import { Mark } from '@/components/ui/Mark'
 import { Reveal } from '@/components/ui/Reveal'
 import { productPath, ROUTES } from '@/constants/routes'
-import { products } from '@/data/products'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useProducts } from '@/hooks/useProducts'
 import { useI18n } from '@/i18n/context'
 
-const VISIBLE_COUNT = Math.min(4, products.length)
 /** Below this width the four tiles become a swipeable row of every piece (see showcase.css). */
 const SWIPE_GALLERY = '(max-width: 800px)'
 
@@ -17,10 +16,12 @@ export function ShowcaseGallery() {
   const { t, tr } = useI18n()
   const [startIndex, setStartIndex] = useState(0)
   const isSwipe = useMediaQuery(SWIPE_GALLERY)
+  const products = useProducts()
+  const visibleCount = Math.min(4, products.length)
 
   const visibleProducts = isSwipe
     ? products
-    : Array.from({ length: VISIBLE_COUNT }, (_, i) => products[(startIndex + i) % products.length])
+    : Array.from({ length: visibleCount }, (_, i) => products[(startIndex + i) % products.length])
   const moveShowcase = (direction) =>
     setStartIndex((current) => (current + direction + products.length) % products.length)
 

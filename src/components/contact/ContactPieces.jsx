@@ -1,9 +1,10 @@
-import { products } from '@/data/products'
+import { useProducts } from '@/hooks/useProducts'
 import { useI18n } from '@/i18n/context'
 
 /** Thumbnail strip for tagging catalogue pieces, with a change note field per tagged piece. */
 export function ContactPieces({ tags, tagged, dispatch }) {
   const { t, tr } = useI18n()
+  const products = useProducts()
   const copy = t.contact
   const toggleTag = (productId) => dispatch({ type: 'toggleTag', productId })
 

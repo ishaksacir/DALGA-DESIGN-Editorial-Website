@@ -2,8 +2,8 @@ import { useEffect, useMemo, useRef } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 import { NeedleLink } from '@/components/ui/NeedleLink'
-import { products } from '@/data/products'
 import { usePhone } from '@/hooks/usePhone'
+import { useProducts } from '@/hooks/useProducts'
 import { useReveal } from '@/hooks/useReveal'
 import { useI18n } from '@/i18n/context'
 
@@ -32,18 +32,19 @@ function CatalogueIndex() {
   const filter = params.get('category') || ALL
   const shown = Number(params.get('show')) || PAGE_SIZE
   const gridRef = useRef(null)
+  const products = useProducts()
 
   const categories = useMemo(() => {
     const byKey = new Map(products.map((product) => [categoryKey(product), product.category]))
     return [{ key: ALL }, ...[...byKey].map(([key, label]) => ({ key, label }))]
-  }, [])
+  }, [products])
   const counts = useMemo(() => {
     const map = new Map()
     products.forEach((product) => {
       map.set(categoryKey(product), (map.get(categoryKey(product)) || 0) + 1)
     })
     return map
-  }, [])
+  }, [products])
 
   const filtered = filter === ALL ? products : products.filter((p) => categoryKey(p) === filter)
   // Arriving with a piece to show (the product page's back link): reveal enough rows to include it.

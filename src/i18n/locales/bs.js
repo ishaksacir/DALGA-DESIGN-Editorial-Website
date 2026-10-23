@@ -273,6 +273,12 @@ export const bs = {
       ['Tkanina', 'Vuna, lan i sirovi pamuk — tkanine koje stare zajedno s osobom koja ih nosi.'],
     ],
   },
+  loadError: {
+    eyebrow: 'Katalog',
+    title: 'Arhiva trenutno miruje',
+    text: 'Komade trenutno nije moguće učitati.',
+    retry: 'Pokušajte ponovo →',
+  },
   notFound: {
     title: 'Stranica nije pronađena',
     text: 'Ta stranica ne postoji.',

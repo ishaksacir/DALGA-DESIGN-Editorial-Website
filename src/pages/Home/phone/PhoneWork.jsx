@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 import { Reveal } from '@/components/ui/Reveal'
 import { ROUTES } from '@/constants/routes'
-import { products } from '@/data/products'
 import { usePieceSheet } from '@/hooks/usePieceSheet'
+import { useProducts } from '@/hooks/useProducts'
 import { useI18n } from '@/i18n/context'
 import { buzz } from '@/utils/haptics'
 import { twoDigits } from '@/utils/format'
@@ -20,6 +20,7 @@ const DRIFT = -0.08
 /** "Selected work": a snapping rail of every piece; the card in focus is full size, the rest recede. */
 export function PhoneWork() {
   const { t, tr } = useI18n()
+  const products = useProducts()
   const { openPiece, pieceHref } = usePieceSheet()
   const [focus, setFocus] = useState(0)
   const railRef = useRef(null)

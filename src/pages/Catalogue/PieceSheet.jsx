@@ -1,9 +1,9 @@
 import { useEffect, useEffectEvent, useRef, useState } from 'react'
 
 import { useContactDrawer } from '@/components/contact/context'
-import { products } from '@/data/products'
 import { useEscapeKey } from '@/hooks/useEscapeKey'
 import { usePieceSheet } from '@/hooks/usePieceSheet'
+import { useProducts } from '@/hooks/useProducts'
 import { useI18n } from '@/i18n/context'
 import { twoDigits } from '@/utils/format'
 import { buzz } from '@/utils/haptics'
@@ -15,9 +15,9 @@ const PULL_TO_CLOSE = 110
 const SPRING =
   'transform 340ms cubic-bezier(0.22, 1, 0.36, 1), opacity 340ms ease, border-radius 340ms ease'
 
-const indexOf = (product) => products.findIndex((p) => p.id === product.id)
-const neighbour = (product, dir) =>
-  products[(indexOf(product) + dir + products.length) % products.length]
+const indexOf = (products, product) => products.findIndex((p) => p.id === product.id)
+const neighbour = (products, product, dir) =>
+  products[(indexOf(products, product) + dir + products.length) % products.length]
 const clothOf = (product) =>
   product.specs.find(([label]) => label.en === 'Fabric')?.[1] ?? product.composition
 
@@ -30,6 +30,7 @@ export function PieceSheet() {
   const { t, tr } = useI18n()
   const copy = t.phone.piece
   const { product, stepTo, closePiece } = usePieceSheet()
+  const products = useProducts()
   const { openDrawer } = useContactDrawer()
   const open = !!product
   // Keep the last piece on screen while the sheet slides away.
@@ -73,7 +74,7 @@ export function PieceSheet() {
     inner.style.transform = `translateX(${-dir * 100}%)`
     inner.style.opacity = '0'
     setTimeout(() => {
-      stepTo(neighbour(shown, dir).id)
+      stepTo(neighbour(products, shown, dir).id)
       inner.style.transition = 'none'
       inner.style.transform = `translateX(${dir * 40}%)`
       requestAnimationFrame(() =>
@@ -177,7 +178,7 @@ export function PieceSheet() {
   }, [])
 
   const piece = shown
-  const next = piece ? neighbour(piece, 1) : null
+  const next = piece ? neighbour(products, piece, 1) : null
   const views = piece ? (piece.images || []).filter((src) => src !== piece.img) : []
   const details = piece
     ? [
@@ -222,7 +223,7 @@ export function PieceSheet() {
                         ‹
                       </button>
                       <span>
-                        {twoDigits(indexOf(piece) + 1)} / {twoDigits(products.length)}
+                        {twoDigits(indexOf(products, piece) + 1)} / {twoDigits(products.length)}
                       </span>
                       <button type="button" aria-label={copy.nextPiece} onClick={() => step(1)}>
                         ›
