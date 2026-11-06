@@ -5,7 +5,7 @@ import { useAtelierNews } from '@/hooks/useAtelierNews'
 import { useReveal } from '@/hooks/useReveal'
 import { useI18n } from '@/i18n/context'
 
-/** "New at the atelier": a rail of recent posts. Entries without a photo yet are left out. */
+/** "New at the atelier": a rail of recent post photos. Entries without a photo yet are left out. */
 export function PhoneNews() {
   const { t } = useI18n()
   const sectionRef = useRef(null)
@@ -27,14 +27,12 @@ export function PhoneNews() {
             href={item.href}
             target="_blank"
             rel="noreferrer"
+            // The card is only a photo, so the post's title names the link.
+            aria-label={item.title}
           >
-            <Reveal as="span" className="ph-news-media reveal-clip">
+            <Reveal as="span" className="ph-news-media">
               <img src={item.img} alt={item.alt} loading="lazy" />
             </Reveal>
-            <span className="ph-news-meta">
-              {item.category} · {item.date}
-            </span>
-            <span className="ph-news-title">{item.title}</span>
           </a>
         ))}
       </div>

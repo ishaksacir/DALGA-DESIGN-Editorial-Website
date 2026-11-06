@@ -164,13 +164,13 @@
   align-items: center;
   justify-content: center;
 }
+.creations-page .product .needle-btn:hover {
+  background: var(--ink);
+}
 .creations-page .product .needle-btn span {
   display: block;
   line-height: 1;
   white-space: nowrap;
-}
-.creations-page .product .needle-btn img {
-  filter: invert(1);
 }
 .creations-page .product-cta-note {
   max-width: 220px;
@@ -345,9 +345,6 @@
     border-color: var(--ink);
     background: var(--ink);
     color: var(--paper);
-  }
-  .creations-page .product .needle-btn img {
-    filter: none;
   }
   .creations-page .product-cta-note {
     display: none;

@@ -6,7 +6,7 @@
     opacity 1.05s cubic-bezier(0.2, 0.6, 0.2, 1),
     transform 1.05s cubic-bezier(0.2, 0.6, 0.2, 1);
 }
-.reveal.visible {
+.reveal[data-revealed] {
   opacity: 1;
   transform: none;
 }
@@ -89,6 +89,14 @@
   .needle-hover:hover > img {
     opacity: 1;
     transform: translate(-50%, -50%);
+  }
+  /* A disabled button (e.g. while sending) keeps its label; the needle stays away. */
+  .needle-hover:disabled:hover > span {
+    opacity: 1;
+  }
+  .needle-hover:disabled:hover > img {
+    opacity: 0;
+    transform: translate(-220%, -50%);
   }
 }
 .needle-btn {

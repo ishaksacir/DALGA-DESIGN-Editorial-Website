@@ -29,7 +29,7 @@ const isActive = (pathname, to) =>
 
 /**
  * Phone header, menu button and full-screen menu. The header sits transparent over the home
- * hero and turns into a blurred paper bar (ink on the dark Process page) once it is passed;
+ * hero and turns into a blurred paper bar once it is passed;
  * on every other page it starts solid.
  */
 export function PhoneNav() {
@@ -39,7 +39,6 @@ export function PhoneNav() {
   const { openDrawer } = useContactDrawer()
   const { product } = usePieceSheet()
   const isHome = pathname === ROUTES.HOME
-  const isDark = pathname === ROUTES.ONE_OF_ONE
   const [pastHero, setPastHero] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [menuPath, setMenuPath] = useState(pathname)
@@ -68,8 +67,6 @@ export function PhoneNav() {
   useFocusTrap(wrapRef, menuOpen, burgerRef)
 
   const solid = (!isHome || pastHero) && !menuOpen
-  // The menu is a white panel, so the button stays ink over it.
-  const light = isDark && !menuOpen
   const toggle = () => {
     buzz()
     setMenuOpen((open) => !open)
@@ -84,7 +81,7 @@ export function PhoneNav() {
     <div
       ref={wrapRef}
       tabIndex={-1}
-      className={`ph-nav${solid ? ' solid' : ''}${light ? ' light' : ''}${isDark ? ' dark' : ''}`}
+      className={`ph-nav${solid ? ' solid' : ''}`}
     >
       <header className="ph-header">
         <Link

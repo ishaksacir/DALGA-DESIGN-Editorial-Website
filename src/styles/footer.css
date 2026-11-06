@@ -1,4 +1,17 @@
 /* Site footer. */
+/* Folk strip over the end of every page; its dark edge tucks under the footer, which casts a
+   shadow onto it (as with the strips around the home sections). */
+.footer-strip {
+  z-index: 2;
+}
+.site-footer,
+.app-phone .ph-footer {
+  position: relative;
+  z-index: 3;
+  box-shadow:
+    0 -2px 4px rgba(23, 20, 15, 0.35),
+    0 -8px 18px rgba(23, 20, 15, 0.3);
+}
 .site-footer {
   overflow: hidden;
   padding: clamp(64px, 7vw, 96px) var(--pad-x) 0;

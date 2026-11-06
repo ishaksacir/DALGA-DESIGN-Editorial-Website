@@ -38,7 +38,7 @@
 
 /* Status bar: the ruled two-item row at the top of a hero or CTA. */
 .home-cta-status,
-.oneofone-cover-status,
+.oneofone-hero-status,
 .about-hero-meta {
   font-size: 11px;
   font-weight: 600;
@@ -49,7 +49,7 @@
 /* Body paragraph: section leads and running copy. */
 .process-lead,
 .good-to-know-lead,
-.oneofone-cover-body > p,
+.oneofone-hero-body > p,
 .maker-feature-notes p,
 .creations-page .product-description {
   font-size: 15px;

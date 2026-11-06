@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node --env-file-if-exists=.env.local scripts/dev.js",
+    "dev:site": "vite",
     "server": "node --env-file-if-exists=.env.local --watch server/index.js",
     "prebuild": "npm run instagram",
     "build": "vite build",

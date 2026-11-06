@@ -15,6 +15,8 @@ export function ProcessPhone() {
   const { openDrawer } = useContactDrawer()
   // Step 1 starts open; -1 means all closed.
   const [openStep, setOpenStep] = useState(0)
+  const [openQuestion, setOpenQuestion] = useState(-1)
+  const faq = t.oneOfOne.faq
 
   return (
     <main className="ph-page ph-process">
@@ -66,7 +68,7 @@ export function ProcessPhone() {
       </div>
       <button
         type="button"
-        className="ph-button sand ph-press"
+        className="ph-button ph-press"
         onClick={() => {
           buzz()
           openDrawer()
@@ -75,6 +77,46 @@ export function ProcessPhone() {
         <span>{t.phone.process.start}</span>
         <span aria-hidden="true">→</span>
       </button>
+      <section className="ph-faq">
+        <p className="ph-eyebrow">{faq.eyebrow}</p>
+        <h2 className="ph-page-title">{faq.title}</h2>
+        <div className="ph-accordion">
+          {faq.items.map(({ question, answer }, index) => {
+            const open = openQuestion === index
+            const panelId = `ph-faq-${index}`
+            return (
+              <div key={question} className={`ph-accordion-item${open ? ' open' : ''}`}>
+                <button
+                  type="button"
+                  aria-expanded={open}
+                  aria-controls={panelId}
+                  onClick={() => {
+                    buzz()
+                    setOpenQuestion(open ? -1 : index)
+                  }}
+                >
+                  <span className="ph-faq-question">{question}</span>
+                  <span className="ph-accordion-sign" aria-hidden="true">
+                    +
+                  </span>
+                </button>
+                {open && (
+                  <div id={panelId} className="ph-accordion-panel">
+                    <p>{answer}</p>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+        <p className="ph-faq-more">
+          {faq.more}{' '}
+          <button type="button" onClick={() => openDrawer()}>
+            {faq.write}
+          </button>
+          .
+        </p>
+      </section>
     </main>
   )
 }

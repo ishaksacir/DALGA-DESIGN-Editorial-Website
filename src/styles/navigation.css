@@ -289,6 +289,10 @@
   background: var(--ink);
   color: var(--paper);
 }
+/* The nav button is small, so its needle is too. */
+.nav-cta.needle-hover > img {
+  height: 6px;
+}
 .nav-cta-solid {
   border: 0;
   background: var(--ink);

@@ -1,8 +1,9 @@
 /** Bosnian interface copy — the site's default language. Keep keys in sync with `en.js`. */
 export const bs = {
   meta: {
-    title: 'DALGA DESIGN — Odjeća po mjeri, stvorena za jednu osobu',
-    description: 'DALGA DESIGN — unikatna odjeća po mjeri.',
+    title: 'DALGA DESIGN — Odjeća iz Bihaća, svaki model u jednom uzorku',
+    description:
+      'DALGA DESIGN — odjeća iz Bihaća s historijskim motivima našeg kraja. Svaki model nastaje u jednom uzorku, a po vašoj mjeri pravimo ga ponovo.',
   },
   language: {
     label: 'Odaberite jezik',
@@ -20,18 +21,19 @@ export const bs = {
     commissionsOpen: 'Narudžbe otvorene · Jesen 2026',
   },
   footer: {
-    tagline: ['Stvoreno za jednog.', 'Ponovljeno ni za koga.'],
-    intro: 'Mali atelje u kojem se odjeća ne proizvodi, nego raste oko jedne po jedne osobe.',
+    tagline: ['Svaki model, jedan uzorak.', 'Ponovljen po vašoj mjeri.'],
+    intro:
+      'Mali atelje u Bihaću u kojem historijske motive našeg kraja prenosimo na odjeću — uzorak po uzorak.',
     explore: 'Istražite',
     follow: 'Pratite',
     atelier: 'Atelje',
-    everyPiece: 'Svaki komad je unikat',
+    everyPiece: 'Svaki model u jednom uzorku',
     backToTop: 'Nazad na vrh',
   },
   home: {
     hero: {
-      noteLeft: ['Stvoreno za jednog.', 'Ponovljeno ni za koga.'],
-      noteRight: ['Odjeća po mjeri, osmišljena', 'oko vaše priče.'],
+      noteLeft: ['Svaki model, jedan uzorak.', 'Ponovljen po vašoj mjeri.'],
+      noteRight: ['Motivi iz prošlosti Bihaća,', 'nošeni danas.'],
     },
     news: {
       heading: 'Novo u ateljeu',
@@ -43,15 +45,15 @@ export const bs = {
     },
     showcase: {
       title: 'Odabrani radovi',
-      meta: '2024 — 2026 · Svaki napravljen jednom',
+      meta: '2024 — 2026 · Svaki u jednom uzorku',
       previous: 'Prikaži prethodne kreacije',
       next: 'Prikaži sljedeće kreacije',
       view: 'Pogledaj →',
     },
     statement: {
       label: 'Atelje',
-      lead: 'Ne pravimo kolekcije. Pravimo jedan komad odjeće, za jednu osobu —',
-      aside: 'a onda taj kroj zauvijek zatvaramo.',
+      lead: 'Ne pravimo kolekcije. Svaki model nastaje jednom, kao jedan uzorak —',
+      aside: 'a isti taj komad možemo napraviti po vašoj mjeri.',
     },
     process: {
       eyebrow: 'Kako nastaje komad',
@@ -62,7 +64,7 @@ export const bs = {
           timing: 'Sedmica 1',
           title: 'Razgovor',
           description:
-            'Pišete nam o prilici i priči koju komad treba nositi. Još bez ikakve obaveze.',
+            'Pišete nam o uzorku iz kataloga ili vlastitoj ideji, i šta biste promijenili. Još bez ikakve obaveze.',
           alt: 'Crtež dvije žene koje razgovaraju nad skicom za stolom',
           details: [
             ['Vi donosite', 'Priliku, datum i bilo kakve reference'],
@@ -74,10 +76,10 @@ export const bs = {
           timing: 'Sedmice 2 — 3',
           title: 'Koncept i ponuda',
           description:
-            'Nacrtamo ga, s vama odaberemo tkaninu i jasno odredimo cijenu prije prvog reza.',
+            'S vama dogovorimo izmjene, zajedno odaberemo tkaninu i jasno odredimo cijenu prije prvog reza.',
           alt: 'Crtež ruke koja drži uzorak tkanine pored haljine na krojačkoj lutki',
           details: [
-            ['Vidite', 'Crteže u dva ili tri smjera'],
+            ['Vidite', 'Crteže dogovorenih izmjena'],
             ['Tkanina', 'Uzorci poštom ili u ateljeu'],
             ['Ponuda', 'Jedna fiksna cijena, u pisanom obliku'],
           ],
@@ -96,25 +98,26 @@ export const bs = {
         },
         {
           timing: 'Sedmica 10',
-          title: 'Samo vaš',
-          description: 'Komad odlazi kući s vama. Kroj se zatvara istog dana.',
+          title: 'Vaš',
+          description:
+            'Komad odlazi kući s vama, po vašoj mjeri i dovršen onako kako smo se dogovorili.',
           alt: 'Crtež žene u lepršavoj haljini koja gleda preko ramena',
           details: [
             ['Isporuka', 'Ispeglano i dovršeno, s karticom za održavanje'],
-            ['Kroj', 'Zatvoren istog dana, nikad ponovo krojen'],
+            ['Kroj', 'Čuva se, da se model može ponovo napraviti'],
             ['Nakon toga', 'Prepravke na zahtjev'],
           ],
         },
       ],
     },
     maker: {
-      imageAlt: 'Osnivačica za svojim krojačkim stolom',
+      imageAlt: 'Sabiha Šaćirbegović za svojim krojačkim stolom',
       eyebrow: 'Dva para ruku',
       quote: '„Želim da se osoba prepozna u komadu i prije nego što ga obuče.“',
-      credit: 'Osnivačica · Dalga Design',
+      credit: 'Sabiha Šaćirbegović · Osnivačica, Dalga Design',
       notes: [
-        'Sve se kroji i šije za jednim stolom, u malom ateljeu, rukama istih dviju osoba od početka do kraja.',
-        'Vuna, lan i sirovi pamuk — tkanine koje stare zajedno s osobom koja ih nosi.',
+        'Sve se kroji i šije za jednim stolom, u malom ateljeu u Bihaću, rukama istih dviju osoba od početka do kraja.',
+        'Motivi iz historije našeg grada i kraja, ručno preneseni u svaki komad.',
       ],
     },
     cta: {
@@ -123,9 +126,12 @@ export const bs = {
       title: 'Vaš',
       titleAccent: 'komad.',
       steps: [
-        { label: 'Pišite', text: 'Recite nam za šta je i za kada.' },
+        { label: 'Pišite', text: 'Odaberite uzorak ili nam recite za šta je i za kada.' },
         { label: 'Razgovarajte', text: 'Odgovaramo lično i dogovaramo prvi razgovor.' },
-        { label: 'Odlučite', text: 'Ništa nije dogovoreno dok ga ne vidite nacrtanog.' },
+        {
+          label: 'Isprobajte',
+          text: 'Dođete na probu u atelje, a plaćate tek kada je komad gotov i pristaje vam.',
+        },
       ],
     },
   },
@@ -133,7 +139,7 @@ export const bs = {
     cover: {
       archive: 'Arhiva',
       onTheCover: 'Na naslovnici',
-      lead: 'Završene narudžbe, svaka skrojena jednom. Kroj je zatvoren onog dana kada je komad napustio sto — ništa se ovdje ne može naručiti dvaput, samo započeti ponovo, drugačije.',
+      lead: 'Svaki model ovdje napravljen je jednom, kao jedan uzorak. Svaki od njih možemo ponovo napraviti po vašoj mjeri — i izmijeniti, u dogovoru s autoricom.',
       title: 'Katalog',
     },
     filter: 'Filter',
@@ -146,7 +152,7 @@ export const bs = {
     close: 'Zatvori',
     heading: 'Pišite ateljeu.',
     intro:
-      'Pokažite nam komad koji vam se sviđa i recite šta biste promijenili — ili krenite od nule. Odgovaramo u roku od dva radna dana.',
+      'Odaberite uzorak iz kataloga i napravit ćemo ga po vašoj mjeri, uz izmjene koje dogovorimo — ili krenite od nule. Odgovaramo u roku od dva radna dana.',
     tagLabel: 'Označite komad iz kataloga',
     optional: 'Neobavezno',
     remove: 'Ukloni',
@@ -180,22 +186,15 @@ export const bs = {
     notFoundLink: 'Nazad na katalog →',
     composition: 'Sastav',
     piece: 'Komad',
-    oneOfOne: 'Unikat',
+    oneOfOne: 'Jedan uzorak',
     care: 'Održavanje',
     ctaNote: 'Na svako pismo odgovaramo lično, u roku od sedmice.',
     showImage: (index, name) => `Prikaži sliku ${index} — ${name}`,
   },
   oneOfOne: {
     hero: {
-      imageAlt: 'Sitotisak DALGA motiva figure na sirovom pamuku',
-      meta: 'Deset sedmica · Četiri faze',
-      title: ['Jedan', 'jedini.'],
-      lead: 'Komad odjeće nacrtan, skrojen i sašiven oko jedne osobe — i kroj koji se zatvara onog dana kada ode kući.',
-    },
-    statement: {
-      label: 'Narudžba',
-      lead: 'Počinje pismom o vama, a završava komadom koji niko drugi neće imati —',
-      aside: 'ni u drugoj veličini, ni u drugoj tkanini.',
+      title: 'Jedan jedini.',
+      lead: 'Svaki model nastaje jednom, kao jedan uzorak. Odaberite ga, a mi ga pravimo ponovo po vašoj mjeri — i mijenjamo, ako želite, u dogovoru s autoricom.',
     },
     unfolds: {
       heading: 'Kako se odvija',
@@ -206,27 +205,27 @@ export const bs = {
           title: 'Razgovor',
           timing: 'Sedmica 1',
           description:
-            'Pišete o prilici i priči koju komad treba nositi. Odgovaramo lično. Još bez obaveze.',
+            'Pišete o uzorku koji vam se sviđa, ili o prilici i priči koju komad treba nositi. Odgovaramo lično. Još bez obaveze.',
           alt: 'Crtež dvije žene koje razgovaraju nad skicom za stolom',
         },
         {
           title: 'Koncept i ponuda',
           timing: 'Sedmice 2—3',
           description:
-            'Nacrtamo ga, s vama odaberemo tkaninu i jasno odredimo cijenu. Ništa nije dogovoreno dok ga ne vidite nacrtanog.',
+            'S vama dogovorimo izmjene, odaberemo tkaninu i jasno odredimo cijenu. Ništa nije dogovoreno dok ga ne vidite nacrtanog.',
           alt: 'Crtež ruke koja drži uzorak tkanine pored haljine na krojačkoj lutki',
         },
         {
           title: 'Probe',
           timing: 'Sedmice 4—9',
-          description:
-            'Dvije do tri probe oblikuju komad direktno na vama. Po potrebi i probe na daljinu.',
+          description: 'Dvije do tri probe u ateljeu oblikuju komad direktno na vama.',
           alt: 'Crtež ruku koje pribadačama pričvršćuju tkaninu na krojačku lutku, uz makaze i krojački metar',
         },
         {
           title: 'Predaja',
           timing: 'Sedmica 10',
-          description: 'Komad odlazi kući s vama. Kroj se zatvara istog dana.',
+          description:
+            'Komad odlazi kući s vama, po vašoj mjeri, dovršen onako kako smo se dogovorili.',
           alt: 'Crtež žene u lepršavoj haljini koja gleda preko ramena',
         },
       ],
@@ -238,25 +237,74 @@ export const bs = {
       answers: [
         {
           label: 'Rok',
-          title: 'Šest do deset sedmica.',
+          title: '6–10 sedmica',
           description: 'Odjeću za posebne prilike treba naručiti najmanje tri mjeseca unaprijed.',
         },
         {
           label: 'Cijena',
-          title: 'Ponuda samo za vas.',
+          title: 'Ponuda za vas',
           description:
             'Cijena se određuje nakon prvog razgovora — prema tkanini, izradi i satima ručnog rada.',
         },
         {
           label: 'Materijali',
-          title: 'Vuna, lan, sirovi pamuk.',
-          description: 'Ili tkanina koja vam već nešto znači — naslijeđena, ostatak, poklon.',
+          title: 'Biramo zajedno',
+          description:
+            'Tkaninu za svaki komad biramo s vama — ili radimo s tkaninom koja vam već nešto znači.',
         },
         {
-          label: 'Obećanje',
-          title: 'Nikad ponovljeno.',
+          label: 'Uzorak',
+          title: 'Po vašoj mjeri',
           description:
-            'Vaš kroj se nikada ne koristi ponovo — ni u drugoj veličini, ni u drugoj tkanini, ni za koga drugog.',
+            'Svaki model iz kataloga možemo ponovo napraviti po vašim mjerama — i izmijeniti, u dogovoru s autoricom.',
+        },
+      ],
+    },
+    faq: {
+      eyebrow: 'Pitanja',
+      title: 'Često pitate.',
+      more: 'Imate neko drugo pitanje?',
+      write: 'Pišite ateljeu',
+      items: [
+        {
+          question: 'Mogu li naručiti komad tačno onakav kakav je u katalogu?',
+          answer:
+            'Da. Svaki model postoji kao jedan uzorak, a mi ga ponovo pravimo po vašoj mjeri — u istoj tkanini ili onoj koja joj je najbliža.',
+        },
+        {
+          question: 'Šta mogu promijeniti?',
+          answer:
+            'Tkaninu, boju, dužinu, rukave i detalje — sve što dogovorimo s autoricom prije prvog reza. Ako bi neka izmjena oduzela ono što model čini dobrim, reći ćemo vam to otvoreno.',
+        },
+        {
+          question: 'Moram li doći u atelje?',
+          answer:
+            'Da. Probe se rade u ateljeu u Bihaću, kako bi komad bio oblikovan direktno na vama.',
+        },
+        {
+          question: 'Koliko će biti proba?',
+          answer:
+            'Obično dvije do tri, otprilike dvije sedmice razmaka. Komad napravljen po uzorku u vašoj veličini često traži manje.',
+        },
+        {
+          question: 'Mogu li donijeti vlastiti crtež ili referencu?',
+          answer:
+            'Naravno. Krenite od uzorka, skice, fotografije — ili od tkanine koja vam već nešto znači.',
+        },
+        {
+          question: 'Mogu li naručiti komad kao poklon?',
+          answer:
+            'Da. Pišite nam prvo i naći ćemo diskretan način da dođemo do mjera, ili zajedno dogovoriti probu nakon što poklon bude predan.',
+        },
+        {
+          question: 'Kako funkcioniše plaćanje?',
+          answer:
+            'Plaćate kada je komad gotov — nakon što ga isprobate u ateljeu i kada vam pristaje.',
+        },
+        {
+          question: 'Šta ako kasnije zatreba prepravka?',
+          answer:
+            'Donesite ga nazad. Prepravke radimo na zahtjev, kako bi vam komad pristajao i godinama kasnije.',
         },
       ],
     },
@@ -265,19 +313,39 @@ export const bs = {
     eyebrow: 'O ateljeu',
     title: 'Dalga znači',
     titleAccent: 'val.',
-    imageAlt: 'Osnivačica DALGA DESIGN-a za svojim krojačkim stolom',
-    caption: 'Osnivačica, za krojačkim stolom',
+    imageAlt: 'Sabiha Šaćirbegović, osnivačica DALGA DESIGN-a, za svojim krojačkim stolom',
+    caption: 'Sabiha Šaćirbegović, za krojačkim stolom',
     facts: [
-      ['Gdje', 'Jedan mali atelje, jedan krojački sto.'],
+      ['Gdje', 'Mali atelje u Bihaću, jedan krojački sto.'],
       ['Ko', 'Iste dvije osobe, od prve skice do posljednjeg šava.'],
-      ['Tkanina', 'Vuna, lan i sirovi pamuk — tkanine koje stare zajedno s osobom koja ih nosi.'],
+      ['Motivi', 'Historijski motivi Bihaća i našeg kraja, preneseni u sve što radimo.'],
+    ],
+  },
+  aboutMaker: {
+    eyebrow: 'Autorica',
+    name: 'Sabiha',
+    surname: 'Šaćirbegović',
+    role: 'Osnivačica · Bihać',
+    motto: 'Svaki komad piše svoju historiju — kao što svako od nas piše historiju svoga stila.',
+    notes: [
+      [
+        'Autentičnost',
+        'Za Sabihu je najvažnije biti autentičan, i u odjeći i u ljudima. Pretočiti viziju i ideju u djelo uvijek joj se činilo posebnim, a svaki komad nastaje kao susret šika i umjetnosti.',
+      ],
+      [
+        'Japodi',
+        'Njene kreacije nastaju na raskršću avangardne i nosive umjetnosti. Na komade iscrtava Japode, drevni narod doline Une oko Bihaća, spajajući modu s historijom našeg grada.',
+      ],
     ],
   },
   loadError: {
     eyebrow: 'Katalog',
-    title: 'Arhiva trenutno miruje',
-    text: 'Komade trenutno nije moguće učitati.',
-    retry: 'Pokušajte ponovo →',
+    status: 'Kratko nedostupno',
+    title: 'Arhiva',
+    titleAccent: 'miruje.',
+    text: 'Komade trenutno nije moguće učitati. Atelje radi kao i uvijek — pokušajte ponovo za trenutak.',
+    retry: 'Pokušajte ponovo',
+    write: 'Ili nam pišite na',
   },
   notFound: {
     title: 'Stranica nije pronađena',
@@ -292,12 +360,12 @@ export const bs = {
       about: 'O nama',
       inquire: 'Upit',
     },
-    hero: { name: 'Dalga Design', line: 'Stvoreno za jednog' },
+    hero: { name: 'Dalga Design', line: 'Iz Bihaća' },
     work: { title: 'Odabrani radovi', all: 'Svi komadi →' },
     rule: {
-      before: 'Ne pravimo kolekcije. Pravimo',
-      accent: 'jedan komad odjeće, za jednu osobu —',
-      after: 'a onda taj kroj zauvijek zatvaramo.',
+      before: 'Ne pravimo kolekcije. Svaki model nastaje',
+      accent: 'jednom, kao jedan uzorak —',
+      after: 'a zatim ponovo, po vašoj mjeri.',
       label: 'Pravilo ateljea',
     },
     process: {
@@ -307,23 +375,23 @@ export const bs = {
     },
     about: {
       title: 'Dalga znači val.',
-      credit: 'Osnivačica, Dalga Design',
+      credit: 'Sabiha Šaćirbegović, osnivačica Dalga Designa',
       link: 'O nama →',
     },
     steps: {
       eyebrow: 'Proces · Deset sedmica',
       intro:
-        'Od prvog pisma do dana kada ode kući, svaki komad nastaje u našem ateljeu, ručno, za jednu osobu.',
+        'Od prvog pisma do dana kada ode kući, svaki komad nastaje ručno u našem ateljeu u Bihaću, po vašoj mjeri.',
       cta: 'Pogledajte cijeli proces',
     },
     cta: {
       status: 'Narudžbe otvorene za jesen',
       title: 'Vaš komad.',
-      text: 'Recite nam za šta je i za kada. Ništa nije dogovoreno dok ga ne vidite nacrtanog.',
+      text: 'Odaberite uzorak ili nam recite za šta je i za kada. Plaćate tek kada je komad gotov.',
     },
     catalogue: {
-      title: 'Svaki napravljen jednom.',
-      lead: 'Dodirnite komad da krenete od njega — vaš ćemo napraviti drugačijim.',
+      title: 'Svaki model, jedan uzorak.',
+      lead: 'Dodirnite komad da ga naručite po svojoj mjeri — uz izmjene koje dogovorimo.',
       filter: 'Filtriraj po vrsti',
       types: {
         all: 'Sve',
@@ -335,9 +403,9 @@ export const bs = {
       },
     },
     piece: {
-      madeOnce: (no) => `Br. ${no} · Napravljen jednom`,
+      madeOnce: (no) => `Br. ${no} · Jedan uzorak`,
       intro:
-        'Upravo ovaj komad se više neće praviti. Krenite od njega, a vaš ćemo napraviti drugačijim — vaša tkanina, vaš kroj, vaše izmjene.',
+        'Ovo je jedini uzorak ovog modela. Možemo ga ponovo napraviti po vašoj mjeri — i promijeniti tkaninu ili detalje, u dogovoru s autoricom.',
       details: {
         type: 'Vrsta',
         year: 'Godina',
@@ -346,8 +414,8 @@ export const bs = {
         pattern: 'Kroj',
         timeline: 'Rok',
       },
-      made: 'Jednom, ručno, u ateljeu',
-      pattern: 'Zatvoren — nikad ponovo krojen',
+      made: 'Jednom kao uzorak, ručno, u Bihaću',
+      pattern: 'Sačuvan — pravi se po vašoj mjeri',
       timeline: 'Otprilike deset sedmica za vaš',
       hint: 'Prevucite za više · povucite nadolje da zatvorite',
       next: (no) => `Sljedeći · Br. ${no}`,

@@ -2,8 +2,8 @@ import { usePhone } from '@/hooks/usePhone'
 
 import { AboutPhone } from './AboutPhone'
 import { AboutHero } from './sections/AboutHero'
-import { AboutQuote } from './sections/AboutQuote'
 import { AtelierStory } from './sections/AtelierStory'
+import { MakerStory } from './sections/MakerStory'
 
 export function AboutPage() {
   if (usePhone()) return <AboutPhone />
@@ -11,7 +11,7 @@ export function AboutPage() {
   return (
     <main className="about-page">
       <AboutHero />
-      <AboutQuote />
+      <MakerStory />
       <AtelierStory />
     </main>
   )

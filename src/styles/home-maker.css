@@ -8,17 +8,20 @@
   padding: clamp(80px, 10vw, 140px) var(--pad-x);
   background: var(--paper);
 }
-/* Zigzag stitches down both side gutters. */
-.stitch-zigzag {
+/* Hand-embroidery stitches down the side gutters, a different one on each side. */
+.maker-stitch {
   top: clamp(80px, 10vw, 140px);
   bottom: clamp(80px, 10vw, 140px);
-  --stitch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='16'><path d='M3 0 11 8 3 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
 }
-.stitch-zigzag-left {
+/* Left: chain stitch, a column of linked loops. */
+.stitch-chain {
   left: calc(var(--pad-x) * 0.4);
+  --stitch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='18'><path d='M7 1.5C9 6 12 9 12 12.5 12 15.5 9.8 17.2 7 17.2 4.2 17.2 2 15.5 2 12.5 2 9 5 6 7 1.5Z' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round'/></svg>");
 }
-.stitch-zigzag-right {
+/* Right: fly stitch, open Y-shapes tacked down by a short tail, with a seed stitch between. */
+.stitch-fly {
   right: calc(var(--pad-x) * 0.4);
+  --stitch: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='30'><path d='M2 3Q7 13 12 3M7 9V15' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round'/><circle cx='7' cy='23' r='1.4'/></svg>");
 }
 .maker-feature-image img {
   width: 100%;
@@ -64,7 +67,7 @@
   .maker-feature {
     grid-template-columns: 1fr;
   }
-  .stitch-zigzag {
+  .maker-stitch {
     display: none;
   }
 }

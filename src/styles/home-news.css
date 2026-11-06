@@ -171,15 +171,15 @@
   color: var(--paper);
   margin-top: 28px;
   padding: 15px 24px;
-  border: 1px solid var(--olive);
+  border: 1px solid var(--caramel);
   transition:
     background 0.35s,
     border-color 0.35s,
     color 0.35s;
 }
 .news-read-more:hover {
-  background: var(--caramel);
-  border-color: var(--caramel);
+  background: var(--paper);
+  border-color: var(--paper);
   color: var(--ink);
 }
 /* Phones stack the image above the text. */

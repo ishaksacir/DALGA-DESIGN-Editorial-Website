@@ -14,7 +14,9 @@ export function HomePhone() {
       <PhoneWork />
       <PhoneRule />
       <PhoneNews />
+      <div className="fabric-strip" aria-hidden="true" />
       <PhoneSteps />
+      <div className="fabric-strip fabric-strip-below" aria-hidden="true" />
       <PhoneAbout />
       <PhoneCTA />
     </main>

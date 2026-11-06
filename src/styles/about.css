@@ -9,15 +9,8 @@
   border-bottom: 1px solid #17140f59;
   color: var(--accent);
 }
-.about-hero-body {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: clamp(40px, 6vw, 120px);
-  align-items: end;
-  margin-top: clamp(40px, 5vw, 72px);
-}
 .about-hero h1 {
-  margin: 0;
+  margin: clamp(40px, 5vw, 72px) 0 0;
   font-family: var(--wordmark);
   font-weight: 400;
   font-size: clamp(64px, 9.5vw, 172px);
@@ -27,49 +20,71 @@
 .about-hero h1 em {
   color: var(--accent);
 }
-.about-hero-intro {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 1.75;
-  color: #453d31;
-  text-wrap: pretty;
-}
 
-/* About — the founder's line on an ink band. */
-.about-quote {
-  padding: clamp(80px, 10vw, 150px) var(--pad-x);
-  background: var(--ink);
-  color: var(--paper);
+/* About — Sabiha, the maker: her name beside her motto and two notes. */
+.maker-story {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(40px, 6vw, 120px);
+  align-items: start;
+  padding: clamp(96px, 11vw, 170px) var(--pad-x) 0;
 }
-.about-quote blockquote {
-  max-width: 1100px;
+.maker-story-head {
+  position: sticky;
+  top: 120px;
+}
+.maker-story-eyebrow,
+.maker-story-role,
+.maker-story-notes dt {
   margin: 0;
-}
-.about-quote blockquote > span {
-  display: block;
-  height: 0.5em;
-  font-family: var(--display);
-  font-size: clamp(96px, 10vw, 150px);
-  line-height: 1;
-  color: var(--accent-on-dark);
-}
-.about-quote p {
-  margin: 0;
-  font-family: var(--display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(40px, 4.6vw, 72px);
-  line-height: 1.12;
-  text-wrap: pretty;
-}
-.about-quote footer {
-  margin-top: clamp(32px, 3.5vw, 48px);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--accent-on-dark);
+  color: var(--accent);
+}
+.maker-story h2 {
+  margin: clamp(20px, 2.4vw, 32px) 0 clamp(16px, 1.8vw, 24px);
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: clamp(44px, 4.4vw, 80px);
+  /* Room for the háček on Š, so it doesn't touch the line above. */
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+/* The surname on its own line, so the long name never runs past its column. */
+.maker-story h2 span {
+  display: block;
+}
+.maker-story-role {
+  color: var(--muted);
+}
+.maker-story-motto {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(32px, 3.3vw, 54px);
+  line-height: 1.15;
+  text-wrap: pretty;
+}
+.maker-story-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 64px);
+  margin: clamp(56px, 6vw, 96px) 0 0;
+}
+.maker-story-notes > div {
+  padding-top: 24px;
+  border-top: 1px solid #17140f29;
+}
+.maker-story-notes dd {
+  margin: 18px 0 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #453d31;
+  text-wrap: pretty;
 }
 
 /* About — founder photograph beside three facts about the atelier. */
@@ -118,16 +133,19 @@
 }
 
 @media (max-width: 900px) {
-  .about-hero-body,
+  .maker-story,
   .atelier-story {
     grid-template-columns: 1fr;
   }
-  .about-hero-body {
-    align-items: start;
+  .maker-story-head {
+    position: static;
   }
 }
 @media (max-width: 560px) {
   .about-hero h1 {
     font-size: 17vw;
+  }
+  .maker-story-notes {
+    grid-template-columns: 1fr;
   }
 }

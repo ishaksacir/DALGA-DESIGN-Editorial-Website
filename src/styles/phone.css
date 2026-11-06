@@ -1,7 +1,7 @@
 /*
   Phone layout (≤ 480px), from the phone design handoff. These classes only exist in the phone
   components (rendered when usePhone() matches), so nothing here reaches tablet or desktop.
-  Easing: --ph-ease for most motion, --ph-ease-io for the menu and image reveals.
+  Easing: --ph-ease for most motion, --ph-ease-io for the menu.
 */
 :root {
   --ph-display: var(--display);
@@ -68,11 +68,6 @@ body:has(.app-phone) {
   text-align: left;
   cursor: pointer;
 }
-.ph-button.sand {
-  background: var(--accent-on-dark);
-  color: var(--ink);
-  font-weight: 700;
-}
 .ph-status {
   display: inline-flex;
   align-items: center;
@@ -126,29 +121,6 @@ body:has(.app-phone) {
 .ph-rail > * {
   scroll-snap-align: start;
 }
-/* Clip reveal for images: the child wipes up from the bottom once the wrapper is revealed.
-   The clip sits on the child because IntersectionObserver ignores a fully clipped target. */
-.reveal.reveal-clip {
-  opacity: 1;
-  transform: none;
-}
-.reveal-clip > * {
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 1200ms var(--ph-ease-io, ease);
-}
-.reveal-clip.visible > * {
-  clip-path: inset(0 0 0 0);
-}
-.app-phone .reveal:not(.reveal-clip) {
-  transform: translateY(24px);
-  transition:
-    opacity 900ms var(--ph-ease),
-    transform 900ms var(--ph-ease);
-}
-.app-phone .reveal.visible:not(.reveal-clip) {
-  transform: none;
-}
-
 /* Header, menu button and menu ---------------------------------------------------------- */
 .ph-header {
   position: fixed;
@@ -167,10 +139,6 @@ body:has(.app-phone) {
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   border-bottom-color: rgba(23, 20, 15, 0.08);
-}
-.ph-nav.solid.dark .ph-header {
-  background: rgba(23, 20, 15, 0.86);
-  border-bottom-color: rgba(247, 245, 241, 0.1);
 }
 .ph-header-logo {
   position: absolute;
@@ -193,9 +161,6 @@ body:has(.app-phone) {
   background: var(--ink);
   -webkit-mask: var(--mask) center / contain no-repeat;
   mask: var(--mask) center / contain no-repeat;
-}
-.ph-nav.dark .ph-header-logo span {
-  background: var(--paper);
 }
 .ph-burger {
   position: fixed;
@@ -223,9 +188,6 @@ body:has(.app-phone) {
 }
 .ph-burger:active {
   transform: scale(0.88);
-}
-.ph-nav.light .ph-burger {
-  color: var(--paper);
 }
 .ph-burger span {
   display: block;
@@ -425,13 +387,10 @@ body:has(.app-phone) {
 }
 .ph-hero {
   position: relative;
-  /* The stage stays pinned for the extra 500px while the figure window zooms open. */
-  height: calc(100svh + 500px);
   background: var(--stone);
 }
 .ph-hero-stage {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100svh;
   min-height: 560px;
   overflow: hidden;
@@ -450,6 +409,14 @@ body:has(.app-phone) {
   display: block;
 }
 .ph-hero-bg {
+  animation: ph-fade 1.4s ease both;
+}
+/* Opening overlay, removed once the intro has played. */
+.ph-hero-intro {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
   animation: ph-fade 1.4s ease both;
 }
 /* Blurred copy of the photo with the figure cut out of it, so the sharp photo shows through. */
@@ -475,7 +442,6 @@ body:has(.app-phone) {
     100% 100%;
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: ph-fade 1.4s ease both;
 }
 .ph-hero-blur img {
   inset: -40px;
@@ -537,9 +503,7 @@ body:has(.app-phone) {
   background: #fff;
   animation: ph-drip 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
-/* Everything after the hero scrolls over its pinned stage. */
-.ph-home > section,
-.app-phone .ph-footer {
+.ph-home > section {
   position: relative;
   z-index: 1;
 }
@@ -728,6 +692,19 @@ body:has(.app-phone) {
   background: var(--ink);
   color: var(--paper);
 }
+/* Folk strips across both seams of the steps (as on desktop): each lies over its light neighbour
+   and tucks its dark edge under the steps, which cast a shadow onto them. */
+.ph-home > .fabric-strip {
+  z-index: 2;
+}
+.ph-home > .ph-steps {
+  z-index: 3;
+  box-shadow:
+    0 -2px 4px rgba(23, 20, 15, 0.35),
+    0 -8px 18px rgba(23, 20, 15, 0.3),
+    0 2px 4px rgba(23, 20, 15, 0.35),
+    0 8px 18px rgba(23, 20, 15, 0.3);
+}
 .ph-steps-bg {
   position: absolute;
   inset: 0;
@@ -875,9 +852,6 @@ body:has(.app-phone) {
 }
 .ph-news-card {
   flex: 0 0 236px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 .ph-news-media {
   display: block;
@@ -888,22 +862,6 @@ body:has(.app-phone) {
   object-fit: cover;
   display: block;
   background: var(--stone);
-}
-.ph-news-meta {
-  font-size: 11px;
-  color: var(--ph-muted);
-}
-.ph-news-title {
-  font-family: var(--ph-display);
-  font-weight: 300;
-  font-size: 19px;
-  line-height: 1.2;
-  /* Instagram captions can run long; keep every card to two lines. */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
 }
 
 /* Home: about band ------------------------------------------------------------------- */
@@ -971,17 +929,10 @@ body:has(.app-phone) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-clip > * {
-    clip-path: none;
-  }
   .ph-hero-drip {
     animation: none;
   }
-  .ph-hero {
-    height: 100svh;
-  }
-  .ph-hero-blur,
-  .ph-hero-outline {
+  .ph-hero-intro {
     display: none;
   }
 }
@@ -1341,15 +1292,16 @@ html.ph-locked body {
 /* Process (One of one) --------------------------------------------------------------- */
 .ph-process {
   min-height: 100svh;
-  background: var(--ink);
-  color: var(--paper);
+  /* Warm stone rather than ink, so the footer's folk strip lies on a light edge, as on every page. */
+  background: var(--stone);
+  color: var(--ink);
 }
 .ph-process .ph-page-lead {
   margin: 14px 0 36px;
-  color: #cfc7b9;
+  color: var(--ph-muted);
 }
 .ph-accordion-item {
-  border-top: 1px solid rgba(247, 245, 241, 0.16);
+  border-top: 1px solid rgba(23, 20, 15, 0.14);
 }
 .ph-accordion-item > button {
   display: grid;
@@ -1360,7 +1312,7 @@ html.ph-locked body {
   padding: 22px 0;
   border: 0;
   background: none;
-  color: var(--paper);
+  color: var(--ink);
   font: inherit;
   text-align: left;
   cursor: pointer;
@@ -1372,7 +1324,7 @@ html.ph-locked body {
 .ph-accordion-n {
   font-size: 13px;
   font-weight: 500;
-  color: var(--accent-on-dark);
+  color: var(--accent);
 }
 .ph-accordion-title {
   display: flex;
@@ -1387,12 +1339,12 @@ html.ph-locked body {
 }
 .ph-accordion-title span:last-child {
   font-size: 12px;
-  color: var(--ph-on-dark);
+  color: var(--ph-muted);
 }
 .ph-accordion-sign {
   font-size: 18px;
   font-weight: 300;
-  color: var(--accent-on-dark);
+  color: var(--accent);
   transition: transform 300ms var(--ph-ease);
 }
 .ph-accordion-item.open .ph-accordion-sign {
@@ -1411,13 +1363,16 @@ html.ph-locked body {
   object-fit: contain;
   object-position: 50% 100%;
   display: block;
+  /* The drawings are light lines on transparent (made for dark sections); darken them. */
+  filter: brightness(0);
+  opacity: 0.85;
 }
 .ph-accordion-panel p {
   margin: 0;
   font-size: 14px;
   line-height: 1.7;
   font-weight: 300;
-  color: #e6dfd3;
+  color: var(--ph-body);
 }
 .ph-accordion-panel dl {
   margin: 0;
@@ -1427,11 +1382,11 @@ html.ph-locked body {
   grid-template-columns: 84px minmax(0, 1fr);
   gap: 12px;
   padding: 10px 0;
-  border-top: 1px solid rgba(247, 245, 241, 0.1);
+  border-top: 1px solid rgba(23, 20, 15, 0.1);
 }
 .ph-accordion-panel dt {
   font-size: 12px;
-  color: var(--accent-on-dark);
+  color: var(--accent);
 }
 .ph-accordion-panel dd {
   margin: 0;
@@ -1442,6 +1397,39 @@ html.ph-locked body {
 .ph-process > .ph-button {
   margin-top: 32px;
   padding: 20px 22px;
+}
+.ph-faq {
+  margin-top: 72px;
+}
+.ph-faq .ph-page-title {
+  margin: 16px 0 28px;
+}
+.ph-faq .ph-accordion {
+  border-bottom: 1px solid rgba(23, 20, 15, 0.14);
+}
+.ph-faq .ph-accordion-item > button {
+  grid-template-columns: minmax(0, 1fr) 20px;
+  gap: 20px;
+}
+.ph-faq-question {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.ph-faq-more {
+  margin: 28px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ph-muted);
+}
+.ph-faq-more button {
+  padding: 0 0 2px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
 }
 
 /* About ------------------------------------------------------------------------------ */
@@ -1466,12 +1454,6 @@ html.ph-locked body {
 .ph-about-intro em {
   color: var(--accent);
 }
-.ph-about-intro p {
-  margin: 0;
-  font-size: 17px;
-  line-height: 1.65;
-  text-wrap: pretty;
-}
 .ph-about-figure {
   display: flex;
   flex-direction: column;
@@ -1490,37 +1472,54 @@ html.ph-locked body {
   font-size: 12px;
   color: var(--ph-muted);
 }
-.ph-about-quote {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin: 48px 0 0;
-  padding: 64px 28px;
-  background: var(--ink);
-  color: var(--paper);
-}
-.ph-about-quote > span:first-child {
-  font-family: var(--ph-display);
-  font-size: 72px;
-  line-height: 0.5;
-  color: var(--accent-on-dark);
-}
-.ph-about-quote p {
-  margin: 0;
-  font-family: var(--ph-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 32px;
-  line-height: 1.18;
-  text-wrap: pretty;
-}
-.ph-about-quote > span:last-child,
 .ph-about-facts dt {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--accent-on-dark);
+}
+.ph-about-maker {
+  display: flex;
+  flex-direction: column;
+  padding: 64px var(--ph-pad) 0;
+}
+.ph-about-maker h2 {
+  margin: 16px 0 22px;
+  font-family: var(--ph-display);
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.ph-about-maker h2 span {
+  display: block;
+}
+.ph-about-maker-motto {
+  margin: 0 0 32px;
+  font-family: var(--ph-display);
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 1.2;
+  text-wrap: pretty;
+}
+.ph-about-maker-note {
+  padding: 20px 0 24px;
+  border-top: 1px solid rgba(23, 20, 15, 0.16);
+}
+.ph-about-maker-note h3 {
+  margin: 0 0 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ph-about-maker-note p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 .ph-about-facts {
   margin: 0;

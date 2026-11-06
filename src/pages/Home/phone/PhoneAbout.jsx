@@ -12,7 +12,7 @@ export function PhoneAbout() {
 
   return (
     <section className="ph-about-band">
-      <Reveal className="ph-about-band-photo reveal-clip">
+      <Reveal className="ph-about-band-photo">
         <img src={asset('about/founder.webp')} alt={t.home.maker.imageAlt} loading="lazy" />
       </Reveal>
       <Reveal as="blockquote">{t.home.maker.quote}</Reveal>

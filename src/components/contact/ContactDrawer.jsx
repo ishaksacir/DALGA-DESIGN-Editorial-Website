@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 
+import { NeedleLink } from '@/components/ui/NeedleLink'
 import { productPath } from '@/constants/routes'
 import { useEscapeKey } from '@/hooks/useEscapeKey'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
@@ -169,9 +170,9 @@ export function ContactDrawer({ state, dispatch, returnFocusRef }) {
               <span className="contact-error" role="alert">
                 {error}
               </span>
-              <button type="submit" className="contact-primary" disabled={status === 'sending'}>
+              <NeedleLink type="submit" className="contact-primary" disabled={status === 'sending'}>
                 {status === 'sending' ? copy.sending : copy.submit}
-              </button>
+              </NeedleLink>
             </div>
           </form>
         )}

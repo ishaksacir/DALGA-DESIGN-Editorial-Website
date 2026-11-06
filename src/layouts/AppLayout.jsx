@@ -33,6 +33,7 @@ export function AppLayout() {
       <div className={`app${isPhone ? ' app-phone' : ''}`}>
         {isPhone ? <PhoneNav /> : <Navbar />}
         <Outlet />
+        <div className="fabric-strip footer-strip" aria-hidden="true" />
         {isPhone ? <PhoneFooter /> : <Footer />}
       </div>
       {isPhone && <PieceSheet />}

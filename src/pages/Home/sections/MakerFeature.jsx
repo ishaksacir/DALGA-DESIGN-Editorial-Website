@@ -25,8 +25,8 @@ export function MakerFeature() {
           ))}
         </div>
       </Reveal>
-      <span className="stitch stitch-zigzag stitch-zigzag-left" aria-hidden="true" />
-      <span className="stitch stitch-zigzag stitch-zigzag-right" aria-hidden="true" />
+      <span className="stitch maker-stitch stitch-chain" aria-hidden="true" />
+      <span className="stitch maker-stitch stitch-fly" aria-hidden="true" />
     </section>
   )
 }

@@ -23,11 +23,7 @@ export function Navbar() {
   const { openDrawer } = useContactDrawer()
   const isHome = pathname === ROUTES.HOME
   // These pages open with a full-bleed header, so the nav floats over it instead of sitting on paper.
-  const isOverlay = [ROUTES.HOME, ROUTES.CATALOGUE, ROUTES.ONE_OF_ONE, ROUTES.ABOUT].includes(
-    pathname,
-  )
-  // One of one opens on a dark photograph, so its nav switches to light ink.
-  const isLight = pathname === ROUTES.ONE_OF_ONE
+  const isOverlay = [ROUTES.HOME, ROUTES.CATALOGUE, ROUTES.ABOUT].includes(pathname)
   const isCompact = useMediaQuery(COMPACT_NAV)
   const [menuOpen, setMenuOpen] = useState(false)
   const [openedForPath, setOpenedForPath] = useState(pathname)
@@ -53,9 +49,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav
-        className={`nav ${isOverlay ? 'nav-hero' : 'nav-solid'}${isLight ? ' nav-light' : ''}${isHome ? ' nav-home' : ''}`}
-      >
+      <nav className={`nav ${isOverlay ? 'nav-hero' : 'nav-solid'}${isHome ? ' nav-home' : ''}`}>
         <Link className="brand" to={ROUTES.HOME}>
           <img src={asset('brand/logo-figure.png')} alt={t.nav.homeAlt} />
         </Link>
