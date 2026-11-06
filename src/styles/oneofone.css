@@ -1,0 +1,380 @@
+/* One of one — masthead on paper: status, title and lead, under the solid nav. */
+.oneofone-hero {
+  padding: clamp(64px, 7vw, 112px) var(--pad-x) clamp(72px, 8vw, 128px);
+  background: var(--paper);
+}
+.oneofone-hero-status {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  color: var(--accent);
+}
+.oneofone-hero-status::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--olive);
+}
+.oneofone-hero-body {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+  gap: clamp(40px, 6vw, 120px);
+  align-items: center;
+  margin-top: clamp(20px, 2.4vw, 36px);
+}
+.oneofone-hero h1 {
+  margin: 0;
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: clamp(64px, 8.6vw, 156px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  animation: hero-in 1.4s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+.oneofone-hero-body > p {
+  max-width: 470px;
+  margin: 0;
+  color: #453d31;
+  text-wrap: pretty;
+}
+
+/* One of one — "How it unfolds" stage cards. */
+.unfolds {
+  padding: clamp(24px, 3vw, 48px) var(--pad-x) clamp(80px, 9vw, 130px);
+  background: var(--paper);
+}
+.unfolds-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.unfolds-head p {
+  margin: 0;
+}
+.unfolds-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+/* Drawings are transparent line art, so the tile is one even colour edge to edge. */
+.unfolds-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--panel-warm);
+}
+.unfolds-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  /* The drawings are light lines on transparent (made for the dark home section); darken them. */
+  filter: brightness(0);
+  opacity: 0.85;
+}
+.unfolds-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 20px 0 22px;
+  border-bottom: 1px solid #17140f40;
+}
+.unfolds-meta h3 {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.unfolds-meta span {
+  flex: none;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.unfolds-stage > p {
+  margin: 22px 0 0;
+  color: #453d31;
+  text-wrap: pretty;
+}
+
+/* One of one — "Good to know": four answers, two by two, on ink. */
+.good-to-know {
+  padding: clamp(96px, 11vw, 170px) var(--pad-x) clamp(80px, 9vw, 140px);
+  background: var(--ink);
+  color: var(--paper);
+}
+.good-to-know-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
+  padding-bottom: clamp(56px, 7vw, 110px);
+}
+.good-to-know-eyebrow {
+  margin: 0 0 clamp(20px, 2.4vw, 36px);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+.good-to-know h2 {
+  margin: 0;
+  font-size: clamp(64px, 7.4vw, 120px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
+.good-to-know-lead {
+  max-width: 440px;
+  margin: 0;
+  font-size: clamp(16px, 1.25vw, 20px);
+  font-weight: 300;
+  line-height: 1.9;
+  color: #f7f5f1c7;
+  text-wrap: pretty;
+}
+.good-to-know-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(48px, 6vw, 110px);
+  margin: 0;
+}
+.good-to-know-item {
+  padding: clamp(40px, 4.2vw, 64px) 0 clamp(16px, 1.6vw, 24px);
+  border-top: 1px solid #f7f5f12e;
+}
+.good-to-know-item dt {
+  margin-bottom: clamp(24px, 2.6vw, 40px);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+.good-to-know-item dd {
+  margin: 0;
+}
+.good-to-know-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(38px, 3.6vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.good-to-know-item .good-to-know-text {
+  max-width: 470px;
+  margin-top: clamp(20px, 2.2vw, 32px);
+  font-weight: 300;
+  line-height: 1.8;
+  color: #f7f5f1c7;
+  text-wrap: pretty;
+}
+
+/* One of one — "Asked often": the closing questions, on paper so the footer meets a light edge. */
+.faq {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
+  gap: clamp(40px, 6vw, 110px);
+  align-items: start;
+  padding: clamp(96px, 11vw, 170px) var(--pad-x) clamp(96px, 10vw, 160px);
+  background: var(--paper);
+  color: var(--ink);
+}
+.faq-head {
+  position: sticky;
+  top: 120px;
+}
+.faq-eyebrow {
+  margin: 0 0 clamp(20px, 2.4vw, 36px);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.faq h2 {
+  margin: 0;
+  font-size: clamp(56px, 6vw, 100px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.faq-more {
+  margin: clamp(32px, 3.6vw, 56px) 0 0;
+  font-weight: 300;
+  color: var(--muted);
+}
+.faq-more button {
+  padding: 0 0 2px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+.faq-more button:hover {
+  opacity: 0.6;
+}
+.faq-list {
+  border-bottom: 1px solid #17140f1f;
+}
+.faq-item {
+  border-top: 1px solid #17140f1f;
+}
+.faq-item h3 {
+  margin: 0;
+}
+.faq-item h3 button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  padding: clamp(24px, 2.4vw, 36px) 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: clamp(18px, 1.5vw, 23px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  text-align: left;
+  cursor: pointer;
+}
+.faq-sign {
+  position: relative;
+  flex: none;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #17140f33;
+  border-radius: 50%;
+  transition:
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 300ms ease,
+    border-color 300ms ease;
+}
+.faq-sign::before,
+.faq-sign::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 1.5px;
+  margin: -0.75px 0 0 -7px;
+  background: currentColor;
+}
+.faq-sign::after {
+  transform: rotate(90deg);
+}
+.faq-item h3 button:hover .faq-sign {
+  border-color: var(--ink);
+}
+.faq-item.open .faq-sign {
+  transform: rotate(45deg);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+/* Height animates from 0 to the answer's own height. */
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-item.open .faq-panel {
+  grid-template-rows: 1fr;
+}
+.faq-panel p {
+  overflow: hidden;
+  max-width: 680px;
+  margin: 0;
+  padding-right: 82px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #453d31;
+  text-wrap: pretty;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.faq-item.open .faq-panel p {
+  padding-bottom: clamp(28px, 2.8vw, 40px);
+  opacity: 1;
+  transition-delay: 120ms;
+}
+
+/* The title's intro (letters gather in as it rises). Lived in the old hero.css. */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    letter-spacing: 0.3em;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .unfolds-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 56px;
+  }
+  .faq {
+    grid-template-columns: 1fr;
+  }
+  .faq-head {
+    position: static;
+  }
+}
+@media (max-width: 800px) {
+  .oneofone-hero-body {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 28px;
+  }
+  .oneofone-hero h1 {
+    font-size: 15vw;
+  }
+  .good-to-know-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .good-to-know-grid {
+    grid-template-columns: 1fr;
+  }
+  .faq-panel p {
+    padding-right: 0;
+  }
+}
+@media (max-width: 560px) {
+  .unfolds-head {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .unfolds-grid {
+    grid-template-columns: 1fr;
+  }
+  .unfolds-art {
+    aspect-ratio: 4 / 3;
+  }
+}

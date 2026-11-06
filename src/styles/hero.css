@@ -1,0 +1,97 @@
+/* Home — full-bleed hero: DALGA behind the model, DESIGN in front. The words zoom in on load.
+   Values follow the hero handoff (hero-reference.html). */
+
+.hero {
+  --hero-ink: #ffffff;
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #d9d6d1;
+  scroll-snap-align: start;
+}
+.hero-svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Photo + cut-out: identical transforms, or the cut-out drifts off the photo. */
+.hero-zoom {
+  transform-box: view-box;
+  transform-origin: 50% 58%;
+  transform: scale(1.35);
+}
+.hero-word {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  /* On load: fall in from 8× (the old maximum zoom), dip just under full size, spring back and
+     stay. Opacity fades in quicker so the words read early.
+     reduced-motion.css turns animations off, so those visitors see the words still. */
+  animation:
+    hero-word-zoom 1.6s both,
+    hero-word-fade 0.7s ease-out both;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: 15vw;
+  letter-spacing: -0.045em;
+  font-kerning: normal;
+  fill: var(--hero-ink);
+}
+.hero-note {
+  position: absolute;
+  bottom: 40px;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #3a342a;
+}
+.hero-note.left {
+  left: 48px;
+}
+.hero-note.right {
+  right: 48px;
+  text-align: right;
+}
+@media (max-width: 800px) {
+  .hero-note.left {
+    left: var(--pad-x);
+  }
+  .hero-note.right {
+    right: var(--pad-x);
+  }
+}
+/* The bounce is set as explicit sizes, not an overshooting curve: a curve overshoots by a share
+   of the whole 8× → 1× travel, which dips far too small. */
+@keyframes hero-word-zoom {
+  0% {
+    transform: scale(8);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  60% {
+    transform: scale(0.94);
+    animation-timing-function: ease-in-out;
+  }
+  80% {
+    transform: scale(1.02);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes hero-word-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

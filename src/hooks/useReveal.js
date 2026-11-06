@@ -2,19 +2,20 @@ import { useEffect } from 'react'
 
 /**
  * Watches every `.reveal` element within `scopeRef` (defaults to the whole
- * document) and adds `.visible` once it scrolls into view. Re-scans whenever
+ * document) and sets `data-revealed` once it scrolls into view. Re-scans whenever
  * a value in `deps` changes, since new `.reveal` nodes can mount (route
- * change, filter change, etc).
+ * change, filter change, etc). An attribute rather than a class, because React
+ * rewrites `className` on re-render and would hide an element whose classes change.
  */
 export function useReveal(deps = [], scopeRef = null) {
   useEffect(() => {
     const scope = scopeRef?.current ?? document
-    const elements = scope.querySelectorAll('.reveal')
+    const elements = scope.querySelectorAll('.reveal:not([data-revealed])')
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
+            entry.target.dataset.revealed = ''
             observer.unobserve(entry.target)
           }
         })

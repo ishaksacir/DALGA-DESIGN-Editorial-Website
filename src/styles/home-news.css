@@ -1,0 +1,194 @@
+/* Home — "New at the atelier": one featured post that rotates through the latest updates. */
+.atelier-news {
+  --news-rule: rgba(247, 245, 241, 0.16);
+  padding: clamp(72px, 8vw, 120px) var(--pad-x);
+  position: relative;
+  /* Above the fabric strip, so the strip's lower edge tucks under this section. */
+  z-index: 2;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow:
+    0 -2px 4px rgba(23, 20, 15, 0.35),
+    0 -8px 18px rgba(23, 20, 15, 0.3),
+    0 2px 4px rgba(23, 20, 15, 0.35),
+    0 8px 18px rgba(23, 20, 15, 0.3);
+}
+/* Woven folk-motif strip laid across the seam: over the showcase, tucked under the news section. */
+.fabric-strip {
+  --strip-h: clamp(51px, 4.3vw, 82px);
+  position: relative;
+  z-index: 1;
+  height: var(--strip-h);
+  margin: calc(var(--strip-h) * -0.45) 0 calc(var(--strip-h) * -0.55);
+  background: url('/images/textures/folk-strip-linen.webp') center / auto 100% repeat-x;
+}
+/* The same strip under the news section, turned 180° so its dark underside is the edge that tucks
+   under the news section; the rest lies on the statement. */
+.fabric-strip-below {
+  margin: calc(var(--strip-h) * -0.55) 0 calc(var(--strip-h) * -0.45);
+  transform: rotate(180deg);
+}
+.atelier-news-head {
+  display: flex;
+  justify-content: space-between;
+  /* Centre, not baseline: the heading opens with a mark, which has no text baseline of its own. */
+  align-items: center;
+  gap: 24px;
+  margin-bottom: clamp(40px, 4.5vw, 64px);
+}
+.atelier-news-head p,
+.atelier-news-head a {
+  margin: 0;
+}
+.atelier-news-head a {
+  transition: color 0.3s;
+}
+.atelier-news-head a:hover {
+  color: var(--accent-on-dark);
+}
+.news-featured {
+  display: grid;
+  /* Image track sized so the heading row and the image fit one screen together. */
+  grid-template-columns: minmax(0, min(560px, 50%, calc((100svh - 240px) * 0.8))) minmax(0, 1fr);
+  gap: clamp(32px, 4.5vw, 64px);
+  align-items: end;
+}
+/* Instagram's portrait post ratio, so feed images drop in uncropped. */
+.news-featured-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: #1e1b17;
+}
+/* A running-stitch frame just outside the photo, as if it were sewn onto the page. */
+.news-stitch-frame {
+  position: absolute;
+  inset: -14px;
+  width: calc(100% + 28px);
+  height: calc(100% + 28px);
+  overflow: visible;
+  pointer-events: none;
+}
+.news-stitch-frame rect {
+  fill: none;
+  stroke: var(--accent-on-dark);
+  stroke-width: 2;
+  stroke-dasharray: 10 9;
+  stroke-linecap: round;
+  opacity: 0.6;
+}
+.news-featured-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Each rotation remounts the image and text, so they fade in fresh. */
+.news-featured-media img,
+.news-featured-text {
+  animation: news-fade-in 0.9s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+.news-featured-text {
+  animation-duration: 0.7s;
+}
+@keyframes news-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+/* One bar per post; the active bar fills over its turn while the section is rotating. */
+.news-pager {
+  display: flex;
+  gap: 8px;
+  margin-top: clamp(32px, 3.5vw, 48px);
+}
+.news-pager button {
+  flex: 0 1 48px;
+  padding: 12px 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.news-pager span {
+  display: block;
+  height: 2px;
+  background: var(--news-rule) linear-gradient(var(--paper), var(--paper)) 0 0 / 0 100% no-repeat;
+  transition: background-color 0.3s;
+}
+.news-pager button:hover span {
+  background-color: rgba(247, 245, 241, 0.4);
+}
+.news-pager .is-active span {
+  background-size: 100% 100%;
+}
+.news-pager.is-rotating .is-active span {
+  animation: news-pager-fill var(--news-rotate) linear;
+}
+@keyframes news-pager-fill {
+  from {
+    background-size: 0 100%;
+  }
+}
+.news-tag {
+  display: inline-block;
+  padding: 7px 12px 6px;
+  background: var(--olive);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.news-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 20px 0 0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+.news-meta-category {
+  color: var(--olive);
+}
+.news-featured h2 {
+  margin: 24px 0 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(40px, 4.6vw, 70px);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+.news-featured-excerpt {
+  max-width: 440px;
+  margin: 32px 0 0;
+  color: #cfc7b9;
+  text-wrap: pretty;
+}
+.news-read-more {
+  display: inline-block;
+  color: var(--paper);
+  margin-top: 28px;
+  padding: 15px 24px;
+  border: 1px solid var(--caramel);
+  transition:
+    background 0.35s,
+    border-color 0.35s,
+    color 0.35s;
+}
+.news-read-more:hover {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+/* Phones stack the image above the text. */
+@media (max-width: 700px) {
+  .news-featured {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .news-featured h2 {
+    font-size: clamp(34px, 9.5vw, 48px);
+  }
+}

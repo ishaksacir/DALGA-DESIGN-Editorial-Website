@@ -1,10 +1,15 @@
 import { useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
-import { Navbar } from '@/components/navigation/Navbar'
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
+
+import { ContactDrawerProvider } from '@/components/contact/ContactDrawerProvider'
 import { Footer } from '@/components/layout/Footer'
-import { useReveal } from '@/hooks/useReveal'
-import { useScrollToTop } from '@/hooks/useScrollToTop'
+import { PhoneFooter } from '@/components/layout/PhoneFooter'
+import { Navbar } from '@/components/navigation/Navbar'
+import { PhoneNav } from '@/components/navigation/PhoneNav'
 import { ROUTES } from '@/constants/routes'
+import { usePhone } from '@/hooks/usePhone'
+import { useReveal } from '@/hooks/useReveal'
+import { PieceSheet } from '@/pages/Catalogue/PieceSheet'
 
 const bodyPageForPath = (pathname) => {
   if (pathname === ROUTES.HOME) return 'home'
@@ -16,18 +21,24 @@ const bodyPageForPath = (pathname) => {
 
 export function AppLayout() {
   const { pathname } = useLocation()
-  useScrollToTop()
-  useReveal([pathname])
+  const isPhone = usePhone()
+  useReveal([pathname, isPhone])
 
   useEffect(() => {
     document.body.dataset.page = bodyPageForPath(pathname)
   }, [pathname])
 
   return (
-    <div className="app">
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </div>
+    <ContactDrawerProvider>
+      <div className={`app${isPhone ? ' app-phone' : ''}`}>
+        {isPhone ? <PhoneNav /> : <Navbar />}
+        <Outlet />
+        <div className="fabric-strip footer-strip" aria-hidden="true" />
+        {isPhone ? <PhoneFooter /> : <Footer />}
+      </div>
+      {isPhone && <PieceSheet />}
+      {/* New pages open at the top; Back returns to where the reader was. */}
+      <ScrollRestoration />
+    </ContactDrawerProvider>
   )
 }

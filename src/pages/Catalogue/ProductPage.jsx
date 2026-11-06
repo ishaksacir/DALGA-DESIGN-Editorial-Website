@@ -1,88 +1,110 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Reveal } from '@/components/ui/Reveal'
+import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
+
+import { useContactDrawer } from '@/components/contact/context'
 import { NeedleLink } from '@/components/ui/NeedleLink'
+import { ROUTES } from '@/constants/routes'
+import { usePhone } from '@/hooks/usePhone'
+import { useProduct } from '@/hooks/useProducts'
+import { useI18n } from '@/i18n/context'
+
 import { ProductGallery } from './ProductGallery'
-import { getAdjacentProducts, getProductById } from '@/data/products'
-import { productPath, ROUTES } from '@/constants/routes'
-import { SITE } from '@/constants/site'
 
 export function ProductPage() {
   const { productId } = useParams()
+  const isPhone = usePhone()
+  const product = useProduct(productId)
+  // Phones show pieces in a sheet over the catalogue, so a direct link opens it there.
+  if (isPhone && product) {
+    return <Navigate to={`${ROUTES.CATALOGUE}?piece=${productId}`} replace />
+  }
+  return <ProductDetail product={product} />
+}
+
+function ProductDetail({ product }) {
+  const location = useLocation()
   const navigate = useNavigate()
-  const product = getProductById(productId)
+  const { t, tr } = useI18n()
+  const copy = t.product
+  const { openDrawer } = useContactDrawer()
 
   if (!product) {
     return (
       <main className="creations-page">
         <section className="page-hero compact creations-hero">
-          <p>Catalogue</p>
-          <h1>Piece not found</h1>
+          <p>{copy.notFoundEyebrow}</p>
+          <h1>{copy.notFoundTitle}</h1>
         </section>
         <section className="section">
           <p className="lead">
-            That commission isn’t in the archive.{' '}
-            <Link to={ROUTES.CATALOGUE}>Return to the catalogue →</Link>
+            {copy.notFoundText} <Link to={ROUTES.CATALOGUE}>{copy.notFoundLink}</Link>
           </p>
         </section>
       </main>
     )
   }
 
-  const { prev, next } = getAdjacentProducts(product)
-
   return (
     <main className="creations-page">
       <section className="product section">
-        <Link className="text-link" to={ROUTES.CATALOGUE}>
-          ← Catalogue
+        {/* From the catalogue this is a plain Back, so the filter, count and scroll come back as
+            they were; arriving any other way, the catalogue opens scrolled to this piece. */}
+        <Link
+          className="text-link"
+          to={ROUTES.CATALOGUE}
+          state={{ focus: product.id }}
+          onClick={(event) => {
+            if (!location.state?.fromCatalogue) return
+            event.preventDefault()
+            navigate(-1)
+          }}
+        >
+          {copy.back}
         </Link>
         <div className="product-grid">
           <ProductGallery key={product.id} product={product} />
-          <div>
+          <div className="product-info">
             <p className="kicker">
-              {product.collection} · {product.year}
+              {tr(product.collection)} · {product.year}
             </p>
-            <h1>{product.name}</h1>
-            <p className="category">{product.category}</p>
-            <p className="lead italic">{product.intro}</p>
-            <p>{product.description}</p>
-            <NeedleLink href={`mailto:${SITE.email}`}>Begin a conversation</NeedleLink>
+            <h1>{tr(product.name)}</h1>
+            <p className="category">{tr(product.category)}</p>
+            <p className="lead italic">{tr(product.intro)}</p>
+            <p className="product-description">{tr(product.description)}</p>
+            <dl className="product-specs">
+              {product.specs.map(([label, value]) => (
+                <div key={label.en}>
+                  <dt>{tr(label)}</dt>
+                  <dd>{tr(value)}</dd>
+                </div>
+              ))}
+              <div>
+                <dt>{copy.composition}</dt>
+                <dd>{tr(product.composition)}</dd>
+              </div>
+              <div>
+                <dt>{copy.piece}</dt>
+                <dd>
+                  {product.number} · {copy.oneOfOne}
+                </dd>
+              </div>
+            </dl>
+            {product.care && (
+              <div className="product-care">
+                <h2>{copy.care}</h2>
+                <ul>
+                  {product.care.map((line) => (
+                    <li key={line.en}>{tr(line)}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className="product-cta">
+              <NeedleLink onClick={() => openDrawer(product.id)}>{t.contact.askAbout}</NeedleLink>
+              <p className="product-cta-note">{copy.ctaNote}</p>
+            </div>
           </div>
         </div>
       </section>
-      <section className="making">
-        <Reveal>
-          <p className="kicker">How it was made</p>
-          <h2>In the making</h2>
-          <p>{product.creation}</p>
-        </Reveal>
-        <Reveal>
-          <dl>
-            {product.specs.map(([label, value]) => (
-              <div key={label}>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
-            <div>
-              <dt>Composition</dt>
-              <dd>{product.composition}</dd>
-            </div>
-            <div>
-              <dt>Piece</dt>
-              <dd>{product.number} · One of one</dd>
-            </div>
-          </dl>
-        </Reveal>
-      </section>
-      <div className="product-nav section">
-        <button type="button" onClick={() => navigate(productPath(prev.id))}>
-          ← {prev.name}
-        </button>
-        <button type="button" onClick={() => navigate(productPath(next.id))}>
-          {next.name} →
-        </button>
-      </div>
     </main>
   )
 }

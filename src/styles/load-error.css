@@ -1,0 +1,153 @@
+/* Catalogue unavailable: the About hero's ruled status bar and two-line title, closed by the
+   footer's fabric strip and cropped wordmark, all within one screen. */
+.load-error {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: clip;
+  background: var(--paper);
+  color: var(--ink);
+}
+.load-error-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 108px;
+  padding: 24px var(--pad-x);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+
+.load-error-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 5vw, 72px) var(--pad-x) clamp(72px, 8vw, 120px);
+}
+.load-error-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #17140f59;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.load-error-status > span:last-child {
+  color: var(--muted);
+}
+.load-error-status .mark-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.load-error-body {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(40px, 6vw, 120px);
+  align-items: end;
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.load-error h1 {
+  margin: 0;
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: clamp(64px, 9.5vw, 172px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+.load-error h1 em {
+  display: block;
+  color: var(--accent);
+}
+.load-error-aside > p:first-child {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #453d31;
+  text-wrap: pretty;
+}
+.load-error-aside .needle-btn {
+  margin-top: 32px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.load-error-write {
+  margin: 22px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.load-error-write a {
+  color: var(--ink);
+  border-bottom: 1px solid #17140f40;
+  transition: border-color 0.25s;
+}
+.load-error-write a:hover {
+  border-color: var(--accent);
+}
+
+/* The footer's ink band and cropped wordmark, without its links (they would hit the same outage). */
+/* As on the site footer: the band rises over the strip's lower half and casts a shadow onto it. */
+.load-error > .fabric-strip {
+  z-index: 2;
+}
+.load-error-band {
+  position: relative;
+  z-index: 3;
+  padding-top: clamp(28px, 3vw, 44px);
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow:
+    0 -2px 4px rgba(23, 20, 15, 0.35),
+    0 -8px 18px rgba(23, 20, 15, 0.3);
+}
+.load-error-band p {
+  margin: 0 0 -0.2em;
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: 17.4vw;
+  line-height: 0.8;
+  white-space: nowrap;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .load-error-body {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .load-error h1 {
+    font-size: 15vw;
+  }
+  .load-error-aside {
+    max-width: 520px;
+  }
+}
+@media (max-width: 560px) {
+  .load-error-bar {
+    height: 84px;
+  }
+  .load-error-bar .brand img {
+    height: 52px;
+  }
+  .load-error-status > span:last-child {
+    display: none;
+  }
+  .load-error h1 {
+    font-size: 17vw;
+  }
+  .load-error-aside > p:first-child {
+    font-size: 15px;
+  }
+}

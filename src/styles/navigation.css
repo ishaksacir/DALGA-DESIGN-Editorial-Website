@@ -1,0 +1,366 @@
+/* Site navigation: bar, links, language switch and mobile menu. */
+.nav {
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px var(--pad-x);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 40;
+}
+.nav-hero {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 108px;
+  z-index: 40;
+  background: transparent;
+}
+.nav-solid {
+  border-bottom: 1px solid #17140f26;
+}
+.brand {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: block;
+}
+.brand img {
+  height: 66px;
+  display: block;
+}
+.nav-links {
+  display: flex;
+  gap: clamp(16px, 3vw, 44px);
+}
+.nav-links a {
+  padding: 0 0 3px;
+  border-bottom: 1px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: inherit;
+  font-size: inherit;
+  font-weight: 600;
+}
+.nav-links a.active,
+.nav-links a:hover {
+  border-color: var(--ink);
+}
+.nav-end {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 44px);
+}
+/* BS / EN switch: the inactive language is dimmed, the active one underlined like a nav link. */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.lang-switch button {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+.lang-switch button + button::before {
+  content: '/';
+  margin-right: 6px;
+  opacity: 0.6;
+}
+.lang-switch button:hover,
+.lang-switch button.active {
+  opacity: 1;
+}
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--ink);
+  background: none;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--ink);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+.nav-mobile-panel {
+  display: none;
+}
+@media (max-width: 800px) {
+  .nav-links-desktop {
+    display: none;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  /* Full-screen menu (pattern from the mobile app handoff): ink ground, numbered serif links,
+     contact details pinned to the bottom. Sits above both bars (40), below the contact drawer (50). */
+  .nav-mobile-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    padding: 18px var(--pad-x) max(32px, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--ink);
+    color: var(--paper);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(24px);
+    transition:
+      opacity 0.32s ease,
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.42s;
+  }
+  .nav-mobile-panel.open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.32s ease,
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-mobile-panel:focus {
+    outline: none;
+  }
+  .nav-mobile-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 50px;
+    margin-bottom: clamp(28px, 6vh, 56px);
+  }
+  .nav-mobile-top .brand img {
+    filter: invert(1);
+  }
+  .nav-mobile-close {
+    border-color: var(--paper);
+  }
+  .nav-mobile-close span {
+    background: var(--paper);
+  }
+  .nav-mobile-close span:first-child {
+    transform: translateY(3px) rotate(45deg);
+  }
+  .nav-mobile-close span:last-child {
+    transform: translateY(-3px) rotate(-45deg);
+  }
+  .nav-mobile-links {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #f7f5f129;
+  }
+  .nav-mobile-links a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 20px 0;
+    border-bottom: 1px solid #f7f5f129;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(30px, 9vw, 44px);
+    line-height: 1;
+  }
+  .nav-mobile-links a.active {
+    color: var(--accent-on-dark);
+  }
+  .nav-mobile-num {
+    width: 32px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--muted-on-dark);
+  }
+  .nav-mobile-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 40px;
+  }
+  .nav-mobile-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 56px;
+    margin-bottom: 14px;
+    padding: 0 22px;
+    border: 0;
+    background: var(--accent-on-dark);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .nav-mobile-status {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent-on-dark);
+  }
+  .nav-mobile-email {
+    align-self: flex-start;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  .nav-mobile-social {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #b8ae9d;
+  }
+  .nav-mobile-social .lang-switch {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--paper);
+  }
+  .nav-mobile-email,
+  .nav-mobile-social a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+@media (max-width: 560px) {
+  /* Language moves into the menu so the bar never crowds. */
+  .nav-end > .lang-switch {
+    display: none;
+  }
+  .nav-end {
+    gap: 12px;
+  }
+  .nav-end .nav-cta,
+  .scroll-nav-end .nav-cta {
+    padding: 11px 14px;
+  }
+}
+/* "Get your piece" button in the nav. Outlined over the home hero; solid in the scroll bar. */
+.nav-cta {
+  padding: 11px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.nav-cta:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+/* The nav button is small, so its needle is too. */
+.nav-cta.needle-hover > img {
+  height: 6px;
+}
+.nav-cta-solid {
+  border: 0;
+  background: var(--ink);
+  color: var(--paper);
+}
+.nav-cta-solid:hover {
+  background: var(--accent);
+}
+@media (min-width: 801px) {
+  .nav-home {
+    height: auto;
+    padding: 26px 48px;
+  }
+  .nav-home .brand img {
+    height: 56px;
+    width: auto;
+  }
+  .nav-home .nav-end,
+  .nav-home .nav-links {
+    gap: 36px;
+    align-items: center;
+  }
+}
+/* Scroll bar: fixed above the page, below the contact drawer (50/51). Shown on scroll up past the top of any page. */
+.scroll-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  background: rgba(247, 245, 241, 0.94);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(23, 20, 15, 0.12);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transform: translateY(-101%);
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scroll-nav.shown {
+  transform: translateY(0);
+}
+.scroll-nav .brand img {
+  height: 40px;
+  width: auto;
+}
+.scroll-nav-end,
+.scroll-nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+@media (max-width: 800px) {
+  /* Scroll bar on narrow screens: logo, CTA and menu button only, on the page gutter. */
+  .scroll-nav {
+    padding: 10px var(--pad-x);
+  }
+  .scroll-nav .nav-links-desktop {
+    display: none;
+  }
+  .scroll-nav-end {
+    gap: 16px;
+  }
+}

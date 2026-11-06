@@ -1,12 +1,9 @@
 import { Reveal } from './Reveal'
 
-/** Compact editorial header used at the top of secondary pages (About, Catalogue, One of one). */
-export function PageHero({ eyebrow, title, centered = false, className = '' }) {
-  const classes = ['page-hero', 'compact', centered && 'centered', className]
-    .filter(Boolean)
-    .join(' ')
+/** Compact editorial header: eyebrow over a large serif title. */
+export function PageHero({ eyebrow, title, className = '' }) {
   return (
-    <section className={classes}>
+    <section className={`page-hero compact ${className}`}>
       <Reveal as="p">{eyebrow}</Reveal>
       <Reveal as="h1">{title}</Reveal>
     </section>

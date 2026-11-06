@@ -1,0 +1,151 @@
+/* About — "Dalga means wave." masthead with the atelier's one-line introduction; the nav floats on top. */
+.about-hero {
+  padding: calc(108px + clamp(48px, 6vw, 96px)) var(--pad-x) clamp(64px, 7vw, 104px);
+  background: var(--paper);
+}
+.about-hero-meta {
+  margin: 0;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #17140f59;
+  color: var(--accent);
+}
+.about-hero h1 {
+  margin: clamp(40px, 5vw, 72px) 0 0;
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: clamp(64px, 9.5vw, 172px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+.about-hero h1 em {
+  color: var(--accent);
+}
+
+/* About — Sabiha, the maker: her name beside her motto and two notes. */
+.maker-story {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(40px, 6vw, 120px);
+  align-items: start;
+  padding: clamp(96px, 11vw, 170px) var(--pad-x) 0;
+}
+.maker-story-head {
+  position: sticky;
+  top: 120px;
+}
+.maker-story-eyebrow,
+.maker-story-role,
+.maker-story-notes dt {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.maker-story h2 {
+  margin: clamp(20px, 2.4vw, 32px) 0 clamp(16px, 1.8vw, 24px);
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: clamp(44px, 4.4vw, 80px);
+  /* Room for the háček on Š, so it doesn't touch the line above. */
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+/* The surname on its own line, so the long name never runs past its column. */
+.maker-story h2 span {
+  display: block;
+}
+.maker-story-role {
+  color: var(--muted);
+}
+.maker-story-motto {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(32px, 3.3vw, 54px);
+  line-height: 1.15;
+  text-wrap: pretty;
+}
+.maker-story-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 64px);
+  margin: clamp(56px, 6vw, 96px) 0 0;
+}
+.maker-story-notes > div {
+  padding-top: 24px;
+  border-top: 1px solid #17140f29;
+}
+.maker-story-notes dd {
+  margin: 18px 0 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #453d31;
+  text-wrap: pretty;
+}
+
+/* About — founder photograph beside three facts about the atelier. */
+.atelier-story {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(48px, 6vw, 120px);
+  align-items: center;
+  padding: clamp(80px, 10vw, 140px) var(--pad-x) clamp(96px, 11vw, 160px);
+}
+.atelier-story-image img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 45%;
+  display: block;
+}
+.atelier-story-image figcaption {
+  margin-top: 18px;
+  color: var(--muted);
+}
+.atelier-story-facts {
+  margin: 0 0 clamp(28px, 3vw, 40px);
+}
+.atelier-story-facts > div {
+  display: grid;
+  grid-template-columns: minmax(96px, 1fr) minmax(0, 3fr);
+  gap: 24px;
+  padding: clamp(24px, 2.6vw, 36px) 0;
+  border-top: 1px solid #17140f29;
+}
+.atelier-story-facts > div:last-child {
+  border-bottom: 1px solid #17140f29;
+}
+.atelier-story-facts dt {
+  padding-top: 0.6em;
+  color: var(--accent);
+}
+.atelier-story-facts dd {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 1.25;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .maker-story,
+  .atelier-story {
+    grid-template-columns: 1fr;
+  }
+  .maker-story-head {
+    position: static;
+  }
+}
+@media (max-width: 560px) {
+  .about-hero h1 {
+    font-size: 17vw;
+  }
+  .maker-story-notes {
+    grid-template-columns: 1fr;
+  }
+}

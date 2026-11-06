@@ -1,0 +1,143 @@
+/* Site footer. */
+/* Folk strip over the end of every page; its dark edge tucks under the footer, which casts a
+   shadow onto it (as with the strips around the home sections). */
+.footer-strip {
+  z-index: 2;
+}
+.site-footer,
+.app-phone .ph-footer {
+  position: relative;
+  z-index: 3;
+  box-shadow:
+    0 -2px 4px rgba(23, 20, 15, 0.35),
+    0 -8px 18px rgba(23, 20, 15, 0.3);
+}
+.site-footer {
+  overflow: hidden;
+  padding: clamp(64px, 7vw, 96px) var(--pad-x) 0;
+  background: var(--ink);
+  color: var(--paper);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+  gap: 48px;
+  padding-bottom: clamp(48px, 6vw, 72px);
+  border-bottom: 1px solid #f7f5f12e;
+}
+.footer-tagline {
+  max-width: 360px;
+  margin: 0 0 18px;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 34px;
+  line-height: 1.1;
+}
+.footer-intro > p:last-child {
+  max-width: 340px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 300;
+  color: #b8ae9d;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 13px;
+}
+.footer-col b {
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted-on-dark);
+}
+.footer-col a {
+  transition: color 0.2s ease;
+}
+.footer-col a:hover {
+  color: var(--accent-on-dark);
+}
+.footer-col span {
+  color: #b8ae9d;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 0;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted-on-dark);
+}
+.footer-top {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.footer-top:hover {
+  color: var(--accent-on-dark);
+}
+.footer-top span {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+.footer-top:hover span {
+  transform: translateY(-2px);
+}
+.footer-wordmark {
+  margin: 0 0 -0.16em;
+  font-family: var(--wordmark);
+  font-weight: 400;
+  font-size: 17.4vw;
+  line-height: 0.8;
+  white-space: nowrap;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .footer-intro {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 560px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 24px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  /* Taller touch targets for the links without changing their visual rhythm. */
+  .footer-col {
+    gap: 0;
+  }
+  .footer-col b {
+    margin-bottom: 4px;
+  }
+  .footer-col a,
+  .footer-top {
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-col a {
+    min-height: 40px;
+  }
+}

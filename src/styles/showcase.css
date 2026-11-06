@@ -1,0 +1,178 @@
+/* Home — showcase gallery on the patterned panel. */
+.showcase-pattern-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.showcase-pattern-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-position: center;
+  background-size: 620px auto;
+  background-repeat: repeat;
+  mask-image: radial-gradient(62% 85% at 78% 30%, #000 38%, transparent 88%);
+  -webkit-mask-image: radial-gradient(62% 85% at 78% 30%, #000 38%, transparent 88%);
+}
+.showcase-pattern-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(247, 245, 241, 0.32);
+}
+.gallery > .showcase-pattern-panel {
+  padding: clamp(54px, 6vw, 88px) var(--pad-x) clamp(70px, 8vw, 110px);
+  background: var(--paper);
+}
+.gallery {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.showcase-pattern-panel::before {
+  background-image: none;
+  opacity: 0;
+}
+.showcase-pattern-panel::after {
+  background: transparent;
+}
+.showcase-pattern-panel .eyebrow-row {
+  color: #302820;
+}
+.showcase-pattern-panel .gallery-track.gallery-static .gallery-item-caption {
+  color: #2b231d;
+  font-weight: 700;
+}
+.showcase-pattern-panel .gallery-track.gallery-static .gallery-item-caption > span {
+  background: rgba(247, 245, 241, 0.82);
+  padding: 5px 7px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.showcase-pattern-panel .gallery-track.gallery-static .gallery-item-caption > span:last-child {
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+.gallery-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: clamp(16px, 1.8vw, 32px);
+  width: min(100%, 1480px);
+  margin: 0 auto;
+}
+.gallery-arrow {
+  /* Centred on the photos rather than photo + caption. */
+  margin-bottom: 60px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    transform 0.25s;
+}
+.gallery-arrow:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Narrow screens: every piece in one swipeable row that bleeds to the screen edge,
+   snapping card by card, with the next card peeking in (pattern from the mobile app). */
+@media (max-width: 800px) {
+  .gallery {
+    min-height: 0;
+  }
+  .gallery > .showcase-pattern-panel {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .showcase-pattern-panel .eyebrow-row {
+    padding: 0 var(--pad-x);
+  }
+  .gallery-shell {
+    display: block;
+  }
+  .gallery-arrow {
+    display: none;
+  }
+  .gallery-window {
+    width: 100%;
+  }
+  .gallery-track.gallery-static {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--pad-x);
+    padding: 0 var(--pad-x) 4px;
+    scrollbar-width: none;
+  }
+  .gallery-track.gallery-static::-webkit-scrollbar {
+    display: none;
+  }
+  .gallery-track.gallery-static .gallery-item {
+    flex: 0 0 clamp(220px, 44vw, 300px);
+    width: auto;
+    scroll-snap-align: start;
+  }
+  .showcase-pattern-panel .gallery-track.gallery-static .gallery-item-caption {
+    margin-top: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .showcase-pattern-panel .gallery-track.gallery-static .gallery-item-caption > span {
+    display: none;
+  }
+  /* Closing card: a link through to the full catalogue, sized like an image. */
+  .gallery-track.gallery-static .gallery-item-all {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 2/3;
+    padding: 22px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1;
+  }
+  .gallery-item-all-count {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    color: var(--accent-on-dark);
+  }
+}
+@media (max-width: 480px) {
+  .gallery-track.gallery-static .gallery-item {
+    flex-basis: 64vw;
+  }
+}
+
+/* Keep the carousel field clean. */
+.gallery > .showcase-pattern-panel::before,
+.gallery > .showcase-pattern-panel::after {
+  content: none;
+}

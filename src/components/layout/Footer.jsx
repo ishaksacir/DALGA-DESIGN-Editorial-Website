@@ -1,28 +1,32 @@
 import { Link } from 'react-router-dom'
+
+import { LineBreaks } from '@/components/ui/LineBreaks'
 import { NAV_ITEMS } from '@/constants/navigation'
-import { SITE, asset } from '@/constants/site'
+import { SITE } from '@/constants/site'
+import { useI18n } from '@/i18n/context'
 
 export function Footer() {
+  const { t } = useI18n()
+
   return (
-    <footer>
-      <p className="footer-tag">{SITE.tagline}</p>
+    <footer className="site-footer">
       <div className="footer-grid">
-        <div>
-          <img className="footer-logo" src={asset('dalga-logo-footer.png')} alt={SITE.name} />
-          <p>
-            A small atelier where garments are not produced, but grown around one person at a time.
+        <div className="footer-intro">
+          <p className="footer-tagline">
+            <LineBreaks lines={t.footer.tagline} />
           </p>
+          <p>{t.footer.intro}</p>
         </div>
-        <div>
-          <b>Explore</b>
+        <div className="footer-col">
+          <b>{t.footer.explore}</b>
           {NAV_ITEMS.map((item) => (
             <Link key={item.to} to={item.to}>
-              {item.label}
+              {t.nav[item.labelKey]}
             </Link>
           ))}
         </div>
-        <div>
-          <b>Follow</b>
+        <div className="footer-col">
+          <b>{t.footer.follow}</b>
           <a href={SITE.instagram} target="_blank" rel="noreferrer">
             Instagram
           </a>
@@ -30,16 +34,22 @@ export function Footer() {
             Facebook
           </a>
         </div>
-        <div>
-          <b>Atelier</b>
+        <div className="footer-col">
+          <b>{t.footer.atelier}</b>
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-          <span>{SITE.commissionsOpen}</span>
+          <span>{t.site.commissionsOpen}</span>
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 Dalga Design</span>
-        <span>Every piece one of one</span>
+        <span>© 2026 {SITE.name}</span>
+        <span>{t.footer.everyPiece}</span>
+        <button type="button" className="footer-top" onClick={() => window.scrollTo({ top: 0 })}>
+          {t.footer.backToTop} <span aria-hidden="true">↑</span>
+        </button>
       </div>
+      <p className="footer-wordmark" aria-hidden="true">
+        DALGA
+      </p>
     </footer>
   )
 }
