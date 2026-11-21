@@ -1,2 +1,4 @@
 dist
 node_modules
+qa/qa-output
+qa/node_modules
