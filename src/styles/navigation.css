@@ -70,7 +70,8 @@
   letter-spacing: inherit;
   text-transform: uppercase;
   cursor: pointer;
-  opacity: 0.45;
+  /* 0.65 keeps the inactive language at 4.5:1+ on paper and on ink. */
+  opacity: 0.65;
   transition: opacity 0.2s ease;
 }
 .lang-switch button + button::before {

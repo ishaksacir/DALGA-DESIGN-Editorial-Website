@@ -29,8 +29,8 @@ function CatalogueIndex() {
   const navigate = useNavigate()
   // Filter and count live in the URL, so Back from a product restores the grid exactly.
   const [params, setParams] = useSearchParams()
-  const filter = params.get('category') || ALL
-  const shown = Number(params.get('show')) || PAGE_SIZE
+  // Never fewer than a page, whatever the link says (`?show=-5` would otherwise empty the grid).
+  const shown = Math.max(PAGE_SIZE, Number(params.get('show')) || 0)
   const gridRef = useRef(null)
   const products = useProducts()
 
@@ -38,6 +38,9 @@ function CatalogueIndex() {
     const byKey = new Map(products.map((product) => [categoryKey(product), product.category]))
     return [{ key: ALL }, ...[...byKey].map(([key, label]) => ({ key, label }))]
   }, [products])
+  // A category nobody has any more (an old link after a rename) falls back to everything.
+  const requested = params.get('category')
+  const filter = categories.some(({ key }) => key === requested) ? requested : ALL
   const counts = useMemo(() => {
     const map = new Map()
     products.forEach((product) => {

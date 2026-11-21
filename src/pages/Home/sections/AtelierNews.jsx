@@ -5,6 +5,7 @@ import { NeedleLink } from '@/components/ui/NeedleLink'
 import { Reveal } from '@/components/ui/Reveal'
 import { SITE } from '@/constants/site'
 import { useAtelierNews } from '@/hooks/useAtelierNews'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useReveal } from '@/hooks/useReveal'
 import { useI18n } from '@/i18n/context'
 
@@ -22,7 +23,8 @@ function NewsMeta({ category, date }) {
 
 /**
  * "New at the atelier": the featured post rotates through every post. Rotation pauses while keyboard focus is inside
- * the section, so tabbing to a link doesn't swap it out from under the reader.
+ * the section or the mouse is over it, so a post doesn't swap out from under the reader, and never starts for visitors
+ * who ask for reduced motion.
  */
 export function AtelierNews() {
   const { t } = useI18n()
@@ -30,6 +32,8 @@ export function AtelierNews() {
   const posts = useAtelierNews()
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const reduceMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
 
   // Posts arrive after the first render, so pick up their `.reveal` nodes once they mount.
   useReveal([posts[0].id], sectionRef)
@@ -37,7 +41,7 @@ export function AtelierNews() {
   const count = posts.length
   const current = active % count
   const featured = posts[current]
-  const rotating = count > 1 && !paused
+  const rotating = count > 1 && !paused && !hovered && !reduceMotion
 
   // A timeout per post (not an interval), so picking one by hand restarts its full turn.
   useEffect(() => {
@@ -53,9 +57,20 @@ export function AtelierNews() {
   const resume = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false)
   }
+  // Touch fires pointerenter on a tap with no matching leave, so only a real mouse holds it.
+  const hover = (over) => (event) => {
+    if (event.pointerType === 'mouse') setHovered(over)
+  }
 
   return (
-    <section className="atelier-news" ref={sectionRef} onFocus={pause} onBlur={resume}>
+    <section
+      className="atelier-news"
+      ref={sectionRef}
+      onFocus={pause}
+      onBlur={resume}
+      onPointerEnter={hover(true)}
+      onPointerLeave={hover(false)}
+    >
       <Reveal className="atelier-news-head">
         <p className="mark-row">
           <Mark name="crescent" size={24} color="var(--accent-on-dark)" />

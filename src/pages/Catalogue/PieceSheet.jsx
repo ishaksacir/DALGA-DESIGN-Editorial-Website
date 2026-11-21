@@ -2,6 +2,7 @@ import { useEffect, useEffectEvent, useRef, useState } from 'react'
 
 import { useContactDrawer } from '@/components/contact/context'
 import { useEscapeKey } from '@/hooks/useEscapeKey'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { usePieceSheet } from '@/hooks/usePieceSheet'
 import { useProducts } from '@/hooks/useProducts'
 import { useI18n } from '@/i18n/context'
@@ -39,6 +40,7 @@ export function PieceSheet() {
   const [stepped, setStepped] = useState(false)
   const [wasOpen, setWasOpen] = useState(open)
   const sheetRef = useRef(null)
+  const returnFocusRef = useRef(null)
   const innerRef = useRef(null)
   const scrollRef = useRef(null)
   const suppressClick = useRef(false)
@@ -51,14 +53,17 @@ export function PieceSheet() {
 
   useEscapeKey(closePiece, open)
 
-  // Lock the page and focus the sheet while it is open.
+  // Lock the page while the sheet is open. A class rather than body.style, so it never clobbers
+  // the contact drawer's own lock. Also remember what opened the sheet (the grid card) so focus
+  // goes back to it; this runs before useFocusTrap below reads the ref.
   useEffect(() => {
     if (!open) return
-    // A class rather than body.style, so it never clobbers the contact drawer's own lock.
+    returnFocusRef.current = document.activeElement
     document.documentElement.classList.add('ph-locked')
-    sheetRef.current.focus({ preventScroll: true })
     return () => document.documentElement.classList.remove('ph-locked')
   }, [open])
+
+  useFocusTrap(sheetRef, open, returnFocusRef, { lockScroll: false })
 
   // Every piece opens at its top.
   useEffect(() => {

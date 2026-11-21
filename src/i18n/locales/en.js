@@ -68,7 +68,7 @@ export const en = {
           alt: 'Line drawing of two women talking over a sketch at a table',
           details: [
             ['You bring', 'The occasion, a date, any references'],
-            ['We reply', 'Within two working days'],
+            ['We reply', 'Within a week'],
             ['Cost', 'Nothing at this stage'],
           ],
         },
@@ -152,7 +152,7 @@ export const en = {
     close: 'Close',
     heading: 'Write to the atelier.',
     intro:
-      'Pick a sample from the catalogue and we’ll make it in your size, with any changes we agree on — or start from nothing. We reply within two working days.',
+      'Pick a sample from the catalogue and we’ll make it in your size, with any changes we agree on — or start from nothing. We reply within a week.',
     tagLabel: 'Tag a piece from the catalogue',
     optional: 'Optional',
     remove: 'Remove',
@@ -400,6 +400,7 @@ export const en = {
         tops: 'Tops',
         jackets: 'Jackets',
         coats: 'Coats',
+        other: 'Other',
       },
     },
     piece: {

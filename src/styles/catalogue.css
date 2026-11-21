@@ -140,7 +140,7 @@
   line-height: 1.5;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #7d7364;
+  color: var(--quiet);
 }
 .creations-page .card-year {
   font-size: 12.5px;

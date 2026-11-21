@@ -1,0 +1,30 @@
+{
+  "name": "dalga-qa",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Autonomous Playwright QA agent for the DALGA DESIGN website",
+  "scripts": {
+    "qa": "npm run qa:fixtures && playwright test; npm run qa:report",
+    "qa:mobile": "npm run qa:fixtures && playwright test --project=mobile-375 --project=mobile-390; npm run qa:report",
+    "qa:desktop": "npm run qa:fixtures && playwright test --project=desktop-1440 --project=desktop-1920; npm run qa:report",
+    "qa:tablet": "npm run qa:fixtures && playwright test --project=tablet-768; npm run qa:report",
+    "qa:report": "tsx scripts/generate-report.ts",
+    "qa:html": "playwright show-report qa-output/html-report",
+    "qa:baseline": "playwright test --grep @visual --update-snapshots",
+    "qa:inventory": "tsx scripts/print-inventory.ts",
+    "typecheck": "tsc --noEmit",
+    "qa:fixtures": "node scripts/build-fixtures.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.6",
+    "marked": "^18.2.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "overrides": {
+    "playwright-core": "1.63.0"
+  }
+}

@@ -4,15 +4,18 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), texta
 
 /**
  * While `active`: locks page scroll, moves focus into `panelRef` and keeps Tab cycling inside it.
- * On deactivation, focus returns to the element held in `returnFocusRef`.
+ * On deactivation, focus returns to the element held in `returnFocusRef`, unless focus has already
+ * moved on to another panel (say, the contact drawer opened from the piece sheet).
+ *
+ * Pass `{ lockScroll: false }` when the caller locks scroll itself.
  */
-export function useFocusTrap(panelRef, active, returnFocusRef) {
+export function useFocusTrap(panelRef, active, returnFocusRef, { lockScroll = true } = {}) {
   useEffect(() => {
     if (!active) return
     const panel = panelRef.current
     const returnTo = returnFocusRef.current
-    panel.focus()
-    document.body.style.overflow = 'hidden'
+    panel.focus({ preventScroll: true })
+    if (lockScroll) document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (event) => {
       if (event.key !== 'Tab') return
@@ -35,8 +38,11 @@ export function useFocusTrap(panelRef, active, returnFocusRef) {
     document.addEventListener('keydown', handleKeyDown)
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
-      returnTo?.focus?.()
+      if (lockScroll) document.body.style.overflow = ''
+      const focused = document.activeElement
+      if (!focused || focused === document.body || panel.contains(focused)) {
+        returnTo?.focus?.({ preventScroll: true })
+      }
     }
-  }, [panelRef, active, returnFocusRef])
+  }, [panelRef, active, returnFocusRef, lockScroll])
 }

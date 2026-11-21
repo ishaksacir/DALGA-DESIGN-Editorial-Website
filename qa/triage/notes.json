@@ -1,0 +1,163 @@
+{
+  "A11Y-product": {
+    "title": "Muted grey text fails WCAG contrast across the site",
+    "severity": "Medium",
+    "verdict": "bug",
+    "steps": [
+      "Open /catalogue/ink-wrap-top, /catalogue or any page with the desktop nav",
+      "Run axe or measure the colours"
+    ],
+    "expected": "Text at 4.5:1 or more against its background (WCAG 1.4.3).",
+    "actual": "Hard-coded greys sit between 2.9:1 and 4.2:1 on the paper background (#f5f3ef / #f7f5f1): the inactive language button 'BS'/'EN' (#92908b effective, 2.92:1; on every desktop page and in the compact menu), product '.category' (#8a7f6c, 3.55:1), product spec labels 'dt' and '.product-cta-note' (#8c8375, 3.37:1), catalogue '.card-category' (#7d7364, 4.2:1, all 12–28 cards) and the drawer's 'Optional' (#8a8178, 3.51:1). All are 10–12px, so the 4.5:1 threshold applies.",
+    "rootCause": "Colours hard-coded instead of the --muted token (#6b5f4d, which passes): shared.css:61, product.css:102 and :180, catalogue.css:143, contact-drawer.css:164 and :292 (also home-process.css:217 and --ph-quiet in phone.css:16 use the same #8a8178). The language switch dims the inactive button with opacity:0.45 (navigation.css:73).",
+    "fix": "Replace those hex values with var(--muted) (or a new token that reaches 4.5:1), and raise the inactive language button's opacity to ~0.7 or use a darker colour instead of opacity.",
+    "regression": "tests/a11y/a11y.spec.ts › axe <page>; menus.spec.ts (compact menu axe); a11y.spec.ts › axe: contact drawer open"
+  },
+  "A11Y-catalogue": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-product)"
+  },
+  "A11Y-catalogue-filtered": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-product)"
+  },
+  "A11Y-about": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-product)"
+  },
+  "A11Y-not-found": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-product)"
+  },
+  "A11Y-one-of-one": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-product)"
+  },
+  "A11Y-product-missing": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-product)"
+  },
+  "A11Y-product-single": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-product)"
+  },
+  "NAV-005": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-product)"
+  },
+  "A11Y-DIALOG": {
+    "title": "Phone piece sheet doesn't keep keyboard focus inside",
+    "severity": "Medium",
+    "verdict": "bug",
+    "steps": [
+      "Open /catalogue?piece=ink-wrap-top at 390px wide (or with a keyboard on a small tablet/phone)",
+      "Press Tab a few times"
+    ],
+    "expected": "Focus cycles inside the open sheet (it is role=dialog aria-modal=true), like it does in the contact drawer and menus.",
+    "actual": "Tab leaves the sheet and lands on the page behind it (first on the header logo 'Dalga Design — home'), which is hidden under the full-screen sheet. The contact drawer and the compact menu trap focus correctly. (The drawer's 'Optional' label contrast is covered in A11Y-product.)",
+    "rootCause": "PieceSheet.jsx only focuses the sheet on open; unlike ContactDrawer/MobileMenu it doesn't use useFocusTrap, and the page behind isn't made inert.",
+    "fix": "Use useFocusTrap(sheetRef, open, …) in PieceSheet. Its body.style.overflow lock duplicates the existing ph-locked class, so either keep both or add an option to skip the overflow part; return focus to the grid card that opened the sheet.",
+    "regression": "tests/a11y/a11y.spec.ts › axe: contact drawer open @any (mobile-390)"
+  },
+  "CAT-006": {
+    "title": "Phone catalogue: 'Shirt & trousers' piece is missing from every type filter",
+    "severity": "Medium",
+    "verdict": "bug",
+    "steps": [
+      "Open /catalogue at 375 or 390px",
+      "Tap each type chip (Dresses, Skirts, Tops, Jackets, Coats)"
+    ],
+    "expected": "Every piece appears under at least one type.",
+    "actual": "#20 Camel wrap shirt, wide trousers (category 'Shirt & trousers') appears only under 'All'. Desktop lists that category normally. Any category added later in the admin will disappear the same way.",
+    "rootCause": "CataloguePhone.jsx TYPES_BY_CATEGORY is a hand-written map with no 'Shirt & trousers' entry, and there's no fallback for unknown categories.",
+    "fix": "Add 'Shirt & trousers': ['tops'] (or a 'trousers' type with its copy in en.js/bs.js), and give unknown categories a fallback (e.g. derive from keywords, or show an 'Other' chip) so admin-created pieces are never orphaned.",
+    "regression": "tests/functional/catalogue.spec.ts › type chips filter; every piece is reachable under a type (mobile-375, mobile-390)"
+  },
+  "CAT-PHONE-ORPHAN": {
+    "verdict": "not-a-bug",
+    "title": "(merged into CAT-006)"
+  },
+  "CAT-003": {
+    "title": "Catalogue URL params can empty the grid (?show=-5, unknown ?category)",
+    "severity": "Low",
+    "verdict": "bug",
+    "steps": [
+      "Open /catalogue?show=-5",
+      "Open /catalogue?category=Nonexistent (e.g. a renamed category in an old shared link)"
+    ],
+    "expected": "The first 12 pieces show for a bad show value; an unknown category falls back to All pieces (or says nothing matches).",
+    "actual": "?show=-5 renders an empty grid with a 'Show 12 more' button. An unknown category renders an empty grid with no filter highlighted and no message.",
+    "rootCause": "CataloguePage.jsx:33 `Number(params.get('show')) || PAGE_SIZE` lets negative numbers through; the filter value isn't checked against the known categories.",
+    "fix": "const shown = Math.max(PAGE_SIZE, Number(params.get('show')) || 0); and treat a category not in `categories` as ALL.",
+    "regression": "tests/functional/catalogue.spec.ts › bad URL params are handled"
+  },
+  "A11Y-RM": {
+    "title": "Home news carousel keeps rotating with reduced motion enabled",
+    "severity": "Medium",
+    "verdict": "bug",
+    "steps": [
+      "Turn on 'Reduce motion' in the OS",
+      "Open the home page and watch 'New at the atelier'"
+    ],
+    "expected": "No automatic rotation with prefers-reduced-motion: reduce; a visible pause control otherwise (WCAG 2.2.2).",
+    "actual": "The featured post switches every 7 seconds even with reduced motion. Rotation only pauses while a pager button has keyboard focus; there's no pause button for mouse/touch users.",
+    "rootCause": "AtelierNews.jsx: `rotating = count > 1 && !paused` ignores the reduced-motion preference; reduced-motion.css only removes the transitions.",
+    "fix": "const reduce = useMediaQuery('(prefers-reduced-motion: reduce)'); rotating = count > 1 && !paused && !reduce. Optionally pause on hover too.",
+    "regression": "tests/a11y/a11y.spec.ts › reduced motion: content visible and news does not auto-rotate"
+  },
+  "HOME-003": {
+    "verdict": "not-a-bug",
+    "title": "(merged into A11Y-RM)"
+  },
+  "I18N-002": {
+    "title": "Reply time is promised differently in two places",
+    "severity": "Low",
+    "verdict": "bug",
+    "steps": [
+      "Open any product page and read the note under 'Ask about this piece'",
+      "Open the drawer and read its intro"
+    ],
+    "expected": "One promise.",
+    "actual": "Product page: 'We answer every letter personally, within a week.' Drawer: 'We reply within two working days.' Same contradiction in Bosnian.",
+    "rootCause": "i18n locales: product.ctaNote vs contact.intro in en.js and bs.js.",
+    "fix": "Pick one reply time and use it in both strings (both languages).",
+    "regression": "tests/functional/pages.spec.ts › copy: related messages agree"
+  },
+  "COPY-REPLY-TIME": {
+    "verdict": "not-a-bug",
+    "title": "(merged into I18N-002)"
+  },
+  "OCCLUDED-catalogue": {
+    "verdict": "not-a-bug",
+    "title": "Sticky phone filter chips cover cards while scrolling (intended)"
+  },
+  "OCCLUDED-product": {
+    "verdict": "not-a-bug",
+    "title": "Page behind the full-screen piece sheet is covered (intended)"
+  },
+  "OCCLUDED-product-single": {
+    "verdict": "not-a-bug",
+    "title": "Page behind the full-screen piece sheet is covered (intended)"
+  },
+  "KBD-002": {
+    "verdict": "not-a-bug",
+    "title": "(test false positive) news pager button clicked while already active"
+  },
+  "HOME-004": {
+    "verdict": "not-a-bug",
+    "title": "(test timing) filmstrip already on step 2 after scrollIntoView"
+  },
+  "CON-001": {
+    "verdict": "flaky",
+    "title": "Drawer trigger test",
+    "actual": "Re-run 8/8 green in isolation; the one failure happened under full parallel load (the click landed before the drawer reacted). Treated as test timing, not a site bug."
+  },
+  "TARGETS-product": {
+    "verdict": "not-a-bug",
+    "title": "(detector false positive) footer links measured behind the full-screen piece sheet"
+  },
+  "TARGETS-product-single": {
+    "verdict": "not-a-bug",
+    "title": "(detector false positive) footer links measured behind the full-screen piece sheet"
+  }
+}

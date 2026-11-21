@@ -58,7 +58,7 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   font-weight: 600;
-  color: #8a7f6c;
+  color: var(--quiet);
 }
 /* Needle hover, shared by every NeedleLink: the label fades out and the needle slides in. */
 .needle-hover {
