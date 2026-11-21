@@ -5,7 +5,7 @@ import { usePieceSheet } from '@/hooks/usePieceSheet'
 import { useI18n } from '@/i18n/context'
 import { buzz } from '@/utils/haptics'
 
-const TYPES = ['all', 'dresses', 'skirts', 'tops', 'jackets', 'coats']
+const TYPES = ['all', 'dresses', 'skirts', 'tops', 'jackets', 'coats', 'other']
 
 /** Garment types each catalogue category counts under (keyed by its English name). A piece can sit under several. */
 const TYPES_BY_CATEGORY = {
@@ -17,9 +17,24 @@ const TYPES_BY_CATEGORY = {
   'Top & skirt': ['tops', 'skirts'],
   Coat: ['coats'],
   'Top & shorts': ['tops'],
+  'Shirt & trousers': ['tops'],
   Jacket: ['jackets'],
 }
-const typesOf = (product) => TYPES_BY_CATEGORY[product.category.en] || []
+/** For categories added in the admin since: guess the types from words in the English name. */
+const TYPE_WORDS = [
+  ['dresses', /\b(dress|gown)/i],
+  ['skirts', /\bskirt/i],
+  ['tops', /\b(top|blouse|shirt)/i],
+  ['jackets', /\bjacket/i],
+  ['coats', /\bcoat/i],
+]
+const typesOf = (product) => {
+  const name = product.category.en
+  if (TYPES_BY_CATEGORY[name]) return TYPES_BY_CATEGORY[name]
+  const guessed = TYPE_WORDS.filter(([, words]) => words.test(name)).map(([type]) => type)
+  // Anything still unmatched goes under "Other", so every piece is reachable from some chip.
+  return guessed.length ? guessed : ['other']
+}
 const inType = (type) => (product) => type === 'all' || typesOf(product).includes(type)
 
 /** Catalogue on phones: title, a sticky row of type chips, and a two-column grid of every piece. */
@@ -31,6 +46,8 @@ export function CataloguePhone() {
   const [params, setParams] = useSearchParams()
   const type = TYPES.includes(params.get('type')) ? params.get('type') : 'all'
   const visible = products.filter(inType(type))
+  // "Other" only shows while some piece needs it (or a link points at it).
+  const chips = TYPES.filter((key) => key !== 'other' || type === key || products.some(inType(key)))
 
   const pick = (next) => {
     buzz()
@@ -45,7 +62,7 @@ export function CataloguePhone() {
       <h1 className="ph-page-title">{copy.title}</h1>
       <p className="ph-page-lead">{copy.lead}</p>
       <div className="ph-chips" role="group" aria-label={copy.filter}>
-        {TYPES.map((key) => (
+        {chips.map((key) => (
           <button
             key={key}
             type="button"

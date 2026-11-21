@@ -78,11 +78,7 @@ export function PhoneNav() {
   }
 
   return (
-    <div
-      ref={wrapRef}
-      tabIndex={-1}
-      className={`ph-nav${solid ? ' solid' : ''}`}
-    >
+    <div ref={wrapRef} tabIndex={-1} className={`ph-nav${solid ? ' solid' : ''}`}>
       <header className="ph-header">
         <Link
           className="ph-header-logo"

@@ -68,7 +68,7 @@ export const bs = {
           alt: 'Crtež dvije žene koje razgovaraju nad skicom za stolom',
           details: [
             ['Vi donosite', 'Priliku, datum i bilo kakve reference'],
-            ['Odgovaramo', 'U roku od dva radna dana'],
+            ['Odgovaramo', 'U roku od sedmice'],
             ['Cijena', 'Ništa u ovoj fazi'],
           ],
         },
@@ -152,7 +152,7 @@ export const bs = {
     close: 'Zatvori',
     heading: 'Pišite ateljeu.',
     intro:
-      'Odaberite uzorak iz kataloga i napravit ćemo ga po vašoj mjeri, uz izmjene koje dogovorimo — ili krenite od nule. Odgovaramo u roku od dva radna dana.',
+      'Odaberite uzorak iz kataloga i napravit ćemo ga po vašoj mjeri, uz izmjene koje dogovorimo — ili krenite od nule. Odgovaramo u roku od sedmice.',
     tagLabel: 'Označite komad iz kataloga',
     optional: 'Neobavezno',
     remove: 'Ukloni',
@@ -400,6 +400,7 @@ export const bs = {
         tops: 'Topovi',
         jackets: 'Jakne',
         coats: 'Kaputi',
+        other: 'Ostalo',
       },
     },
     piece: {
